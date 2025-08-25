@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(pandoc:*)",
+      "Bash(pdftotext:*)",
+      "Bash(mkdocs build:*)",
+      "Bash(chmod:*)",
+      "Bash(tree:*)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)"
+    ],
+    "additionalDirectories": [
+      "/home/stovepipe/repos/rhcsa/"
+    ]
+  }
+}
