@@ -7,7 +7,8 @@
       "Bash(chmod:*)",
       "Bash(tree:*)",
       "Bash(git add:*)",
-      "Bash(git commit:*)"
+      "Bash(git commit:*)",
+      "Bash(git push:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"
