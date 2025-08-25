@@ -227,6 +227,10 @@ EOF
 - **Reference enhancements**: `Implement module cross-references in quick reference`
 - **Documentation**: `Update README with current lab requirements`
 - **Resource cleanup**: `Remove outdated automation examples in favor of RHEL 9 patterns`
+- **Ansible practice**: `Add Jinja2 template examples to Module 05`
+- **Lab environment**: `Fix SSH key distribution in Vagrant provisioning`
+- **Flashcard updates**: `Add vault command variations to Anki deck`
+- **Playbook examples**: `Implement multi-tier application deployment scenario`
 
 ## Study Workflow Recommendations
 
