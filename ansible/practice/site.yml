@@ -1,0 +1,139 @@
+---
+# Sample RHCE Practice Playbook
+# This playbook demonstrates key concepts tested on the RHCE exam
+
+- name: Configure web servers
+  hosts: webservers
+  become: yes
+  vars:
+    http_port: 80
+    max_clients: 200
+  
+  tasks:
+    - name: Install Apache HTTP Server
+      yum:
+        name: httpd
+        state: present
+      
+    - name: Start and enable httpd service
+      systemd:
+        name: httpd
+        state: started
+        enabled: yes
+        
+    - name: Configure Apache with template
+      template:
+        src: httpd.conf.j2
+        dest: /etc/httpd/conf/httpd.conf
+        backup: yes
+      notify: restart apache
+      
+    - name: Create web content directory
+      file:
+        path: /var/www/html/app
+        state: directory
+        owner: apache
+        group: apache
+        mode: '0755'
+        
+    - name: Deploy index page
+      copy:
+        content: |
+          <html>
+          <head><title>RHCE Practice</title></head>
+          <body>
+            <h1>Welcome to {{ inventory_hostname }}</h1>
+            <p>Server configured on {{ ansible_date_time.date }}</p>
+          </body>
+          </html>
+        dest: /var/www/html/index.html
+        owner: apache
+        group: apache
+        mode: '0644'
+
+  handlers:
+    - name: restart apache
+      systemd:
+        name: httpd
+        state: restarted
+
+- name: Configure database servers
+  hosts: dbservers
+  become: yes
+  vars_files:
+    - vault_vars.yml
+    
+  tasks:
+    - name: Install MariaDB
+      yum:
+        name:
+          - mariadb-server
+          - python3-PyMySQL
+        state: present
+        
+    - name: Start and enable MariaDB
+      systemd:
+        name: mariadb
+        state: started
+        enabled: yes
+        
+    - name: Create application database
+      mysql_db:
+        name: "{{ app_db_name }}"
+        state: present
+      when: app_db_name is defined
+      
+    - name: Create database user
+      mysql_user:
+        name: "{{ app_db_user }}"
+        password: "{{ app_db_password }}"
+        priv: "{{ app_db_name }}.*:ALL"
+        state: present
+      when: app_db_user is defined
+
+- name: Common configuration for all hosts
+  hosts: all
+  become: yes
+  
+  tasks:
+    - name: Update system packages
+      yum:
+        name: "*"
+        state: latest
+      when: update_system | default(false) | bool
+      
+    - name: Configure NTP
+      template:
+        src: chrony.conf.j2
+        dest: /etc/chrony.conf
+        backup: yes
+      notify: restart chronyd
+      
+    - name: Ensure chronyd is running
+      systemd:
+        name: chronyd
+        state: started
+        enabled: yes
+        
+    - name: Configure firewall for SSH
+      firewalld:
+        service: ssh
+        permanent: yes
+        state: enabled
+        immediate: yes
+        
+    - name: Create system users
+      user:
+        name: "{{ item.name }}"
+        groups: "{{ item.groups | default(omit) }}"
+        shell: "{{ item.shell | default('/bin/bash') }}"
+        create_home: yes
+        state: present
+      loop: "{{ system_users | default([]) }}"
+      when: system_users is defined
+
+  handlers:
+    - name: restart chronyd
+      systemd:
+        name: chronyd
+        state: restarted
