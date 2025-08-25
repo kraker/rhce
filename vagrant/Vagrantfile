@@ -1,0 +1,89 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# RHCE Lab environment for Ansible automation practice
+# Creates 5 VMs: 1 control node + 4 managed nodes
+Vagrant.configure("2") do |config|
+  # vagrant-registration plugin settings for Red Hat subscription
+  config.registration.username = ENV['RHS_USERNAME']
+  config.registration.password = ENV['RHS_PASSWORD']
+  config.ssh.key_type = "ecdsa256"
+  config.registration.unregister_on_halt = false
+
+  # Define VMs configuration
+  vms = {
+    "control" => {
+      "ip" => "192.168.4.200",
+      "memory" => "2048",
+      "cpus" => "2",
+      "role" => "control"
+    },
+    "ansible1" => {
+      "ip" => "192.168.4.201",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed"
+    },
+    "ansible2" => {
+      "ip" => "192.168.4.202",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed"
+    },
+    "ansible3" => {
+      "ip" => "192.168.4.203",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed"
+    },
+    "ansible4" => {
+      "ip" => "192.168.4.204",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed"
+    }
+  }
+
+  # Create VMs
+  vms.each do |name, vm_config|
+    config.vm.define name do |vm|
+      # Base configuration
+      vm.vm.box = "generic/rhel9"
+      vm.vm.hostname = "#{name}.example.com"
+      vm.vm.network "private_network", ip: vm_config["ip"]
+      
+      # Provider specific settings
+      vm.vm.provider "virtualbox" do |vb|
+        vb.name = "rhce-#{name}"
+        vb.memory = vm_config["memory"]
+        vb.cpus = vm_config["cpus"]
+        vb.customize ["modifyvm", :id, "--groups", "/RHCE Lab"]
+      end
+
+      # Add additional disk for storage exercises
+      vm.vm.disk :disk, name: "storage", size: "1GB"
+
+      # Provision with Ansible only after all VMs are created
+      if name == "ansible4"  # Last VM triggers provisioning
+        vm.vm.provision "ansible" do |ansible|
+          ansible.limit = "all"
+          ansible.playbook = "playbook.yml"
+          ansible.inventory_path = "inventory"
+          ansible.config_file = "ansible.cfg"
+          ansible.groups = {
+            "control" => ["control"],
+            "managed" => ["ansible1", "ansible2", "ansible3", "ansible4"],
+            "webservers" => ["ansible1", "ansible2"],
+            "databases" => ["ansible3"],
+            "development" => ["ansible4"],
+            "production" => ["ansible1", "ansible2", "ansible3"],
+            "all:vars" => {
+              "ansible_user" => "ansible",
+              "ansible_ssh_private_key_file" => "~/.ssh/id_rsa"
+            }
+          }
+        end
+      end
+    end
+  end
+end
