@@ -77,19 +77,23 @@
         state: started
         enabled: yes
 
+    # Database configuration - requires community.mysql collection
+    # ansible-galaxy collection install community.mysql
     - name: Create application database
-      mysql_db:
+      community.mysql.mysql_db:
         name: "{{ app_db_name }}"
         state: present
       when: app_db_name is defined
+      tags: database
 
     - name: Create database user
-      mysql_user:
+      community.mysql.mysql_user:
         name: "{{ app_db_user }}"
         password: "{{ app_db_password }}"
         priv: "{{ app_db_name }}.*:ALL"
         state: present
       when: app_db_user is defined
+      tags: database
 
 - name: Common configuration for all hosts
   hosts: all

@@ -1,5 +1,7 @@
 site_name: RHCE Certification Study Guide
-site_description: Comprehensive study materials and resources for Red Hat Certified Engineer (RHCE) exam preparation with focus on Ansible automation
+site_description: >-
+  Comprehensive study materials and resources for Red Hat Certified Engineer (RHCE)
+  exam preparation with focus on Ansible automation
 site_author: RHCE Study Repository
 site_url: https://kraker.github.io/rhce/
 
@@ -23,22 +25,22 @@ theme:
 nav:
   - Home: index.md
   - Study Modules:
-    - Overview: rhce_synthesis/index.md
-    - 'Module 00: Exam Overview': rhce_synthesis/00_exam_overview.md
-    - 'Module 01: Ansible Basics': rhce_synthesis/01_ansible_basics.md
-    - 'Module 02: Playbooks & Tasks': rhce_synthesis/02_playbooks_tasks.md
-    - 'Module 03: Variables & Facts': rhce_synthesis/03_variables_facts.md
-    - 'Module 04: Task Control': rhce_synthesis/04_task_control.md
-    - 'Module 05: Templates': rhce_synthesis/05_templates.md
-    - 'Module 06: Roles': rhce_synthesis/06_roles.md
-    - 'Module 07: System Administration': rhce_synthesis/07_system_administration.md
-    - 'Module 08: Vault & Advanced Features': rhce_synthesis/08_advanced_features.md
+      - Overview: rhce_synthesis/index.md
+      - 'Module 00: Exam Overview': rhce_synthesis/00_exam_overview.md
+      - 'Module 01: Ansible Basics': rhce_synthesis/01_ansible_basics.md
+      - 'Module 02: Playbooks & Tasks': rhce_synthesis/02_playbooks_tasks.md
+      - 'Module 03: Variables & Facts': rhce_synthesis/03_variables_facts.md
+      - 'Module 04: Task Control': rhce_synthesis/04_task_control.md
+      - 'Module 05: Templates': rhce_synthesis/05_templates.md
+      - 'Module 06: Roles': rhce_synthesis/06_roles.md
+      - 'Module 07: System Administration': rhce_synthesis/07_system_administration.md
+      - 'Module 08: Vault & Advanced Features': rhce_synthesis/08_advanced_features.md
   - Quick References:
-    - 'eBook Summary': ebook_summary.md
-    - 'Exam Quick Reference': exam_quick_reference.md
-    - 'Command Reference by Topic': command_reference_by_topic.md
-    - 'RHCE Acronyms & Glossary': rhce_acronyms_glossary.md
-    - 'Knowledge Gaps Checklist': knowledge_gaps_checklist.md
+      - 'eBook Summary': ebook_summary.md
+      - 'Exam Quick Reference': exam_quick_reference.md
+      - 'Command Reference by Topic': command_reference_by_topic.md
+      - 'RHCE Acronyms & Glossary': rhce_acronyms_glossary.md
+      - 'Knowledge Gaps Checklist': knowledge_gaps_checklist.md
 
 # Markdown extensions
 markdown_extensions:

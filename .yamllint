@@ -1,4 +1,3 @@
----
 # yamllint configuration for RHCE study repository
 # Balanced rules for Ansible playbooks and documentation
 
@@ -38,6 +37,7 @@ rules:
   # Comments should be properly formatted
   comments:
     min-spaces-from-content: 1
+  comments-indentation: false
 
   # Allow quoted strings for Ansible variables and templates
   quoted-strings:
@@ -48,6 +48,15 @@ rules:
   brackets:
     min-spaces-inside: 0
     max-spaces-inside: 1
+
+  # Allow braces for Ansible vars with required max spaces
+  braces:
+    max-spaces-inside: 1
+
+  # Octal values rules for ansible-lint compatibility
+  octal-values:
+    forbid-implicit-octal: true
+    forbid-explicit-octal: true
 
 # Ignore certain directories and files
 ignore: |

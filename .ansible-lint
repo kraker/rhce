@@ -1,4 +1,3 @@
----
 # Ansible-lint configuration for RHCE study repository
 # Tailored for educational playbooks and practice scenarios
 
@@ -8,6 +7,8 @@ exclude_paths:
   - site/
   - sources/
   - .github/
+  - ansible/practice/site.yml  # Requires collections not installed in CI
+  - vagrant/playbook.yml       # Requires collections not installed in CI
 
 # Directories to search for roles
 rulesdir:

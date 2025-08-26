@@ -50,12 +50,15 @@
           192.168.4.204 ansible4.example.com ansible4
         marker: "# {mark} RHCE LAB HOSTS"
 
+    # Firewall configuration - requires ansible.posix collection
+    # ansible-galaxy collection install ansible.posix
     - name: Configure firewall for SSH
-      firewalld:
+      ansible.posix.firewalld:
         service: ssh
         permanent: yes
         state: enabled
         immediate: yes
+      tags: firewall
 
     - name: Deploy custom MOTD
       template:
