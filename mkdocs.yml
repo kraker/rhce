@@ -31,13 +31,14 @@ nav:
     - 'Module 04: Task Control': rhce_synthesis/04_task_control.md
     - 'Module 05: Templates': rhce_synthesis/05_templates.md
     - 'Module 06: Roles': rhce_synthesis/06_roles.md
-    - 'Module 07: Ansible Vault': rhce_synthesis/07_ansible_vault.md
-    - 'Module 08: Advanced Features': rhce_synthesis/08_advanced_features.md
+    - 'Module 07: System Administration': rhce_synthesis/07_system_administration.md
+    - 'Module 08: Vault & Advanced Features': rhce_synthesis/08_advanced_features.md
   - Quick References:
+    - 'eBook Summary': ebook_summary.md
     - 'Exam Quick Reference': exam_quick_reference.md
-    - 'Ansible Module Reference': ansible_module_reference.md
-    - 'Command Reference': command_reference.md
-    - 'RHCE Glossary': rhce_glossary.md
+    - 'Command Reference by Topic': command_reference_by_topic.md
+    - 'RHCE Acronyms & Glossary': rhce_acronyms_glossary.md
+    - 'Knowledge Gaps Checklist': knowledge_gaps_checklist.md
 
 # Markdown extensions
 markdown_extensions:
