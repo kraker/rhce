@@ -1,0 +1,62 @@
+---
+# RuboCop configuration for RHCE study repository
+# Tailored for Vagrant configuration files and Ruby scripts
+
+AllCops:
+  TargetRubyVersion: 2.7
+  NewCops: enable
+  Exclude:
+    - 'sources/**/*'
+    - 'site/**/*'
+    - '.git/**/*'
+    - 'vendor/**/*'
+    - 'tmp/**/*'
+
+# Style configurations
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+Style/HashSyntax:
+  EnforcedStyle: ruby19_no_mixed_keys
+
+# Layout configurations
+Layout/LineLength:
+  Max: 120
+  AllowedPatterns:
+    - '\A\s*#'  # Allow long comments
+    - 'https?://'  # Allow long URLs
+
+Layout/MultilineMethodCallIndentation:
+  EnforcedStyle: indented
+
+Layout/FirstArrayElementIndentation:
+  EnforcedStyle: consistent
+
+# Metrics configurations (be lenient for Vagrant configuration)
+Metrics/BlockLength:
+  Exclude:
+    - 'Vagrantfile'
+    - 'vagrant/**/*'
+
+Metrics/MethodLength:
+  Max: 20
+
+Metrics/AbcSize:
+  Max: 20
+
+# Vagrant-specific allowances
+Style/GlobalVars:
+  AllowedVariables:
+    - '$vagrant_root'
+    - '$script'
+
+# Allow certain naming patterns common in Vagrant
+Naming/VariableNumber:
+  Enabled: false
+

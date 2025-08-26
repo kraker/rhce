@@ -61,3 +61,17 @@ Thumbs.db
 # Temporary files
 *.tmp
 *.temp
+
+# Pre-commit cache
+.pre-commit-cache/
+
+# Development and testing
+.tox/
+.coverage
+htmlcov/
+.pytest_cache/
+.cache/
+
+# Ansible testing
+tests/output/
+tests/test_*.retry

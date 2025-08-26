@@ -1,0 +1,32 @@
+# Development dependencies for RHCE study repository
+# Includes linting, formatting, and development tools
+
+# Pre-commit framework
+pre-commit>=4.0.0
+
+# Ansible linting and validation
+ansible-lint>=6.0.0
+yamllint>=1.32.0
+
+# Markdown linting (installed via npm/pre-commit)
+# markdownlint-cli>=0.41.0  # Installed via pre-commit hook
+
+# Python code quality tools
+black>=25.0.0
+isort>=6.0.0
+flake8>=7.0.0
+
+# Additional development utilities
+ansible-doctor>=3.0.0  # Generate documentation from Ansible roles
+ansible-navigator>=3.0.0  # Enhanced Ansible CLI experience
+
+# YAML and configuration utilities
+ruamel.yaml>=0.18.0  # Advanced YAML parsing
+python-dotenv>=1.0.0  # Environment variable management
+
+# Git hooks and repository management
+gitpython>=3.1.0
+
+# Ruby development tools (for Vagrantfile linting)
+# Note: RuboCop is installed via pre-commit, but these are useful for manual use
+# Install with: gem install rubocop rubocop-performance rubocop-rspec

@@ -1,0 +1,45 @@
+---
+# Ansible-lint configuration for RHCE study repository
+# Tailored for educational playbooks and practice scenarios
+
+# List of directories to exclude
+exclude_paths:
+  - .cache/  # implicit unless exclude_paths is defined in config
+  - site/
+  - sources/
+  - .github/
+
+# Directories to search for roles
+rulesdir:
+  - ~/.ansible-lint/custom-rules/
+
+# Enable offline mode to disable rules requiring internet access
+offline: false
+
+# Enforce use of fully qualified collection names (FQCN)
+use_default_rules: true
+
+# Skip list for rules that may be too strict for study materials
+skip_list:
+  - yaml[line-length]  # Allow longer lines in YAML for readability
+  - name[template]     # Allow template expressions in task names for examples
+  - var-naming[no-role-prefix]  # Allow variables without role prefixes in examples
+
+# Only warn for certain rules instead of failing
+warn_list:
+  - experimental  # Allow experimental features for learning
+  - command-instead-of-module  # Warn but don't fail for shell/command usage in examples
+
+
+# Enable checking of vars files
+enable_list:
+  - fqcn-builtins  # Require FQCN for builtin actions
+  - no-changed-when  # Tasks should tell when they have changed something
+
+# Mock modules or roles for linting purposes
+mock_modules:
+  - community.general.rhsm_subscription
+  - community.general.subscription_manager
+
+mock_roles:
+  - example_role

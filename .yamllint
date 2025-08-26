@@ -1,0 +1,56 @@
+---
+# yamllint configuration for RHCE study repository
+# Balanced rules for Ansible playbooks and documentation
+
+extends: default
+
+rules:
+  # Ansible playbooks often have long lines due to module parameters
+  line-length:
+    max: 120
+    level: warning
+
+  # Allow multiple spaces after commas for alignment in lists
+  commas:
+    max-spaces-after: -1
+
+  # Be more lenient with indentation for complex Ansible structures
+  indentation:
+    spaces: 2
+    indent-sequences: true
+    check-multi-line-strings: false
+
+  # Document start warnings (allow but don't require)
+  document-start:
+    present: false
+
+  # Allow empty lines at end of files
+  empty-lines:
+    max: 2
+    max-start: 0
+    max-end: 1
+
+  # Be flexible with truthy values since Ansible uses yes/no, on/off
+  truthy:
+    allowed-values: ['true', 'false', 'yes', 'no', 'on', 'off']
+    check-keys: false
+
+  # Comments should be properly formatted
+  comments:
+    min-spaces-from-content: 1
+
+  # Allow quoted strings for Ansible variables and templates
+  quoted-strings:
+    quote-type: any
+    required: false
+
+  # Allow brackets for lists in Ansible vars
+  brackets:
+    min-spaces-inside: 0
+    max-spaces-inside: 1
+
+# Ignore certain directories and files
+ignore: |
+  site/
+  sources/
+  .cache/
