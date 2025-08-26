@@ -45,7 +45,7 @@ vim .rhel-credentials
 ### 2. Start Lab Environment
 ```bash
 # Start all VMs and configure automatically
-./lab-up.sh
+./lab.sh up
 ```
 
 This will:
@@ -72,9 +72,10 @@ ansible all -m ping
 
 ### Start/Stop Operations
 ```bash
-./lab-up.sh      # Start all VMs (initial setup ~15 minutes)
-./lab-halt.sh    # Stop all VMs gracefully
-./lab-reset.sh   # Destroy and recreate all VMs
+./lab.sh up       # Start all VMs (initial setup ~15 minutes)
+./lab.sh halt     # Stop all VMs gracefully
+./lab.sh destroy  # Destroy all VMs (does not recreate)
+./lab.sh status   # Show current VM status
 ```
 
 ### Individual VM Management
@@ -244,7 +245,8 @@ vagrant provision
 
 **Hard Reset** (destroy and recreate):
 ```bash
-./lab-reset.sh
+./lab.sh destroy
+./lab.sh up
 ```
 
 **Individual VM Reset**:
