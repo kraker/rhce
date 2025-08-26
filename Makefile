@@ -29,7 +29,6 @@ setup:
 	@echo "🔧 Setting up RHCE study environment..."
 	pip install --upgrade pip
 	pip install -r requirements.txt
-	pip install -r requirements-lint.txt
 	pre-commit install
 	@echo "✅ Setup complete! Use 'make help' to see available commands."
 

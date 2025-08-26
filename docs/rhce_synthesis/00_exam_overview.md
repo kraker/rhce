@@ -34,45 +34,81 @@ By the end of this module, you will understand:
 🔒 **No Preparation**: Cannot modify environment before exam starts  
 📝 **Performance-Based**: Must demonstrate working solutions, not just knowledge  
 
-## 🎯 Exam Objectives
+## 🎯 Official RHCE Exam Objectives
 
-The RHCE exam tests your ability to:
+The RHCE EX294 exam tests your ability to perform these **official Red Hat objectives**:
 
-### 1. Configure Ansible (15-20% of exam)
-- Install and configure Ansible on control node
-- Create and maintain inventory files
-- Configure SSH keys and connection methods
-- Set up configuration files and defaults
+### Prerequisites
+**Be able to perform all tasks expected of a Red Hat Certified System Administrator**
+- Understand and use essential tools
+- Operate running systems
+- Configure local storage
+- Create and configure file systems
+- Deploy, configure, and maintain systems
+- Manage users and groups
+- Manage security
 
-### 2. Create and Use Playbooks (25-30% of exam)
-- Write playbooks with proper YAML syntax
-- Use modules effectively for system tasks
-- Implement task organization and structure
-- Handle task failures and error conditions
+### 1. Understand core components of Ansible
+- **Inventories** - Static and dynamic host management
+- **Modules** - Using built-in and collection modules effectively
+- **Variables** - Variable types, scoping, and precedence
+- **Facts** - System information gathering and utilization
+- **Loops** - Iterating over data structures
+- **Conditional tasks** - When clauses and control flow
+- **Plays** - Task organization and execution
+- **Handling task failure** - Error handling and recovery
+- **Playbooks** - Multi-play automation workflows
+- **Configuration files** - ansible.cfg setup and management
+- **Roles** - Reusable automation components
+- **Use provided documentation** - ansible-doc command proficiency
 
-### 3. Work with Variables and Facts (15-20% of exam)
-- Define and use variables in multiple ways
-- Work with host and group variables
-- Gather and utilize system facts
-- Implement variable precedence correctly
+### 2. Use roles and Ansible Content Collections
+- **Create and work with roles** - Role structure and development
+- **Install roles and use them in playbooks** - ansible-galaxy integration
+- **Install Content Collections** - Modern Ansible content management
+- **Use Content Collections in playbooks** - FQCN and collection integration
+- **Obtain content from collections** - Related roles, modules, and supplementary content
 
-### 4. Create and Use Templates (10-15% of exam)
-- Use Jinja2 templating for configuration files
-- Implement variable substitution and control structures
-- Deploy templates with the template module
-- Handle template logic and conditionals
+### 3. Install and configure an Ansible control node
+- **Install required packages** - Ansible installation and dependencies
+- **Create a static host inventory file** - INI and YAML inventory formats
+- **Create a configuration file** - ansible.cfg customization
+- **Create and use static inventories** - Host groups and group variables
 
-### 5. Work with Roles (15-20% of exam)
-- Create role directory structures
-- Implement role tasks, handlers, and variables
-- Use roles in playbooks effectively
-- Work with role dependencies
+### 4. Configure Ansible managed nodes
+- **Create and distribute SSH keys** - Passwordless authentication setup
+- **Configure privilege escalation** - sudo/become configuration
+- **Deploy files to managed nodes** - File transfer and management
+- **Analyze shell scripts and convert to playbooks** - Legacy automation migration
 
-### 6. Use Ansible Vault (10-15% of exam)
-- Encrypt sensitive data with vault
-- Use vault passwords and keys
-- Integrate vault files in playbooks
-- Manage vault file operations
+### 5. Run playbooks with Automation content navigator
+- **Run playbooks with navigator** - Modern Ansible execution interface
+- **Find new modules in Content Collections** - Module discovery and usage
+- **Create inventories with navigator** - Dynamic inventory management
+- **Configure Ansible environment** - Environment setup and management
+
+### 6. Create Ansible plays and playbooks
+- **Work with commonly used modules** - Core module proficiency
+- **Use variables for command results** - Register and variable manipulation
+- **Use conditionals for execution control** - When statements and logic
+- **Configure error handling** - Failed_when, ignore_errors, and handlers
+- **Create playbooks for system state** - Desired state configuration
+
+### 7. Automate standard RHCSA tasks using Ansible modules
+- **Software packages and repositories** - dnf/yum, repository management
+- **Services** - systemd service control and configuration
+- **Firewall rules** - firewalld automation
+- **File systems** - Filesystem creation and mounting
+- **Storage devices** - Disk and volume management
+- **File content** - File creation, modification, and management
+- **Archiving** - Backup and archive operations
+- **Task scheduling** - Cron job automation
+- **Security** - SELinux, file permissions, and access controls
+- **Users and groups** - Account management automation
+
+### 8. Manage content
+- **Create and use templates** - Jinja2 templating for configuration files
+- **Template customization** - Variable substitution and logic
 
 ## 🛠️ Lab Environment Setup
 

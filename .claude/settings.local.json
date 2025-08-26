@@ -15,7 +15,8 @@
       "Read(//proc/31580/fd/**)",
       "Bash(pip install:*)",
       "Bash(pre-commit:*)",
-      "Bash(sudo dnf install:*)"
+      "Bash(sudo dnf install:*)",
+      "WebFetch(domain:www.redhat.com)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

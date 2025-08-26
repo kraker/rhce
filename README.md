@@ -201,17 +201,58 @@ rhce/
 └── COPYRIGHT_NOTICE.md           # Copyright information
 ```
 
-## RHCE Exam Objectives Coverage
+## Official RHCE Exam Objectives Coverage
 
-This study guide comprehensively covers all official RHCE exam objectives:
+This study guide comprehensively covers all **official Red Hat RHCE EX294 exam objectives**:
 
-✅ **Configure Ansible** - Installation, inventory, connections, and configuration  
-✅ **Create and Use Playbooks** - YAML syntax, modules, tasks, and execution  
-✅ **Work with Variables and Facts** - Variable types, precedence, and system facts  
-✅ **Create and Use Templates** - Jinja2 templating for configuration management  
-✅ **Work with Roles** - Role development, organization, and dependencies  
-✅ **Use Ansible Vault** - Encrypting secrets and secure automation  
-✅ **Advanced Ansible Features** - Complex automation and troubleshooting  
+### Prerequisites
+✅ **Be able to perform all tasks expected of a Red Hat Certified System Administrator**
+- Understand and use essential tools, operate running systems, configure local storage
+- Create and configure file systems, deploy and maintain systems
+- Manage users and groups, manage security
+
+### Core Ansible Competencies
+✅ **Understand core components of Ansible**
+- Inventories, modules, variables, facts, loops, conditional tasks, plays
+- Handling task failure, playbooks, configuration files, roles
+- Use provided documentation to look up specific information about Ansible modules and commands
+
+✅ **Use roles and Ansible Content Collections**
+- Create and work with roles, install roles and use them in playbooks
+- Install Content Collections and use them in playbooks
+- Obtain a set of related roles, supplementary modules, and other content from content collections
+
+### Environment Configuration
+✅ **Install and configure an Ansible control node**
+- Install required packages, create a static host inventory file
+- Create a configuration file, create and use static inventories to define groups of hosts
+
+✅ **Configure Ansible managed nodes**
+- Create and distribute SSH keys to managed nodes
+- Configure privilege escalation on managed nodes, deploy files to managed nodes
+- Be able to analyze simple shell scripts and convert them to playbooks
+
+### Automation Content Navigator
+✅ **Run playbooks with Automation content navigator**
+- Know how to run playbooks with Automation content navigator
+- Use Automation content navigator to find new modules in available Ansible Content Collections
+- Use Automation content navigator to create inventories and configure the Ansible environment
+
+### Playbook Development
+✅ **Create Ansible plays and playbooks**
+- Know how to work with commonly used Ansible modules
+- Use variables to retrieve the results of running a command, use conditionals to control play execution
+- Configure error handling, create playbooks to configure systems to a specified state
+
+### RHCSA Task Automation
+✅ **Automate standard RHCSA tasks using Ansible modules that work with:**
+- Software packages and repositories, services, firewall rules
+- File systems, storage devices, file content, archiving
+- Task scheduling, security, users and groups
+
+### Content Management
+✅ **Manage content**
+- Create and use templates to create customized configuration files  
 
 ## Contributing and Maintenance
 
