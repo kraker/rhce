@@ -8,7 +8,14 @@
       "Bash(tree:*)",
       "Bash(git add:*)",
       "Bash(git commit:*)",
-      "Bash(git push:*)"
+      "Bash(git push:*)",
+      "WebFetch(domain:github.com)",
+      "WebFetch(domain:raw.githubusercontent.com)",
+      "Bash(who)",
+      "Read(//proc/31580/fd/**)",
+      "Bash(pip install:*)",
+      "Bash(pre-commit:*)",
+      "Bash(sudo dnf install:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

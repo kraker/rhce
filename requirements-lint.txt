@@ -1,0 +1,11 @@
+# Linting dependencies for RHCE study repository
+# Minimal set focused on Ansible and YAML quality
+
+# Pre-commit framework
+pre-commit>=4.0.0
+
+# Ansible linting (essential for learning correct practices)
+ansible-lint>=6.0.0
+
+# YAML linting (helps catch syntax errors)
+yamllint>=1.32.0

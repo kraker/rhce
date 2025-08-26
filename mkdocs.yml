@@ -54,8 +54,8 @@ markdown_extensions:
 # Extra configuration
 extra:
   generator: false
-  
-# Copyright information  
+
+# Copyright information
 copyright: 'Study materials for RHCE certification preparation'
 
 # Build directory

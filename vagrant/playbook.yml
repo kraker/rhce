@@ -10,7 +10,7 @@
       dnf:
         name: '*'
         state: latest
-        
+
     - name: Install essential packages
       dnf:
         name:
@@ -22,7 +22,7 @@
           - bash-completion
           - python3-pip
         state: present
-        
+
     - name: Create ansible user
       user:
         name: ansible
@@ -31,13 +31,13 @@
         create_home: yes
         groups: wheel
         append: yes
-        
+
     - name: Set up passwordless sudo for ansible user
       copy:
         content: "ansible ALL=(ALL) NOPASSWD: ALL"
         dest: /etc/sudoers.d/ansible
         mode: '0440'
-        
+
     - name: Configure /etc/hosts for all lab VMs
       blockinfile:
         path: /etc/hosts
@@ -49,14 +49,14 @@
           192.168.4.203 ansible3.example.com ansible3
           192.168.4.204 ansible4.example.com ansible4
         marker: "# {mark} RHCE LAB HOSTS"
-        
+
     - name: Configure firewall for SSH
       firewalld:
         service: ssh
         permanent: yes
         state: enabled
         immediate: yes
-        
+
     - name: Deploy custom MOTD
       template:
         src: files/motd
@@ -73,14 +73,14 @@
       dnf:
         name: ansible-core
         state: present
-        
+
     - name: Install additional Ansible collections
       command: ansible-galaxy collection install {{ item }}
       loop:
         - community.general
         - ansible.posix
       become_user: ansible
-      
+
     - name: Create SSH key for ansible user
       user:
         name: ansible
@@ -88,7 +88,7 @@
         ssh_key_type: rsa
         ssh_key_bits: 2048
         ssh_key_file: .ssh/id_rsa
-        
+
     - name: Create Ansible project directories
       file:
         path: "{{ item }}"
@@ -101,7 +101,7 @@
         - /home/ansible/projects/webservers
         - /home/ansible/projects/databases
         - /home/ansible/projects/practice
-        
+
     - name: Deploy ansible.cfg to control node
       copy:
         content: |
@@ -111,10 +111,10 @@
           host_key_checking = False
           retry_files_enabled = False
           stdout_callback = yaml
-          
+
           [inventory]
           enable_plugins = host_list, script, auto, yaml, ini, toml
-          
+
           [privilege_escalation]
           become = True
           become_method = sudo
@@ -124,34 +124,34 @@
         owner: ansible
         group: ansible
         mode: '0644'
-        
+
     - name: Deploy default inventory to control node
       copy:
         content: |
           [control]
           control.example.com
-          
+
           [managed]
           ansible1.example.com
           ansible2.example.com
           ansible3.example.com
           ansible4.example.com
-          
+
           [webservers]
           ansible1.example.com
           ansible2.example.com
-          
+
           [databases]
           ansible3.example.com
-          
+
           [development]
           ansible4.example.com
-          
+
           [production]
           ansible1.example.com
           ansible2.example.com
           ansible3.example.com
-          
+
           [all:vars]
           ansible_user=ansible
         dest: /home/ansible/inventory
@@ -169,7 +169,7 @@
           - python3-dnf
           - python3-firewall
         state: present
-        
+
     - name: Create .ssh directory for ansible user
       file:
         path: /home/ansible/.ssh
@@ -198,7 +198,7 @@
         user: ansible
         state: present
         key: "{{ lookup('file', '/tmp/ansible_public_key') }}"
-        
+
 - name: Test Ansible connectivity
   hosts: control
   become: yes
@@ -208,11 +208,11 @@
       command: ansible all -m ping
       register: connectivity_test
       ignore_errors: yes
-      
+
     - name: Display connectivity test results
       debug:
         var: connectivity_test.stdout_lines
-        
+
 - name: Configure web server group
   hosts: webservers
   become: yes
@@ -221,7 +221,7 @@
       dnf:
         name: httpd
         state: present
-        
+
     - name: Configure firewall for HTTP
       firewalld:
         service: http
@@ -239,7 +239,7 @@
           - mariadb-server
           - python3-PyMySQL
         state: present
-        
+
     - name: Configure firewall for MySQL
       firewalld:
         service: mysql

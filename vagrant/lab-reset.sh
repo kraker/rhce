@@ -21,7 +21,7 @@ case $confirm in
         echo ""
         echo "🗑️  Destroying current lab environment..."
         vagrant destroy --force
-        
+
         echo ""
         echo "🚀 Creating fresh lab environment..."
         ./lab-up.sh
@@ -32,7 +32,7 @@ case $confirm in
         echo ""
         echo "💡 Alternative options:"
         echo "   ./lab-halt.sh         # Stop VMs without destroying"
-        echo "   ./lab-up.sh           # Start existing VMs" 
+        echo "   ./lab-up.sh           # Start existing VMs"
         echo "   vagrant provision     # Re-run provisioning only"
         exit 1
         ;;

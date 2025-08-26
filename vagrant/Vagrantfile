@@ -51,7 +51,7 @@ Vagrant.configure("2") do |config|
       vm.vm.box = "generic/rhel9"
       vm.vm.hostname = "#{name}.example.com"
       vm.vm.network "private_network", ip: vm_config["ip"]
-      
+
       # Provider specific settings
       vm.vm.provider "virtualbox" do |vb|
         vb.name = "rhce-#{name}"

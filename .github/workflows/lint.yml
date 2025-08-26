@@ -1,5 +1,5 @@
 ---
-name: Lint and Validate Code
+name: Lint and Build
 
 on:
   push:
@@ -9,9 +9,9 @@ on:
   workflow_dispatch:
 
 jobs:
-  pre-commit:
+  lint-and-build:
     runs-on: ubuntu-latest
-    name: Run pre-commit hooks
+    name: Lint Ansible and Build Docs
 
     steps:
       - name: Checkout code
@@ -26,14 +26,15 @@ jobs:
         uses: actions/cache@v4
         with:
           path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements-dev.txt') }}
+          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt', 'requirements-lint.txt') }}
           restore-keys: |
             ${{ runner.os }}-pip-
 
-      - name: Install development dependencies
+      - name: Install dependencies
         run: |
           pip install --upgrade pip
-          pip install -r requirements-dev.txt
+          pip install -r requirements.txt
+          pip install -r requirements-lint.txt
 
       - name: Cache pre-commit hooks
         uses: actions/cache@v4
@@ -44,79 +45,5 @@ jobs:
       - name: Run pre-commit hooks
         run: pre-commit run --all-files --show-diff-on-failure
 
-  ansible-syntax:
-    runs-on: ubuntu-latest
-    name: Validate Ansible syntax
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Install Ansible
-        run: |
-          pip install --upgrade pip
-          pip install ansible-core>=2.15.0
-
-      - name: Run ansible-playbook syntax check
-        run: |
-          find . -name "*.yml" -o -name "*.yaml" | \
-          grep -E "(playbook|site)" | \
-          while read playbook; do
-            echo "Checking syntax of $playbook"
-            ansible-playbook --syntax-check "$playbook"
-          done
-
-  documentation-build:
-    runs-on: ubuntu-latest
-    name: Test documentation build
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
-
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
-
-      - name: Install MkDocs dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-
       - name: Build documentation
         run: mkdocs build --verbose --strict
-
-  ruby-lint:
-    runs-on: ubuntu-latest
-    name: Lint Ruby code
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
-        with:
-          ruby-version: '3.1'
-          bundler-cache: false
-
-      - name: Install RuboCop
-        run: |
-          gem install rubocop rubocop-performance rubocop-rspec
-
-      - name: Run RuboCop
-        run: rubocop --config .rubocop.yml

@@ -8,26 +8,26 @@
   vars:
     http_port: 80
     max_clients: 200
-  
+
   tasks:
     - name: Install Apache HTTP Server
       yum:
         name: httpd
         state: present
-      
+
     - name: Start and enable httpd service
       systemd:
         name: httpd
         state: started
         enabled: yes
-        
+
     - name: Configure Apache with template
       template:
         src: httpd.conf.j2
         dest: /etc/httpd/conf/httpd.conf
         backup: yes
       notify: restart apache
-      
+
     - name: Create web content directory
       file:
         path: /var/www/html/app
@@ -35,7 +35,7 @@
         owner: apache
         group: apache
         mode: '0755'
-        
+
     - name: Deploy index page
       copy:
         content: |
@@ -62,7 +62,7 @@
   become: yes
   vars_files:
     - vault_vars.yml
-    
+
   tasks:
     - name: Install MariaDB
       yum:
@@ -70,19 +70,19 @@
           - mariadb-server
           - python3-PyMySQL
         state: present
-        
+
     - name: Start and enable MariaDB
       systemd:
         name: mariadb
         state: started
         enabled: yes
-        
+
     - name: Create application database
       mysql_db:
         name: "{{ app_db_name }}"
         state: present
       when: app_db_name is defined
-      
+
     - name: Create database user
       mysql_user:
         name: "{{ app_db_user }}"
@@ -94,34 +94,34 @@
 - name: Common configuration for all hosts
   hosts: all
   become: yes
-  
+
   tasks:
     - name: Update system packages
       yum:
         name: "*"
         state: latest
       when: update_system | default(false) | bool
-      
+
     - name: Configure NTP
       template:
         src: chrony.conf.j2
         dest: /etc/chrony.conf
         backup: yes
       notify: restart chronyd
-      
+
     - name: Ensure chronyd is running
       systemd:
         name: chronyd
         state: started
         enabled: yes
-        
+
     - name: Configure firewall for SSH
       firewalld:
         service: ssh
         permanent: yes
         state: enabled
         immediate: yes
-        
+
     - name: Create system users
       user:
         name: "{{ item.name }}"

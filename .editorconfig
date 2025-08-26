@@ -1,5 +1,4 @@
-# EditorConfig configuration for RHCE study repository
-# Ensures consistent coding styles across different editors
+# Basic EditorConfig for RHCE study repository
 
 root = true
 
@@ -10,24 +9,16 @@ end_of_line = lf
 insert_final_newline = true
 trim_trailing_whitespace = true
 
-# YAML files (Ansible playbooks, configs, GitHub Actions)
+# YAML files (Ansible playbooks, configs)
 [*.{yml,yaml}]
 indent_style = space
 indent_size = 2
-max_line_length = 120
 
-# Markdown files (documentation)
+# Markdown files (preserve trailing spaces for line breaks)
 [*.md]
 indent_style = space
 indent_size = 2
-max_line_length = 120
-trim_trailing_whitespace = false  # Preserve trailing spaces for line breaks
-
-# Python files (if any)
-[*.py]
-indent_style = space
-indent_size = 4
-max_line_length = 88
+trim_trailing_whitespace = false
 
 # Shell scripts
 [*.sh]
@@ -37,30 +28,8 @@ indent_size = 2
 # Makefile (requires tabs)
 [Makefile]
 indent_style = tab
-indent_size = 4
-
-# CSV files (Anki deck)
-[*.csv]
-trim_trailing_whitespace = false
 
 # Configuration files
 [*.{ini,cfg,conf}]
 indent_style = space
 indent_size = 2
-
-# JSON files
-[*.json]
-indent_style = space
-indent_size = 2
-
-# Ruby files (Vagrantfile and scripts)
-[*.rb]
-indent_style = space
-indent_size = 2
-max_line_length = 120
-
-# Vagrantfile (Ruby without .rb extension)
-[Vagrantfile]
-indent_style = space
-indent_size = 2
-max_line_length = 120

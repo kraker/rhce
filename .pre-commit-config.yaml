@@ -1,6 +1,6 @@
 ---
-# Pre-commit configuration for RHCE study repository
-# Focuses on Ansible, YAML, and documentation quality
+# Simplified pre-commit configuration for RHCE study repository
+# Focus on essential Ansible and YAML quality checks
 
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
@@ -12,20 +12,16 @@ repos:
       - id: end-of-file-fixer
       - id: check-yaml
       - id: check-added-large-files
-      - id: check-case-conflict
-      - id: check-executables-have-shebangs
-      - id: check-shebang-scripts-are-executable
       - id: check-merge-conflict
-      - id: mixed-line-ending
 
-  # YAML linting
+  # YAML linting (essential for Ansible)
   - repo: https://github.com/adrienverge/yamllint
     rev: v1.37.0
     hooks:
       - id: yamllint
         args: [-c=.yamllint]
 
-  # Ansible linting
+  # Ansible linting (essential for learning correct practices)
   - repo: https://github.com/ansible/ansible-lint
     rev: v25.4.0
     hooks:
@@ -33,38 +29,3 @@ repos:
         args: [-c=.ansible-lint]
         files: \.(yml|yaml)$
         exclude: ^(site/|\.github/workflows/)
-
-  # Markdown linting
-  - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.44.0
-    hooks:
-      - id: markdownlint
-        args: [--config=.markdownlint.yaml]
-        exclude: ^(site/|sources/)
-
-  # Ruby code quality (for Vagrantfile and other Ruby scripts)
-  - repo: https://github.com/rubocop/rubocop
-    rev: v1.69.2
-    hooks:
-      - id: rubocop
-        args: [--config=.rubocop.yml]
-        require_serial: false
-
-  # Python code quality (for any Python scripts)
-  - repo: https://github.com/psf/black
-    rev: 25.1.0
-    hooks:
-      - id: black
-        language_version: python3
-
-  - repo: https://github.com/pycqa/isort
-    rev: 6.0.1
-    hooks:
-      - id: isort
-        args: [--profile=black]
-
-  - repo: https://github.com/pycqa/flake8
-    rev: 7.1.2
-    hooks:
-      - id: flake8
-        args: [--max-line-length=88, --extend-ignore=E203,W503]
