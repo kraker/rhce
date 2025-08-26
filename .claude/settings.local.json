@@ -16,7 +16,8 @@
       "Bash(pip install:*)",
       "Bash(pre-commit:*)",
       "Bash(sudo dnf install:*)",
-      "WebFetch(domain:www.redhat.com)"
+      "WebFetch(domain:www.redhat.com)",
+      "Bash(grep:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

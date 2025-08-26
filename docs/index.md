@@ -13,18 +13,25 @@ The Red Hat Certified Engineer (RHCE) certification demonstrates your ability to
 
 ## 📚 Study Materials Overview
 
-### 🌟 Comprehensive Study Modules
-Our structured learning path covers all RHCE exam objectives:
+### 🌟 Core Study Resources (Experienced Users)
+Focused materials targeting exam-specific gaps for production Ansible users:
 
-- **[Study Modules](rhce_synthesis/index.md)** - Complete coverage of RHCE topics in 8 detailed modules
-- **[Exam Quick Reference](exam_quick_reference.md)** - Essential commands and syntax for exam day
-- **[Ansible Module Reference](ansible_module_reference.md)** - Key modules with examples
-- **[Command Reference](command_reference.md)** - Organized by functional area
+- **[Ebook Summary](ebook_summary.md)** - Exam-focused synthesis from multiple RHCE sources  
+- **[Exam Quick Reference](exam_quick_reference.md)** - Critical exam-day syntax and commands
+- **[Command Reference by Topic](command_reference_by_topic.md)** - Organized by official exam objectives
+- **[RHCE Acronyms & Glossary](rhce_acronyms_glossary.md)** - Exam terminology and concepts
 
-### 🎓 Learning Resources
-- **Anki Flashcards** - `anki/rhce_deck.csv` for spaced repetition learning
-- **Practice Playbooks** - Hands-on exercises in `ansible/practice/`
-- **Study Guides** - Extracted content from leading RHCE books
+### 🎯 Synthesis Modules (Gap-Focused)
+Targeted modules covering exam-specific requirements:
+
+- **[Module 00: Exam Overview](rhce_synthesis/00_exam_overview.md)** - Official objectives and format
+- **[Module 01: Automation Content Navigator](rhce_synthesis/01_automation_content_navigator.md)** - New exam tool mastery
+- **[Module 02: Content Collections](rhce_synthesis/02_content_collections.md)** - FQCN and collection management
+
+### 🧪 Practical Resources  
+- **[Knowledge Gaps Checklist](knowledge_gaps_checklist.md)** - Self-assessment for experienced users
+- **[Exam Scenarios](exam_scenarios.md)** - Realistic practice tasks with time limits
+- **Anki Flashcards** - `anki/rhce_deck.csv` for exam-specific memorization
 
 ## 🚀 Quick Start
 
