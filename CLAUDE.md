@@ -190,7 +190,7 @@ ansible-playbook site.yml --vault-password-file .vault_pass
 
 - **Minimal Dependencies**: Only include dependencies actually used in configuration files. Before adding any dependency to requirements.txt, verify it's referenced in mkdocs.yml or other config files. Remove unused dependencies to keep the project lean and maintainable.
 - **Node.js Dependencies**: Use idiomatic npm workflow - run `npm install package-name --save-dev` to automatically create/update package.json rather than manually creating the file. This ensures proper dependency management and follows Node.js best practices.
-- **Documentation Maintenance**: When making significant changes (features, reorganizations, refactors), always update project documentation (README.md, CLAUDE.md, and relevant docs/) to reflect the current state. Keep documentation in sync with actual project structure and capabilities.
+- **Documentation Maintenance**: When making significant changes (features, reorganizations, refactors), always update project documentation (README.md, CLAUDE.md, and relevant docs/) to reflect the current state. Keep documentation in sync with actual project structure and capabilities. The main README.md should focus on project overview and development setup - detailed study content belongs in docs/ and specialized documentation (like vagrant/README.md) should remain focused on their specific domains.
 - **Gitignore Management**: When adding new dependencies or tooling, always update .gitignore to exclude generated files, build artifacts, and dependency directories (e.g., node_modules/, *pycache*/, .env files). Review .gitignore patterns whenever introducing new technology stacks.
 
 ## Git Commit Style Guide
