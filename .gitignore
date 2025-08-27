@@ -31,7 +31,9 @@ Thumbs.db
 *.retry
 .vault_pass
 .ansible/
-vagrant/collections/  # Project-local collections installed via requirements.yml
+# Project-local Ansible collections and roles (any location)
+**/collections/
+**/roles/
 
 # Vagrant and RHEL credentials
 vagrant/.rhel-credentials
