@@ -5,6 +5,7 @@
 *Complete glossary covering all RHCE exam terminology, concepts, and technical vocabulary for thorough exam preparation*
 
 **📚 Source Integration**: Terminology synthesized from:
+
 - Sander van Vugt's RHCE Guide (16 chapters) - RHEL 8/9 focused
 - Jeff Geerling's Ansible for DevOps (15 chapters) - Modern practices
 - Red Hat official documentation and certification materials
@@ -14,6 +15,7 @@
 ## 📝 Essential RHCE Acronyms
 
 ### Core Certification Acronyms
+
 | Acronym | Full Term | Context | Exam Importance |
 |---------|-----------|---------|-----------------|
 | **RHCE** | Red Hat Certified Engineer | EX294 certification exam | Critical |
@@ -23,6 +25,7 @@
 | **FQCN** | Fully Qualified Collection Name | Module naming: `ansible.builtin.dnf` | Critical |
 
 ### Ansible Technology Acronyms
+
 | Acronym | Full Term | Technical Context | Usage |
 |---------|-----------|-------------------|-------|
 | **ACN** | Automation Content Navigator | Primary exam execution tool | Daily use |
@@ -33,6 +36,7 @@
 | **CLI** | Command Line Interface | Traditional execution mode | Daily use |
 
 ### System and Network Acronyms
+
 | Acronym | Full Term | System Context | Exam Use |
 |---------|-----------|----------------|----------|
 | **SSH** | Secure Shell | Remote access protocol | Critical |
@@ -51,6 +55,7 @@
 ## 📚 Comprehensive Terminology by Category
 
 ### A - Ansible Fundamentals
+
 - **Ad-hoc Commands**: Single-task execution without playbooks using `ansible` command
 - **Ansible**: Open source IT automation platform for configuration management and deployment
 - **Ansible Configuration File**: `ansible.cfg` controlling Ansible behavior and settings
@@ -61,6 +66,7 @@
 - **Available**: Package state indicating software should be installed but not necessarily latest
 
 ### B - Basic Operations  
+
 - **Become**: Privilege escalation mechanism replacing traditional sudo in Ansible
 - **Block**: Grouping construct for tasks allowing structured error handling
 - **Boolean**: True/false variable type used extensively in conditionals and configuration
@@ -68,6 +74,7 @@
 - **Byte Code**: Compiled Python code executed on managed nodes during task execution
 
 ### C - Collections and Control
+
 - **Cache**: Temporary storage mechanism for facts and data to improve performance
 - **Callback Plugin**: Extension modifying how Ansible displays output and logs information
 - **Check Mode**: Dry run execution showing potential changes without applying them
@@ -80,6 +87,7 @@
 - **Controller**: Centralized management system for Ansible automation (AWX/Tower)
 
 ### D - Data and Deployment
+
 - **Daemon**: Background system service typically managed through systemd
 - **Debug Module**: Ansible module for printing variables, messages, and troubleshooting information
 - **Declarative**: Configuration approach describing desired end state rather than steps
@@ -90,6 +98,7 @@
 - **Dynamic Inventory**: Automatically generated inventory from external sources or scripts
 
 ### E - Execution and Environment
+
 - **Execution Environment**: Container image containing Ansible and required dependencies
 - **Encryption**: Data protection mechanism using ansible-vault or external tools
 - **Error Handling**: Managing task failures through blocks, rescue, and always constructs
@@ -97,6 +106,7 @@
 - **Execution Policy**: Rules and constraints controlling how and where automation runs
 
 ### F - Facts and Files
+
 - **Facts**: System information automatically gathered by Ansible setup module
 - **Fact Caching**: Performance optimization storing gathered facts for reuse across runs
 - **Failed State**: Condition indicating task execution encountered unrecoverable errors
@@ -107,6 +117,7 @@
 - **Function**: Reusable code construct including filters, plugins, and custom modules
 
 ### G - Groups and Galaxy
+
 - **Galaxy**: Ansible's official community repository for sharing collections and roles
 - **Gather Facts**: Automated process collecting system information from managed nodes
 - **Group**: Logical collection of hosts in inventory for targeted automation
@@ -114,6 +125,7 @@
 - **Guard Condition**: Logical check preventing task execution under specific circumstances
 
 ### H - Handlers and Hosts
+
 - **Handler**: Special task triggered by notifications, typically for service restarts
 - **Host**: Individual system targeted by Ansible automation and configuration management
 - **Host Variables**: Variables specific to individual inventory hosts
@@ -121,6 +133,7 @@
 - **Hostvars**: Magic variable containing all variables for all hosts in inventory
 
 ### I - Inventory and Idempotency
+
 - **Idempotency**: Critical property ensuring repeated execution produces identical results
 - **Imperative**: Configuration approach specifying step-by-step procedural actions
 - **Import**: Static inclusion of tasks, roles, or playbooks processed at parse time
@@ -131,16 +144,19 @@
 - **Item**: Individual element referenced during loop iteration in tasks
 
 ### J - Jinja2 and JSON
+
 - **Jinja2**: Powerful templating engine used throughout Ansible for dynamic content generation
 - **JSON**: Structured data format used for complex variables and API interactions
 - **Jump Host**: Intermediate system used for reaching isolated or secured managed nodes
 
 ### K - Keys and Kernel
+
 - **Kernel Module**: Loadable kernel extensions managed through automation for system functionality
 - **Key Distribution**: Process of copying SSH public keys to managed nodes for authentication
 - **Key Pair**: Combined public/private SSH keys enabling secure passwordless authentication
 
 ### L - Loops and Logic
+
 - **Library**: Collection of reusable modules, plugins, or code components
 - **Limit**: Mechanism restricting playbook execution to subset of inventory hosts
 - **Lineinfile Module**: Ansible module for managing individual lines within text files
@@ -150,6 +166,7 @@
 - **Lookup Plugin**: Extension retrieving external data during playbook execution
 
 ### M - Modules and Management
+
 - **Magic Variable**: Special Ansible-provided variable containing system and runtime information
 - **Managed Node**: Target system configured and controlled by Ansible automation
 - **Module**: Fundamental unit of Ansible automation implementing specific functionality
@@ -157,17 +174,20 @@
 - **Mount Point**: File system attachment location managed through storage automation
 
 ### N - Networking and Namespaces
+
 - **Namespace**: Organizational structure for collections using dot notation (e.g., `community.general`)
 - **Network Module**: Specialized Ansible modules for network device configuration and management
 - **Notification**: Mechanism triggering handler execution after task state changes
 - **No Log**: Security feature preventing sensitive information from appearing in execution logs
 
 ### O - Operations and Output
+
 - **Operation**: Individual automation action performed by Ansible modules
 - **Output**: Results and information returned by task and module execution
 - **Override**: Process of replacing default configuration values with custom settings
 
 ### P - Playbooks and Plugins
+
 - **Package Manager**: System utility for software installation and management (DNF/YUM)
 - **Parameter**: Module option or argument controlling specific task behavior
 - **Parsing**: Process of reading, interpreting, and validating YAML syntax and structure
@@ -181,10 +201,12 @@
 - **Public Key**: Shareable portion of SSH key pair for remote authentication
 
 ### Q - Queries and Queues
+
 - **Query**: Request for information from system, API, or external data source
 - **Queue**: Ordered sequence of tasks awaiting execution in automation workflow
 
 ### R - Roles and Registry
+
 - **Registry**: Repository storing container images or automation content packages
 - **Remote User**: Account used for SSH connections to managed nodes
 - **Repository**: Storage location for packages, source code, or automation content
@@ -194,6 +216,7 @@
 - **Run**: Single execution instance of playbook or automation content
 
 ### S - Security and Services
+
 - **Secrets Management**: Secure handling of passwords, keys, and sensitive configuration data
 - **Service**: System daemon managed through systemd or similar service management
 - **Service Facts**: Automatically gathered information about system services and their states
@@ -204,6 +227,7 @@
 - **Syntax Check**: Validation process ensuring YAML structure and Ansible logic correctness
 
 ### T - Tasks and Templates
+
 - **Tag**: Categorical label for organizing and selectively executing specific tasks
 - **Task**: Individual automation step within plays representing atomic work units
 - **Template**: Dynamic file generation mechanism using Jinja2 templating engine
@@ -213,12 +237,14 @@
 - **Transform**: Data manipulation process using filters or custom processing logic
 
 ### U - Users and Updates
+
 - **Unarchive**: Process of extracting and deploying compressed archive files
 - **Update**: Modification of existing configuration or installation of newer software versions
 - **URI Module**: Ansible module for HTTP/REST API interactions and web service communication
 - **User Module**: Ansible module for comprehensive system user account management
 
 ### V - Variables and Vaults
+
 - **Variable**: Named storage mechanism for data used throughout automation processes
 - **Variable File**: YAML file containing organized variable definitions and values
 - **Vault**: Ansible's integrated encryption system for protecting sensitive automation data
@@ -228,19 +254,23 @@
 - **Version Control**: System for tracking and managing changes to automation code
 
 ### W - Workflow and When
+
 - **When Condition**: Conditional logic construct controlling selective task execution
 - **Workflow**: Organized sequence of automation tasks and decision points
 - **Working Directory**: File system location where commands and operations execute
 
 ### X - eXecution and eXtensions
+
 - **Execution**: Process of running playbooks, tasks, or automation content
 - **Extension**: Plugin or module adding specialized functionality to Ansible core
 
 ### Y - YAML and Yum
+
 - **YAML**: Human-readable data serialization language used for all Ansible configuration
 - **YUM**: Legacy package manager predecessor to DNF on Red Hat systems
 
 ### Z - Zones
+
 - **Zone**: Security or network context used in firewall and SELinux configuration
 
 ---
@@ -248,6 +278,7 @@
 ## 🔧 Module Categories and Classifications
 
 ### System Administration Modules
+
 | Category | Purpose | Key Modules | Exam Weight |
 |----------|---------|-------------|-------------|
 | **User Management** | Account operations | `user`, `group`, `authorized_key` | High |
@@ -259,6 +290,7 @@
 | **Security Controls** | Access and permissions | `seboolean`, `selinux`, `sefcontext` | Medium |
 
 ### Advanced Module Categories
+
 | Category | Purpose | Collections | Use Cases |
 |----------|---------|-------------|-----------|
 | **Cloud Integration** | Cloud platform management | `amazon.aws`, `azure.azcollection` | Infrastructure |
@@ -272,6 +304,7 @@
 ## 🎯 Exam-Specific Concepts
 
 ### Red Hat Methodology and Best Practices
+
 - **Idempotency**: Fundamental principle ensuring automation safety and predictability
 - **Declarative Configuration**: Approach focusing on desired end state rather than procedures
 - **Infrastructure as Code**: Methodology treating infrastructure as version-controlled software
@@ -280,6 +313,7 @@
 - **Immutable Infrastructure**: Strategy of replacing rather than modifying existing systems
 
 ### Collection Namespaces and Usage
+
 | Namespace | Purpose | Primary Modules | Exam Relevance |
 |-----------|---------|-----------------|----------------|
 | `ansible.builtin` | Core functionality | `dnf`, `systemd`, `copy`, `template` | Critical |
@@ -289,6 +323,7 @@
 | `containers.podman` | Container management | `podman_container` | Medium |
 
 ### Variable Precedence Hierarchy
+
 1. **Command line** (`-e` flag) - Highest priority
 2. **Task vars** - Task-specific variables
 3. **Block vars** - Block-scoped variables
@@ -311,6 +346,7 @@
 ## 🚨 Common Exam Pitfalls and Solutions
 
 ### FQCN Requirements and Errors
+
 | Incorrect Usage | Correct Usage | Error Prevention |
 |-----------------|---------------|------------------|
 | `dnf:` | `ansible.builtin.dnf:` | Always use FQCN |
@@ -319,6 +355,7 @@
 | `parted:` | `community.general.parted:` | Verify availability |
 
 ### Navigator vs Traditional Commands
+
 | Old Method | New Method | Exam Requirement |
 |------------|------------|------------------|
 | `ansible-playbook` | `ansible-navigator run` | Use navigator |
@@ -326,6 +363,7 @@
 | `ansible-inventory` | `ansible-navigator inventory` | Either acceptable |
 
 ### Collection Management Issues
+
 | Problem | Solution | Prevention |
 |---------|----------|------------|
 | Missing collections | Install required collections | Check requirements |
@@ -337,6 +375,7 @@
 ## 📋 Study Strategy and Priority Framework
 
 ### Critical Priority Terms (Master First)
+
 - **FQCN usage and namespace understanding**
 - **Variable precedence and scoping rules**
 - **Module parameters for core modules**
@@ -345,6 +384,7 @@
 - **Task control: conditionals, loops, error handling**
 
 ### High Priority Terms (Essential Knowledge)
+
 - **Role structure and development patterns**
 - **Template syntax and Jinja2 filters**
 - **Collection installation and management**
@@ -352,12 +392,14 @@
 - **SSH configuration and authentication setup**
 
 ### Medium Priority Terms (Supporting Knowledge)
+
 - **Advanced automation patterns and strategies**
 - **Performance optimization techniques**
 - **Troubleshooting methodologies and approaches**
 - **Integration with external systems and APIs**
 
 ### Study Methodology
+
 1. **Terminology Drills**: Regular review of key terms and definitions
 2. **Practical Application**: Hands-on use of concepts in lab environments
 3. **Cross-Reference Learning**: Connect terminology to actual implementation
@@ -369,6 +411,7 @@
 ## 🎓 Quick Reference for Exam Day
 
 ### Essential Command Patterns
+
 ```bash
 # Documentation lookup (your lifeline)
 ansible-doc module_name
@@ -382,14 +425,16 @@ ansible-navigator run --check --diff
 ```
 
 ### Must-Know Module Categories
+
 - **System**: `systemd`, `user`, `group`, `cron`
-- **Package**: `dnf`, `package`, `rpm_key` 
+- **Package**: `dnf`, `package`, `rpm_key`
 - **File**: `copy`, `template`, `file`, `lineinfile`
 - **Storage**: `parted`, `lvg`, `lvol`, `mount`
 - **Network**: `firewalld`, `uri`, `get_url`
 - **Security**: `seboolean`, `selinux`, `authorized_key`
 
 ### Critical Success Factors
+
 - **Always use FQCN**: Never use short module names
 - **Test connectivity first**: Start every session with `ansible all -m ping`
 - **Know ansible-doc**: Your primary reference tool during exam

@@ -7,11 +7,13 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 ### 📚 Study Materials
 
 #### 🌐 Online Documentation Site
-- **GitHub Pages**: https://kraker.github.io/rhce/ (live documentation site)
+
+- **GitHub Pages**: <https://kraker.github.io/rhce/> (live documentation site)
 - Built with MkDocs using the readthedocs theme
 - Mobile-friendly and searchable interface
 
 #### 📁 Local Files
+
 - **`docs/`** - All study materials (MkDocs source)
   - `rhce_synthesis/` - 8 comprehensive study modules covering all RHCE exam objectives
   - `exam_quick_reference.md` - Essential Ansible commands and syntax for exam day
@@ -21,6 +23,7 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 - **`anki/rhce_deck.csv`** - Comprehensive flashcards for Anki import (Ansible-focused)
 
 ### 🏗️ Lab Environment
+
 - **`vagrant/`** - Automated RHEL 9 lab with 5 VMs (1 control + 4 managed nodes)
   - `Vagrantfile` - Complete multi-VM configuration
   - `lab-up.sh` - Automated lab startup script
@@ -30,6 +33,7 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 - Includes SSH key distribution, inventory setup, and service configuration
 
 ### 📖 External Resources (`sources/` directory, not tracked)
+
 - Study book materials from leading RHCE authors (EPUBs converted to markdown)
 - Official Red Hat documentation extracts
 - Practice guides and reference materials
@@ -37,12 +41,14 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 ## Quick Start
 
 ### Using the Study Materials
-1. **Visit the Documentation Site**: Browse https://kraker.github.io/rhce/ for organized study materials
+
+1. **Visit the Documentation Site**: Browse <https://kraker.github.io/rhce/> for organized study materials
 2. **Start with Module 00**: Begin with [Exam Overview](docs/rhce_synthesis/00_exam_overview.md) to understand the exam format
 3. **Follow the Study Path**: Work through the 8 comprehensive modules systematically
 4. **Use Quick References**: Leverage the exam-focused reference materials
 
 ### Using the Anki Flashcards
+
 1. Import `anki/rhce_deck.csv` into Anki
 2. The deck focuses on Ansible concepts, modules, and automation patterns:
    - `ansible_basics`, `playbooks`, `variables`
@@ -52,6 +58,7 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 ### Lab Environment Setup
 
 #### Option 1: Automated Vagrant Lab (Recommended)
+
 ```bash
 cd vagrant/
 cp .rhel-credentials.template .rhel-credentials
@@ -60,25 +67,30 @@ cp .rhel-credentials.template .rhel-credentials
 ```
 
 This creates:
+
 - **control** (192.168.4.200) - Ansible control node with 2GB RAM
 - **ansible1-4** (192.168.4.201-204) - Managed nodes with 1GB RAM each
 - Pre-configured SSH keys, inventory, and host groups
 - Automatic Red Hat subscription registration
 
 #### Option 2: Manual Lab Setup
+
 1. **Control Node**: RHEL 9 system with Ansible installed
 2. **Managed Nodes**: 2-3 RHEL 9 systems for automation targets
 3. **SSH Configuration**: Key-based authentication between nodes
 4. **Network Access**: All systems can communicate via SSH
 
-**Prerequisites**: 
+**Prerequisites**:
+
 - Vagrant + VirtualBox (for automated lab) OR RHEL 9 systems (manual)
 - Red Hat Developer account (free at developers.redhat.com)
 - SSH access and basic Linux administration knowledge
 - RHCSA certification (required for RHCE exam)
 
 #### Development Environment (Optional)
+
 For playbook development and testing outside the lab:
+
 ```bash
 pip install -r requirements.txt  # Installs Ansible, linting, and testing tools
 ```
@@ -86,18 +98,21 @@ pip install -r requirements.txt  # Installs Ansible, linting, and testing tools
 ## Study Workflow
 
 ### Phase 1: Foundation (Weeks 1-2)
+
 - **Environment Setup**: Configure control and managed nodes
 - **Basic Concepts**: Complete Modules 00-01 (Exam Overview, Ansible Basics)
 - **Simple Automation**: Practice ad-hoc commands and basic playbooks
 - **Daily Practice**: 1-2 hours of hands-on work
 
 ### Phase 2: Core Skills (Weeks 3-4)
+
 - **Playbook Mastery**: Complete Modules 02-04 (Playbooks, Variables, Task Control)
 - **Complex Logic**: Build playbooks with conditionals, loops, and error handling
 - **Configuration Management**: Practice system configuration scenarios
 - **Daily Practice**: 1-2 hours focused on playbook development
 
 ### Phase 3: Advanced Topics (Weeks 5-6)
+
 - **Templates and Roles**: Complete Modules 05-06 (Templates, Roles)
 - **Security**: Master Module 07 (Ansible Vault)
 - **Advanced Features**: Complete Module 08 (Advanced Features)
@@ -105,6 +120,7 @@ pip install -r requirements.txt  # Installs Ansible, linting, and testing tools
 - **Daily Practice**: 1-2 hours on complex scenarios
 
 ### Phase 4: Exam Preparation (Week 7)
+
 - **Intensive Practice**: Mock exam scenarios under time pressure
 - **Quick Reference Review**: Master essential commands and syntax
 - **Troubleshooting**: Focus on debugging and error resolution
@@ -114,6 +130,7 @@ pip install -r requirements.txt  # Installs Ansible, linting, and testing tools
 ## Key RHCE Skills Areas
 
 ### Essential Ansible Automation
+
 ```bash
 # Inventory and connection management
 ansible all -i inventory.ini -m ping
@@ -126,6 +143,7 @@ ansible-playbook site.yml -v
 ```
 
 ### Configuration Management
+
 ```yaml
 # Template deployment example
 - name: Deploy configuration file
@@ -137,6 +155,7 @@ ansible-playbook site.yml -v
 ```
 
 ### Role Development
+
 ```bash
 # Role creation and structure
 ansible-galaxy init my_role
@@ -150,6 +169,7 @@ tree roles/my_role/
 ```
 
 ### Security with Ansible Vault
+
 ```bash
 # Vault operations
 ansible-vault create secrets.yml
@@ -206,52 +226,68 @@ rhce/
 This study guide comprehensively covers all **official Red Hat RHCE EX294 exam objectives**:
 
 ### Prerequisites
+
 ✅ **Be able to perform all tasks expected of a Red Hat Certified System Administrator**
+
 - Understand and use essential tools, operate running systems, configure local storage
 - Create and configure file systems, deploy and maintain systems
 - Manage users and groups, manage security
 
 ### Core Ansible Competencies
+
 ✅ **Understand core components of Ansible**
+
 - Inventories, modules, variables, facts, loops, conditional tasks, plays
 - Handling task failure, playbooks, configuration files, roles
 - Use provided documentation to look up specific information about Ansible modules and commands
 
 ✅ **Use roles and Ansible Content Collections**
+
 - Create and work with roles, install roles and use them in playbooks
 - Install Content Collections and use them in playbooks
 - Obtain a set of related roles, supplementary modules, and other content from content collections
 
 ### Environment Configuration
+
 ✅ **Install and configure an Ansible control node**
+
 - Install required packages, create a static host inventory file
 - Create a configuration file, create and use static inventories to define groups of hosts
 
 ✅ **Configure Ansible managed nodes**
+
 - Create and distribute SSH keys to managed nodes
 - Configure privilege escalation on managed nodes, deploy files to managed nodes
 - Be able to analyze simple shell scripts and convert them to playbooks
 
 ### Automation Content Navigator
+
 ✅ **Run playbooks with Automation content navigator**
+
 - Know how to run playbooks with Automation content navigator
 - Use Automation content navigator to find new modules in available Ansible Content Collections
 - Use Automation content navigator to create inventories and configure the Ansible environment
 
 ### Playbook Development
+
 ✅ **Create Ansible plays and playbooks**
+
 - Know how to work with commonly used Ansible modules
 - Use variables to retrieve the results of running a command, use conditionals to control play execution
 - Configure error handling, create playbooks to configure systems to a specified state
 
 ### RHCSA Task Automation
+
 ✅ **Automate standard RHCSA tasks using Ansible modules that work with:**
+
 - Software packages and repositories, services, firewall rules
 - File systems, storage devices, file content, archiving
 - Task scheduling, security, users and groups
 
 ### Content Management
+
 ✅ **Manage content**
+
 - Create and use templates to create customized configuration files  
 
 ## Contributing and Maintenance

@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Understand variable types, scoping, and precedence rules
 - Master fact gathering and utilization in playbooks
 - Organize variables using host_vars and group_vars
@@ -16,6 +17,7 @@ By the end of this module, you will:
 ### Static vs Dynamic Playbooks
 
 **Static Approach**: Hard-coded values limit reusability
+
 ```yaml
 # Limited reusability
 - name: Install web server
@@ -25,6 +27,7 @@ By the end of this module, you will:
 ```
 
 **Dynamic Approach**: Variables enable flexibility
+
 ```yaml
 # Highly reusable
 - name: Install web server
@@ -47,6 +50,7 @@ By the end of this module, you will:
 ### Variable Naming Rules
 
 **Valid Names**:
+
 - Letters, numbers, and underscores only
 - Must start with letter or underscore
 - Case-sensitive
@@ -67,6 +71,7 @@ environment2: production
 ### Variable Definition Locations
 
 **1. Playbook Variables**:
+
 ```yaml
 ---
 - name: Web server setup
@@ -83,6 +88,7 @@ environment2: production
 ```
 
 **2. External Variable Files**:
+
 ```yaml
 # vars/web_vars.yml
 ---
@@ -106,6 +112,7 @@ web_document_root: /var/www/html
 ```
 
 **3. Command Line Variables**:
+
 ```bash
 # Override variables at runtime
 ansible-navigator run site.yml -e "web_port=8080" --mode stdout
@@ -114,6 +121,7 @@ ansible-navigator run site.yml -e "@vars/production.yml" --mode stdout
 ```
 
 **4. Host Variables** (`host_vars/hostname.yml`):
+
 ```yaml
 # host_vars/web01.example.com.yml
 ---
@@ -126,6 +134,7 @@ custom_modules:
 ```
 
 **5. Group Variables** (`group_vars/groupname.yml`):
+
 ```yaml
 # group_vars/webservers.yml
 ---
@@ -143,6 +152,7 @@ log_level: warn
 ```
 
 **6. Inventory Variables**:
+
 ```ini
 # INI format
 [webservers]
@@ -174,6 +184,7 @@ all:
 ### Variable Data Types
 
 **Strings**:
+
 ```yaml
 server_name: web01.example.com
 config_path: "/etc/httpd/conf/httpd.conf"
@@ -181,6 +192,7 @@ message: 'Single quotes preserve content literally'
 ```
 
 **Numbers**:
+
 ```yaml
 web_port: 80
 max_connections: 1000
@@ -188,6 +200,7 @@ timeout: 30.5
 ```
 
 **Booleans**:
+
 ```yaml
 ssl_enabled: true
 debug_mode: false
@@ -196,6 +209,7 @@ maintenance: no        # Ansible converts to boolean
 ```
 
 **Lists**:
+
 ```yaml
 packages:
   - httpd
@@ -212,6 +226,7 @@ users:
 ```
 
 **Dictionaries**:
+
 ```yaml
 database:
   host: db.example.com
@@ -277,6 +292,7 @@ web_port: 8080
 ```
 
 **Command Line Override** (highest precedence):
+
 ```bash
 # Command line variables always win
 ansible-navigator run site.yml -e "web_port=9090" --mode stdout
@@ -312,6 +328,7 @@ ansible-navigator run site.yml -e "web_port=9090" --mode stdout
 ### Understanding Facts
 
 **What are Facts?**: Automatically gathered system information including:
+
 - Operating system details
 - Hardware information
 - Network configuration
@@ -342,6 +359,7 @@ ansible-navigator run site.yml -e "web_port=9090" --mode stdout
 ### Essential Facts
 
 **System Information**:
+
 ```yaml
 - name: Display system facts
   ansible.builtin.debug:
@@ -355,6 +373,7 @@ ansible-navigator run site.yml -e "web_port=9090" --mode stdout
 ```
 
 **Hardware Facts**:
+
 ```yaml
 - name: Display hardware facts
   ansible.builtin.debug:
@@ -366,6 +385,7 @@ ansible-navigator run site.yml -e "web_port=9090" --mode stdout
 ```
 
 **Network Facts**:
+
 ```yaml
 - name: Display network facts
   ansible.builtin.debug:
@@ -377,6 +397,7 @@ ansible-navigator run site.yml -e "web_port=9090" --mode stdout
 ```
 
 **Storage Facts**:
+
 ```yaml
 - name: Display storage facts
   ansible.builtin.debug:
@@ -421,6 +442,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ```
 
 **Using Custom Facts**:
+
 ```yaml
 - name: Use custom facts
   ansible.builtin.debug:
@@ -436,6 +458,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ### Built-in Magic Variables
 
 **Inventory Variables**:
+
 ```yaml
 - name: Display inventory information
   ansible.builtin.debug:
@@ -448,6 +471,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ```
 
 **Play Variables**:
+
 ```yaml
 - name: Display play information
   ansible.builtin.debug:
@@ -458,6 +482,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ```
 
 **Hostvars Access**:
+
 ```yaml
 - name: Access other host variables
   ansible.builtin.debug:
@@ -470,6 +495,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ### Advanced Magic Variable Usage
 
 **Cross-Host Information Sharing**:
+
 ```yaml
 ---
 - name: Collect information from all hosts
@@ -543,6 +569,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ### Advanced Registration Patterns
 
 **Conditional Logic Based on Registration**:
+
 ```yaml
 - name: Check web service availability
   ansible.builtin.uri:
@@ -566,6 +593,7 @@ sudo chmod +x /etc/ansible/facts.d/application.fact
 ```
 
 **Loop Registration**:
+
 ```yaml
 - name: Check multiple services
   ansible.builtin.systemd:
@@ -608,6 +636,7 @@ inventory/
 ### Variable Organization Best Practices
 
 **Environment Separation**:
+
 ```yaml
 # group_vars/all/common.yml
 ---
@@ -631,6 +660,7 @@ database_host: prod-db.internal.com
 ```
 
 **Service-Specific Variables**:
+
 ```yaml
 # group_vars/webservers/apache.yml
 ---
@@ -689,6 +719,7 @@ mysql:
 ### Debug Strategies
 
 **Basic Variable Display**:
+
 ```yaml
 - name: Debug variable content
   ansible.builtin.debug:
@@ -707,6 +738,7 @@ mysql:
 ```
 
 **Fact Exploration**:
+
 ```yaml
 - name: Display all facts
   ansible.builtin.debug:
@@ -722,6 +754,7 @@ mysql:
 ```
 
 **Variable Source Investigation**:
+
 ```yaml
 - name: Check if variable is defined
   ansible.builtin.debug:
@@ -842,24 +875,28 @@ test_var: "from host_vars"
 ## 🎯 Key Takeaways
 
 ### Variable Management Excellence
+
 - **Precedence understanding**: Know which variable definitions take priority
 - **Organization strategy**: Use logical directory structures for variables
 - **Data typing**: Understand how Ansible handles different data types
 - **Validation**: Always validate critical variables before use
 
 ### Fact Utilization Mastery
+
 - **System intelligence**: Use facts to make decisions about configuration
 - **Performance consideration**: Disable fact gathering when not needed
 - **Custom facts**: Extend system information with application-specific data
 - **Fact filtering**: Gather only needed information for efficiency
 
 ### Magic Variable Proficiency
+
 - **Inventory access**: Use magic variables to access host and group information
 - **Cross-host communication**: Share data between hosts using hostvars
 - **Play context**: Understand play-level variables and their scope
 - **Dynamic targeting**: Use magic variables for dynamic host selection
 
 ### Registration and Debugging Skills
+
 - **Output capture**: Register command and module outputs for later use
 - **Conditional logic**: Make decisions based on registered results
 - **Debugging techniques**: Efficiently troubleshoot variable issues

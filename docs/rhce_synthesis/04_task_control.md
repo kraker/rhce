@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Master conditional execution using when statements and complex logic
 - Implement loops for efficient repetitive tasks and data processing
 - Design comprehensive error handling strategies with blocks
@@ -15,6 +16,7 @@ By the end of this module, you will:
 ### Linear vs Intelligent Automation
 
 **Basic Approach**: All tasks run in sequence on all hosts
+
 ```yaml
 # Limited flexibility
 - name: Install package
@@ -25,6 +27,7 @@ By the end of this module, you will:
 ```
 
 **Advanced Approach**: Intelligent execution based on conditions
+
 ```yaml
 # Conditional and intelligent
 - name: Install web server package
@@ -49,6 +52,7 @@ By the end of this module, you will:
 ### Basic When Statements
 
 **Simple Conditions**:
+
 ```yaml
 ---
 - name: Conditional task examples
@@ -79,6 +83,7 @@ By the end of this module, you will:
 ### Complex Conditional Logic
 
 **Boolean Logic**:
+
 ```yaml
 - name: Complex conditional examples
   hosts: all
@@ -112,6 +117,7 @@ By the end of this module, you will:
 ```
 
 **Variable Testing**:
+
 ```yaml
 - name: Variable condition examples
   hosts: all
@@ -146,6 +152,7 @@ By the end of this module, you will:
 ### Conditional Patterns
 
 **Based on Command Results**:
+
 ```yaml
 - name: Conditional based on command output
   hosts: all
@@ -170,6 +177,7 @@ By the end of this module, you will:
 ```
 
 **Based on File/Directory Existence**:
+
 ```yaml
 - name: File-based conditionals
   hosts: all
@@ -194,6 +202,7 @@ By the end of this module, you will:
 ```
 
 **Based on Previous Task Results**:
+
 ```yaml
 - name: Task result conditionals
   hosts: all
@@ -224,6 +233,7 @@ By the end of this module, you will:
 ### Basic Loop Types
 
 **Simple List Loop**:
+
 ```yaml
 - name: Basic loop examples
   hosts: all
@@ -249,6 +259,7 @@ By the end of this module, you will:
 ```
 
 **Dictionary Loop**:
+
 ```yaml
 - name: Dictionary loop examples
   hosts: all
@@ -274,6 +285,7 @@ By the end of this module, you will:
 ```
 
 **Hash/Dictionary Processing**:
+
 ```yaml
 - name: Process dictionary data
   hosts: all
@@ -300,6 +312,7 @@ By the end of this module, you will:
 ### Advanced Loop Patterns
 
 **Nested Loops**:
+
 ```yaml
 - name: Nested loop examples
   hosts: all
@@ -327,6 +340,7 @@ By the end of this module, you will:
 ```
 
 **Range Loops**:
+
 ```yaml
 - name: Range loop examples
   hosts: all
@@ -346,6 +360,7 @@ By the end of this module, you will:
 ```
 
 **File Globbing Loops**:
+
 ```yaml
 - name: File-based loops
   hosts: all
@@ -376,6 +391,7 @@ By the end of this module, you will:
 ### Loop Control Options
 
 **Loop Control Variables**:
+
 ```yaml
 - name: Loop control examples
   hosts: all
@@ -405,6 +421,7 @@ By the end of this module, you will:
 ```
 
 **Conditional Loops**:
+
 ```yaml
 - name: Conditional loops
   hosts: all
@@ -427,6 +444,7 @@ By the end of this module, you will:
 ### Block Structure
 
 **Basic Block/Rescue/Always**:
+
 ```yaml
 ---
 - name: Error handling with blocks
@@ -501,6 +519,7 @@ By the end of this module, you will:
 ### Custom Error Conditions
 
 **Failed When Conditions**:
+
 ```yaml
 - name: Custom failure conditions
   hosts: all
@@ -529,6 +548,7 @@ By the end of this module, you will:
 ```
 
 **Changed When Conditions**:
+
 ```yaml
 - name: Custom change conditions
   hosts: all
@@ -595,6 +615,7 @@ By the end of this module, you will:
 ### Delegation Patterns
 
 **Delegate to Specific Host**:
+
 ```yaml
 - name: Delegation examples
   hosts: webservers
@@ -630,6 +651,7 @@ By the end of this module, you will:
 ```
 
 **Run Once Pattern**:
+
 ```yaml
 - name: Run once examples
   hosts: webservers
@@ -660,6 +682,7 @@ By the end of this module, you will:
 ### Execution Control
 
 **Serial Execution**:
+
 ```yaml
 ---
 - name: Rolling update deployment
@@ -697,6 +720,7 @@ By the end of this module, you will:
 ```
 
 **Batch Processing**:
+
 ```yaml
 ---
 - name: Batch update servers
@@ -719,6 +743,7 @@ By the end of this module, you will:
 ```
 
 **Throttling**:
+
 ```yaml
 - name: Resource-intensive tasks
   hosts: all
@@ -873,6 +898,7 @@ By the end of this module, you will:
 ### Exercise 1: Complex Conditional Logic
 
 **Create a playbook that:**
+
 1. Installs different packages based on OS and role
 2. Configures services only if certain conditions are met
 3. Skips tasks based on system resources
@@ -901,6 +927,7 @@ By the end of this module, you will:
 ### Exercise 2: Advanced Loop Processing
 
 **Build a playbook that:**
+
 1. Creates users with different attributes from a complex data structure
 2. Configures multiple services with nested configuration
 3. Processes file lists with conditional actions
@@ -908,6 +935,7 @@ By the end of this module, you will:
 ### Exercise 3: Comprehensive Error Handling
 
 **Design error handling that:**
+
 1. Attempts multiple strategies for package installation
 2. Recovers gracefully from service failures
 3. Always cleans up temporary resources
@@ -916,6 +944,7 @@ By the end of this module, you will:
 ### Exercise 4: Rolling Deployment Pattern
 
 **Implement a rolling update that:**
+
 1. Updates servers in batches
 2. Removes each server from load balancer during update
 3. Verifies health before proceeding
@@ -926,24 +955,28 @@ By the end of this module, you will:
 ## 🎯 Key Takeaways
 
 ### Conditional Logic Mastery
+
 - **When statements**: Use for simple and complex conditions
 - **Boolean logic**: Combine conditions with and/or/not operators  
 - **Variable testing**: Check for defined, undefined, and type conditions
 - **Fact-based decisions**: Make choices based on system information
 
 ### Loop Proficiency
+
 - **Basic loops**: Process lists efficiently with loop directive
 - **Complex data**: Handle dictionaries and nested structures
 - **Loop control**: Use labels, indexing, and pauses effectively
 - **Performance**: Choose appropriate loop patterns for data size
 
 ### Error Handling Excellence
+
 - **Block structure**: Organize error handling with block/rescue/always
 - **Custom conditions**: Define when tasks fail or change
 - **Ignore strategies**: Continue execution when appropriate
 - **Recovery patterns**: Implement graceful fallback mechanisms
 
 ### Delegation and Control
+
 - **Task delegation**: Run tasks on different hosts when needed
 - **Run once**: Execute expensive operations only once
 - **Serial execution**: Control deployment speed and risk

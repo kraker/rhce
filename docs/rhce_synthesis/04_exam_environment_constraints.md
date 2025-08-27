@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Understand the RHCE exam environment and its limitations
 - Master offline documentation usage with ansible-doc
 - Know time management strategies for the 4-hour exam
@@ -26,11 +27,13 @@ By the end of this module, you will:
 **Total Exam Time**: 4 hours (240 minutes)
 
 **Realistic Breakdown**:
+
 - **Setup & Orientation**: 15-20 minutes
 - **Task Execution**: 180-200 minutes  
 - **Final Validation**: 20-25 minutes
 
 **Tasks Distribution** (typical):
+
 - 15-20 individual automation tasks
 - 3-5 complex multi-step scenarios
 - 1-2 troubleshooting/debugging challenges
@@ -53,6 +56,7 @@ By the end of this module, you will:
 ### System Configuration
 
 **Control Node**:
+
 - RHEL 9 with Ansible installed
 - `ansible-core` package (not full Ansible)
 - Essential collections pre-installed
@@ -60,6 +64,7 @@ By the end of this module, you will:
 - No GUI access
 
 **Managed Nodes**:
+
 - 3-5 RHEL 9 systems
 - Pre-configured with SSH access
 - Predefined hostnames and groups
@@ -95,6 +100,7 @@ ansible_ssh_private_key_file=/home/student/.ssh/id_rsa
 ### Available Software
 
 **Pre-installed on Control Node**:
+
 - `ansible-core` (latest RHEL 9 version)
 - `ansible-navigator` (exam-preferred tool)
 - Essential collections
@@ -102,6 +108,7 @@ ansible_ssh_private_key_file=/home/student/.ssh/id_rsa
 - Text editors (vi/vim, nano)
 
 **NOT Available**:
+
 - Full Ansible package
 - Additional Python modules
 - Development tools
@@ -144,14 +151,16 @@ ansible-navigator collections
 ### Documentation Strategy
 
 **Pre-Exam Preparation**:
+
 1. **Memorize key module parameters** for frequently used modules
 2. **Practice ansible-doc navigation** until it's fast
 3. **Know module relationships** (which modules work together)
 4. **Understand FQCN patterns** for collections
 
 **During Exam**:
+
 1. **Quick syntax check**: `ansible-doc -s module_name`
-2. **Full examples**: `ansible-doc module_name` 
+2. **Full examples**: `ansible-doc module_name`
 3. **Parameter verification**: Look for required vs optional parameters
 4. **Copy-paste examples**: Use documentation examples as templates
 
@@ -162,6 +171,7 @@ ansible-navigator collections
 ### Time Allocation Framework
 
 **Phase 1: Setup & Inventory (15 minutes)**
+
 ```bash
 # Verify Ansible installation
 ansible --version
@@ -181,23 +191,27 @@ ansible-galaxy collection list
 **Phase 2: Task Execution (200 minutes)**
 
 **Simple Tasks** (5-10 minutes each):
+
 - Package installation
 - Service management
 - User creation
 - Basic file operations
 
 **Complex Tasks** (15-25 minutes each):
+
 - Storage configuration with LVM
 - Multi-service deployments
 - Role-based configurations
 - Template deployments
 
 **Troubleshooting Tasks** (10-20 minutes each):
+
 - Debug failed playbooks
 - Fix configuration errors
 - Resolve permission issues
 
 **Phase 3: Validation (25 minutes)**
+
 ```bash
 # Final verification commands
 ansible-playbook site.yml --check
@@ -210,11 +224,13 @@ systemctl status service_name
 **Efficient Development Patterns**:
 
 1. **Start with check mode**:
+
    ```bash
    ansible-navigator run playbook.yml --check --mode stdout
    ```
 
 2. **Test incrementally**:
+
    ```bash
    # Test single task
    ansible-navigator run playbook.yml --start-at-task "Install packages" --mode stdout
@@ -224,11 +240,13 @@ systemctl status service_name
    ```
 
 3. **Use verbose output for debugging**:
+
    ```bash
    ansible-navigator run playbook.yml --mode stdout -v
    ```
 
 4. **Quick syntax validation**:
+
    ```bash
    ansible-navigator run playbook.yml --syntax-check
    ```
@@ -240,6 +258,7 @@ systemctl status service_name
 ### Understanding Exam Inventory
 
 **Typical Structure**:
+
 ```ini
 # /etc/ansible/hosts or inventory.ini
 [web_servers]
@@ -287,12 +306,14 @@ ansible all -m ping
 ### Inventory Constraints
 
 **You CANNOT**:
+
 - Modify the provided inventory
 - Add or remove hosts
 - Change group memberships
 - Modify SSH configuration
 
 **You CAN**:
+
 - Use group variables in playbooks
 - Target specific groups
 - Use host-specific variables
@@ -305,6 +326,7 @@ ansible all -m ping
 ### Exam Environment Configuration
 
 **Typical exam ansible.cfg**:
+
 ```ini
 [defaults]
 inventory = /home/student/inventory
@@ -323,6 +345,7 @@ become_ask_pass = False
 ```
 
 **Key Settings for Exam**:
+
 - **inventory**: Points to provided inventory file
 - **remote_user**: Predefined user account
 - **host_key_checking**: Disabled for speed
@@ -348,6 +371,7 @@ ansible-config list
 ### Working Without Internet
 
 **Documentation Workflow**:
+
 1. **Use ansible-doc extensively** - it's your only reference
 2. **Memorize common module parameters** beforehand
 3. **Practice syntax patterns** until they're muscle memory
@@ -388,6 +412,7 @@ ansible.builtin.copy:
 **Common Error Patterns**:
 
 1. **Module not found**:
+
    ```bash
    # Check available modules
    ansible-doc -l | grep module_name
@@ -397,6 +422,7 @@ ansible.builtin.copy:
    ```
 
 2. **Connection failures**:
+
    ```bash
    # Test basic connectivity
    ansible all -m ping
@@ -406,6 +432,7 @@ ansible.builtin.copy:
    ```
 
 3. **Permission denied**:
+
    ```bash
    # Verify become configuration
    ansible-config dump | grep -i become
@@ -415,6 +442,7 @@ ansible.builtin.copy:
    ```
 
 4. **YAML syntax errors**:
+
    ```bash
    # Check playbook syntax
    ansible-navigator run playbook.yml --syntax-check
@@ -467,6 +495,7 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 ### Common Task Patterns
 
 **Package + Service Pattern**:
+
 ```yaml
 - name: Install and start service
   hosts: webservers
@@ -485,6 +514,7 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 ```
 
 **Storage Configuration Pattern**:
+
 ```yaml
 - name: Configure storage
   hosts: storage_servers
@@ -517,12 +547,14 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 ### Pre-Exam Checklist
 
 **1 Week Before**:
+
 - [ ] Practice offline documentation usage
 - [ ] Memorize key module parameters
 - [ ] Time yourself on practice scenarios
 - [ ] Review FQCN syntax patterns
 
 **1 Day Before**:
+
 - [ ] Review quick reference materials
 - [ ] Practice ansible-navigator usage
 - [ ] Get familiar with exam environment setup
@@ -531,12 +563,14 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 ### Exam Execution Strategy
 
 **First 15 Minutes**:
+
 1. **Read all tasks** before starting any
 2. **Identify dependencies** between tasks
 3. **Note time estimates** for each task
 4. **Plan task execution order**
 
 **During Execution**:
+
 1. **Start with familiar tasks** to build confidence
 2. **Use check mode** to validate before execution
 3. **Test incrementally** - don't wait until the end
@@ -544,6 +578,7 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 5. **Document issues** for later troubleshooting
 
 **Final 30 Minutes**:
+
 1. **Run full validation** on all playbooks
 2. **Check service status** on all managed nodes
 3. **Verify file permissions** and ownership
@@ -552,6 +587,7 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 ### Common Time Traps to Avoid
 
 **❌ Time Wasters**:
+
 - Spending too long on one difficult task
 - Not using check mode before execution
 - Re-reading documentation multiple times
@@ -559,6 +595,7 @@ ansible TARGET_GROUP -m MODULE_NAME -a "parameter=value"
 - Not testing connectivity early
 
 **✅ Time Savers**:
+
 - Using templates and copy-paste from docs
 - Starting with simple tasks for momentum
 - Using incremental testing approach
@@ -590,6 +627,7 @@ ansible-doc ansible.posix.firewalld
 ### Time Management Practice
 
 **4-Hour Simulation**:
+
 1. **Set up timer** for 240 minutes
 2. **Complete 3-4 scenarios** from exam scenarios module
 3. **Track time per task** and identify bottlenecks
@@ -614,6 +652,7 @@ ansible_ssh_private_key_file=/home/student/.ssh/lab_rsa
 ```
 
 **Tasks**:
+
 1. Deploy web application to webservers only
 2. Configure database on database server only  
 3. Set up monitoring on all systems

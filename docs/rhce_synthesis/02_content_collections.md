@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Understand Ansible Content Collections and their structure
 - Master FQCN (Fully Qualified Collection Name) requirements
 - Install and manage collections using ansible-galaxy
@@ -24,6 +25,7 @@ By the end of this module, you will:
 ### What are Collections?
 
 Collections are a distribution format for Ansible content that includes:
+
 - **Modules** - Task execution units
 - **Plugins** - Extend Ansible functionality  
 - **Roles** - Reusable automation components
@@ -65,6 +67,7 @@ namespace.collection_name/
 **FQCN Format**: `namespace.collection_name.module_name`
 
 **Examples**:
+
 - `ansible.builtin.dnf` instead of `dnf`
 - `ansible.posix.firewalld` instead of `firewalld`
 - `community.general.parted` instead of `parted`
@@ -178,6 +181,7 @@ ansible-config dump | grep COLLECTIONS_PATHS
 **Purpose**: Core Ansible modules (always available)
 
 **Key Modules for Exam**:
+
 ```yaml
 # Package management
 ansible.builtin.dnf:
@@ -209,6 +213,7 @@ ansible.builtin.setup:
 **Purpose**: POSIX system administration modules
 
 **Key Modules for Exam**:
+
 ```yaml
 # Firewall management
 ansible.posix.firewalld:
@@ -232,6 +237,7 @@ ansible.posix.synchronize:
 **Purpose**: General community-maintained modules
 
 **Key Modules for Exam**:
+
 ```yaml
 # Storage management
 community.general.parted:
@@ -417,12 +423,14 @@ ansible-config dump | grep COLLECTIONS_PATH
 ### Collection Installation Issues
 
 **Problem**: Module not found during playbook execution
+
 ```bash
 # Error message
 ERROR! couldn't resolve module/action 'community.general.parted'
 ```
 
 **Solution**: Install missing collection
+
 ```bash
 ansible-galaxy collection install community.general
 ```
@@ -430,6 +438,7 @@ ansible-galaxy collection install community.general
 ### FQCN Requirements
 
 **Problem**: Using short module names when FQCN required
+
 ```yaml
 # Potentially problematic
 - dnf:
@@ -438,6 +447,7 @@ ansible-galaxy collection install community.general
 ```
 
 **Solution**: Use FQCN format
+
 ```yaml
 # Exam-compliant
 - ansible.builtin.dnf:
@@ -448,6 +458,7 @@ ansible-galaxy collection install community.general
 ### Collection Path Issues
 
 **Problem**: Collections installed but not found
+
 ```bash
 # Check collection path
 ansible-config dump | grep COLLECTIONS_PATH
@@ -488,21 +499,25 @@ ansible-galaxy collection list
 ## 🧪 Practical Lab Exercises
 
 ### Exercise 1: Collection Installation
+
 1. Install community.general and ansible.posix collections
 2. List installed collections
 3. Verify specific modules are available
 
 ### Exercise 2: FQCN Conversion
+
 1. Create a playbook using short module names
 2. Convert all modules to FQCN format
 3. Test both versions work the same
 
 ### Exercise 3: Storage Automation
+
 1. Create a playbook using storage-related collections
 2. Use community.general modules for LVM
 3. Use ansible.posix.mount for filesystem mounting
 
 ### Exercise 4: Collection Documentation
+
 1. Use ansible-navigator to browse collections
 2. Find the firewalld module documentation
 3. Practice quick module lookup techniques
@@ -520,11 +535,13 @@ ansible-galaxy collection list
 ### Memory Aids
 
 **Essential Collections:**
+
 - **ansible.builtin** = Core modules (dnf, systemd, user, copy)
 - **ansible.posix** = System modules (firewalld, mount, seboolean)  
 - **community.general** = Storage modules (parted, lvg, lvol)
 
 **FQCN Pattern:**
+
 - **namespace.collection.module** format
 - **Always start with namespace** (ansible, community)
 - **Use tab completion** in editors when possible

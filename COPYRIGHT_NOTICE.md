@@ -77,6 +77,7 @@ Where study materials reference or are inspired by the above copyrighted works, 
 ### Educational Use Declaration
 
 This repository is created and maintained for:
+
 - Personal education and professional development
 - Preparation for Red Hat Certified Engineer (RHCE) certification
 - Study resource organization and knowledge retention

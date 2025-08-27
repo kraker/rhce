@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will understand:
+
 - The RHCE exam format and structure
 - Required lab environment setup
 - Effective study strategies and timeline
@@ -39,7 +40,9 @@ By the end of this module, you will understand:
 The RHCE EX294 exam tests your ability to perform these **official Red Hat objectives**:
 
 ### Prerequisites
+
 **Be able to perform all tasks expected of a Red Hat Certified System Administrator**
+
 - Understand and use essential tools
 - Operate running systems
 - Configure local storage
@@ -49,6 +52,7 @@ The RHCE EX294 exam tests your ability to perform these **official Red Hat objec
 - Manage security
 
 ### 1. Understand core components of Ansible
+
 - **Inventories** - Static and dynamic host management
 - **Modules** - Using built-in and collection modules effectively
 - **Variables** - Variable types, scoping, and precedence
@@ -63,6 +67,7 @@ The RHCE EX294 exam tests your ability to perform these **official Red Hat objec
 - **Use provided documentation** - ansible-doc command proficiency
 
 ### 2. Use roles and Ansible Content Collections
+
 - **Create and work with roles** - Role structure and development
 - **Install roles and use them in playbooks** - ansible-galaxy integration
 - **Install Content Collections** - Modern Ansible content management
@@ -70,24 +75,28 @@ The RHCE EX294 exam tests your ability to perform these **official Red Hat objec
 - **Obtain content from collections** - Related roles, modules, and supplementary content
 
 ### 3. Install and configure an Ansible control node
+
 - **Install required packages** - Ansible installation and dependencies
 - **Create a static host inventory file** - INI and YAML inventory formats
 - **Create a configuration file** - ansible.cfg customization
 - **Create and use static inventories** - Host groups and group variables
 
 ### 4. Configure Ansible managed nodes
+
 - **Create and distribute SSH keys** - Passwordless authentication setup
 - **Configure privilege escalation** - sudo/become configuration
 - **Deploy files to managed nodes** - File transfer and management
 - **Analyze shell scripts and convert to playbooks** - Legacy automation migration
 
 ### 5. Run playbooks with Automation content navigator
+
 - **Run playbooks with navigator** - Modern Ansible execution interface
 - **Find new modules in Content Collections** - Module discovery and usage
 - **Create inventories with navigator** - Dynamic inventory management
 - **Configure Ansible environment** - Environment setup and management
 
 ### 6. Create Ansible plays and playbooks
+
 - **Work with commonly used modules** - Core module proficiency
 - **Use variables for command results** - Register and variable manipulation
 - **Use conditionals for execution control** - When statements and logic
@@ -95,6 +104,7 @@ The RHCE EX294 exam tests your ability to perform these **official Red Hat objec
 - **Create playbooks for system state** - Desired state configuration
 
 ### 7. Automate standard RHCSA tasks using Ansible modules
+
 - **Software packages and repositories** - dnf/yum, repository management
 - **Services** - systemd service control and configuration
 - **Firewall rules** - firewalld automation
@@ -107,6 +117,7 @@ The RHCE EX294 exam tests your ability to perform these **official Red Hat objec
 - **Users and groups** - Account management automation
 
 ### 8. Manage content
+
 - **Create and use templates** - Jinja2 templating for configuration files
 - **Template customization** - Variable substitution and logic
 
@@ -115,11 +126,13 @@ The RHCE EX294 exam tests your ability to perform these **official Red Hat objec
 ### Minimum Requirements
 
 **Control Node (ansible-controller)**:
+
 - RHEL 9 with Ansible installed
 - SSH client configured
 - At least 2GB RAM, 20GB disk
 
 **Managed Nodes (2-3 systems)**:
+
 - RHEL 9 systems
 - SSH server running
 - Python 3 installed
@@ -167,49 +180,63 @@ ansible-galaxy collection install community.general
 ## 📅 7-Week Study Plan
 
 ### Week 1: Foundation
+
 **Goals**: Environment setup and basic concepts
+
 - Set up lab environment with control and managed nodes
 - Complete Module 01: Ansible Basics
 - Practice ad-hoc commands and simple playbooks
 - **Daily Practice**: 1-2 hours
 
 ### Week 2: Core Playbooks
+
 **Goals**: Master playbook fundamentals  
+
 - Complete Module 02: Playbooks & Tasks
 - Build multi-task playbooks with error handling
 - Practice with 20+ common modules
 - **Daily Practice**: 1-2 hours
 
 ### Week 3: Variables and Control
+
 **Goals**: Dynamic playbooks and logic
+
 - Complete Module 03: Variables & Facts
 - Complete Module 04: Task Control  
 - Build complex conditional playbooks
 - **Daily Practice**: 1-2 hours
 
 ### Week 4: Templates and Configuration
+
 **Goals**: Configuration management mastery
+
 - Complete Module 05: Templates
 - Practice Jinja2 templating extensively
 - Build complete configuration management playbooks
 - **Daily Practice**: 1-2 hours
 
 ### Week 5: Roles and Organization
+
 **Goals**: Code reusability and structure
+
 - Complete Module 06: Roles
 - Create custom roles for common tasks
 - Practice role dependencies and organization
 - **Daily Practice**: 1-2 hours
 
 ### Week 6: Security and Advanced Features
+
 **Goals**: Security and troubleshooting
+
 - Complete Module 07: Ansible Vault
 - Complete Module 08: Advanced Features
 - Practice vault integration and debugging
 - **Daily Practice**: 1-2 hours
 
 ### Week 7: Exam Preparation
+
 **Goals**: Exam readiness and confidence
+
 - Daily practice with timed exercises
 - Review all quick reference materials
 - Mock exam scenarios under time pressure
@@ -218,25 +245,30 @@ ansible-galaxy collection install community.general
 ## 🎯 Key Success Factors
 
 ### 1. Hands-On Practice First
+
 ❌ **Wrong Approach**: Reading documentation without practicing  
 ✅ **Right Approach**: Implement every example in your lab immediately
 
 ### 2. Master the Documentation
+
 - Learn to use `ansible-doc module_name` efficiently
 - Practice finding syntax without internet access
 - Memorize locations of key information
 
 ### 3. Build Muscle Memory
+
 - Practice common patterns until they're automatic
 - Create personal cheat sheets for frequent tasks
 - Type examples rather than copy-pasting
 
 ### 4. Time Management Skills
+
 - Practice common tasks under time pressure
 - Learn to prioritize high-value tasks first
 - Develop troubleshooting workflows
 
 ### 5. Error Handling Expertise
+
 - Master debugging failed playbooks quickly
 - Learn common error patterns and solutions
 - Practice systematic troubleshooting approaches
@@ -244,17 +276,20 @@ ansible-galaxy collection install community.general
 ## ⚠️ Common Pitfalls to Avoid
 
 ### Time Management Mistakes
+
 - Spending too much time on low-point tasks
 - Not leaving time for testing and validation
 - Getting stuck on debugging instead of moving forward
 
 ### Technical Mistakes
+
 - YAML syntax errors (indentation, quotes)
 - Incorrect variable precedence assumptions
 - Not testing playbooks before considering them complete
 - Forgetting to handle error conditions
 
 ### Exam Day Mistakes
+
 - Not reading instructions carefully
 - Making assumptions about the environment
 - Not using available documentation effectively
@@ -263,12 +298,14 @@ ansible-galaxy collection install community.general
 ## 🧠 Mental Preparation
 
 ### Build Confidence Through Practice
+
 1. **Start Simple**: Master basic tasks before complex ones
 2. **Practice Under Pressure**: Set timers for your practice sessions
 3. **Learn from Failures**: Every error teaches you something valuable
 4. **Build a Toolkit**: Develop go-to patterns for common scenarios
 
 ### Exam Day Mindset
+
 - **Stay Calm**: Breathe and think through problems systematically
 - **Read Carefully**: Understand exactly what's being asked
 - **Test Everything**: Verify your solutions work completely

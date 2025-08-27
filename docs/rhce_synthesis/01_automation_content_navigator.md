@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Master ansible-navigator for exam execution
 - Understand execution environments and their benefits
 - Navigate the interactive TUI effectively
@@ -118,6 +119,7 @@ ansible-navigator run site.yml
 ```
 
 **In TUI Navigation:**
+
 1. **Play overview**: See all plays in playbook
 2. **Task details**: Drill down into specific tasks
 3. **Host results**: View results per host
@@ -171,12 +173,14 @@ ansible-navigator run site.yml -e "env=prod" --mode stdout
 ### Understanding Execution Environments
 
 **Concept**: Containerized runtime environments that include:
+
 - Python interpreter
 - Ansible collections
 - Python dependencies
 - System tools
 
 **Benefits**:
+
 - Consistent execution across environments
 - Isolation from host system
 - Reproducible automation
@@ -270,6 +274,7 @@ cat artifacts/site-artifact-2024-01-15T10-30-45.json | jq .
 ### Debug Information in TUI
 
 **Interactive debugging workflow:**
+
 1. Run playbook in TUI mode
 2. Navigate to failed task
 3. View detailed error output
@@ -297,21 +302,25 @@ ansible-navigator run site.yml --mode stdout -vvvv
 ### Typical Exam Workflow
 
 1. **Syntax Check**:
+
    ```bash
    ansible-navigator run site.yml --syntax-check
    ```
 
 2. **Dry Run**:
+
    ```bash
    ansible-navigator run site.yml --check --mode stdout
    ```
 
 3. **Execute with Monitoring**:
+
    ```bash
    ansible-navigator run site.yml --mode stdout -v
    ```
 
 4. **Debug Issues** (if needed):
+
    ```bash
    ansible-navigator run site.yml  # Use TUI for debugging
    ```
@@ -330,12 +339,14 @@ ansible-navigator run site.yml --mode stdout -vvvv
 ### When to Use Navigator vs Traditional Tools
 
 **Use Navigator:**
+
 - Running playbooks (exam preference)
 - Debugging complex issues
 - Exploring collections and documentation
 - When you need detailed execution artifacts
 
 **Traditional tools still valid:**
+
 - Quick ad-hoc commands (`ansible all -m ping`)
 - Simple documentation lookup (`ansible-doc module`)
 - Inventory validation (`ansible-inventory --list`)
@@ -353,18 +364,21 @@ ansible-navigator run site.yml --mode stdout -vvvv
 ## 🧪 Practical Lab Exercises
 
 ### Exercise 1: Basic Navigation
+
 1. Install ansible-navigator
 2. Create a simple playbook
 3. Run it using both TUI and stdout modes
 4. Explore the playbook artifact
 
 ### Exercise 2: Documentation Browsing
+
 1. Use navigator to browse collections
 2. Find the firewalld module
 3. Read its documentation within navigator
 4. Practice searching for modules
 
 ### Exercise 3: Debugging Workflow
+
 1. Create a playbook with an intentional error
 2. Run in TUI mode
 3. Navigate to the failed task
@@ -372,6 +386,7 @@ ansible-navigator run site.yml --mode stdout -vvvv
 5. Fix the issue and re-run
 
 ### Exercise 4: Inventory Exploration
+
 1. Create a complex inventory with groups
 2. Use navigator to explore the structure
 3. View host details

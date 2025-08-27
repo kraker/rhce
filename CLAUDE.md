@@ -9,8 +9,8 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## User Context
 
 **GitHub Username**: @kraker (not stovepipe)
-**Repository**: https://github.com/kraker/rhce
-**GitHub Pages Site**: https://kraker.github.io/rhce/
+**Repository**: <https://github.com/kraker/rhce>
+**GitHub Pages Site**: <https://kraker.github.io/rhce/>
 
 CRITICAL: Always use @kraker as the GitHub username in all URLs, repository references, and documentation.
 
@@ -51,6 +51,7 @@ This is a Red Hat Certified Engineer (RHCE) certification study repository focus
 ## Lab Environment Requirements
 
 **Ansible Lab Setup**: The study environment requires:
+
 - RHEL 9 control node with Ansible installed
 - 2-3 RHEL 9 managed nodes for automation targets
 - SSH key-based authentication configured
@@ -58,11 +59,13 @@ This is a Red Hat Certified Engineer (RHCE) certification study repository focus
 - Prerequisites: Basic Linux knowledge, RHCSA certification
 
 **Control Node Configuration**:
+
 - Ansible core installed via dnf
 - Required collections installed (ansible.posix, community.general)
 - SSH client configured for passwordless authentication
 
 **Managed Node Configuration**:
+
 - Python 3 installed for Ansible modules
 - SSH server running and accessible
 - User accounts for automation practice
@@ -70,7 +73,8 @@ This is a Red Hat Certified Engineer (RHCE) certification study repository focus
 ## Common Study Tasks
 
 ### Working with Study Materials
-- **Visit Documentation Site**: Browse https://kraker.github.io/rhce/ for organized study materials
+
+- **Visit Documentation Site**: Browse <https://kraker.github.io/rhce/> for organized study materials
 - **Start with RHCE Synthesis**: Begin with comprehensive modules in `docs/rhce_synthesis/` for complete topic coverage
 - **Use Anki flashcards** for spaced repetition and Ansible command memorization
 - **Reference guides** in `docs/` directory for quick lookup during study
@@ -78,7 +82,9 @@ This is a Red Hat Certified Engineer (RHCE) certification study repository focus
 - **Focus on hands-on** playbook development and automation scenarios
 
 ### Anki Flashcard Usage
+
 The `anki/rhce_deck.csv` file contains essential Ansible concepts organized by tags:
+
 - `ansible_basics` - Installation, configuration, inventory management
 - `playbooks` - YAML syntax, task structure, playbook execution
 - `variables` - Variable types, precedence, facts, templating
@@ -91,6 +97,7 @@ The `anki/rhce_deck.csv` file contains essential Ansible concepts organized by t
 ## Key RHCE Command Categories
 
 ### Essential Ansible Operations
+
 ```bash
 # Inventory and connectivity
 ansible all -i inventory.ini -m ping
@@ -105,6 +112,7 @@ ansible-playbook site.yml --ask-vault-pass
 ```
 
 ### Module Usage and Documentation
+
 ```bash
 # Module documentation
 ansible-doc yum
@@ -118,6 +126,7 @@ ansible all -m copy -a "src=/etc/hosts dest=/tmp/hosts"
 ```
 
 ### Role Management
+
 ```bash
 # Role operations
 ansible-galaxy init my_role
@@ -129,6 +138,7 @@ ansible-playbook test.yml --tags "role_test"
 ```
 
 ### Vault Operations
+
 ```bash
 # Vault management
 ansible-vault create secrets.yml
@@ -145,7 +155,8 @@ ansible-playbook site.yml --vault-password-file .vault_pass
 
 **CRITICAL**: Claude Code must update `COPYRIGHT_NOTICE.md` whenever adding copyrighted content to the repository.
 
-### When Adding New Copyrighted Materials:
+### When Adding New Copyrighted Materials
+
 1. **Read COPYRIGHT_NOTICE.md first** to understand current copyright inventory
 2. **Add new materials to `sources/` directory** (gitignored)
 3. **Update COPYRIGHT_NOTICE.md** with:
@@ -156,7 +167,8 @@ ansible-playbook site.yml --vault-password-file .vault_pass
 4. **Verify .gitignore excludes the new content**
 5. **Never commit copyrighted content to git repository**
 
-### Content Classification:
+### Content Classification
+
 - **Original Work**: Content created for this repository → `docs/` directory (tracked)
 - **Copyrighted Materials**: Books, PDFs, documentation from external sources → `sources/` directory (not tracked)
 - **Derived Content**: Analysis or summaries of copyrighted works → `sources/` directory (not tracked)
@@ -164,7 +176,7 @@ ansible-playbook site.yml --vault-password-file .vault_pass
 ## Notes for Claude Code
 
 - This repository focuses on RHCE exam preparation with emphasis on Ansible automation
-- **Documentation Site**: The repository is published as a MkDocs site at https://kraker.github.io/rhce/
+- **Documentation Site**: The repository is published as a MkDocs site at <https://kraker.github.io/rhce/>
 - When helping with study materials, emphasize practical playbook development and testing
 - The study materials in `docs/` are original work and tracked in git
 - External resources in `sources/` contain copyrighted materials and are not tracked
@@ -173,9 +185,15 @@ ansible-playbook site.yml --vault-password-file .vault_pass
 - **MkDocs Development**: Use `mkdocs serve` for local development, `mkdocs build` for static generation
 - **Always read CLAUDE.md, README.md, and COPYRIGHT_NOTICE.md before making changes**
 
+## Development Principles
+
+- **Minimal Dependencies**: Only include dependencies actually used in configuration files. Before adding any dependency to requirements.txt, verify it's referenced in mkdocs.yml or other config files. Remove unused dependencies to keep the project lean and maintainable.
+- **Node.js Dependencies**: Use idiomatic npm workflow - run `npm install package-name --save-dev` to automatically create/update package.json rather than manually creating the file. This ensures proper dependency management and follows Node.js best practices.
+
 ## Git Commit Style Guide
 
 ### Atomic Commit Principles
+
 Following [Aleksandr Hovhannisyan's atomic git commits](https://www.aleksandrhovhannisyan.com/blog/atomic-git-commits/):
 
 **Core Rule**: Each commit should represent "a single, complete unit of work" that can be independently reviewed and reverted.
@@ -183,6 +201,7 @@ Following [Aleksandr Hovhannisyan's atomic git commits](https://www.aleksandrhov
 ### Commit Message Format
 
 **Simple Changes** (content fixes, small updates):
+
 ```bash
 git commit -m "Fix YAML syntax in template examples"
 git commit -m "Update Anki flashcard for vault command syntax"
@@ -190,12 +209,14 @@ git commit -m "Add missing ansible-doc references"
 ```
 
 **Feature Commits** (new capabilities, significant changes):
+
 ```bash
 git commit -m "Add comprehensive role development section"
 git commit -m "Implement advanced Jinja2 templating examples"
 ```
 
 **Milestone/Release Commits** (major completions):
+
 ```bash
 # Use detailed heredoc format for comprehensive changelog
 git commit -m "$(cat <<'EOF'
@@ -215,6 +236,7 @@ EOF
 ```
 
 ### Guidelines
+
 - **Present tense verbs**: "Fix", "Add", "Update", "Remove", "Implement"
 - **Component focus**: Mention what study material/module is changed
 - **Atomic scope**: One logical change per commit
@@ -222,6 +244,7 @@ EOF
 - **Commit early and often**: Make commits as soon as a logical unit is complete
 
 ### Examples by Type
+
 - **Content fixes**: `Fix variable precedence examples in Module 03`
 - **Study material updates**: `Add comprehensive error handling patterns to playbook module`
 - **Reference enhancements**: `Implement module cross-references in quick reference`
@@ -234,7 +257,7 @@ EOF
 
 ## Study Workflow Recommendations
 
-1. **Visit Documentation Site**: Browse https://kraker.github.io/rhce/ for organized study materials
+1. **Visit Documentation Site**: Browse <https://kraker.github.io/rhce/> for organized study materials
 2. **Begin with RHCE Synthesis**: Start with `docs/rhce_synthesis/` for comprehensive topic coverage
 3. **Use Anki deck** (`anki/rhce_deck.csv`) for Ansible command memorization and concept reinforcement
 4. **Practice with Lab Environment** using real RHEL 9 systems and practical automation scenarios

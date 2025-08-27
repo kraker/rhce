@@ -7,6 +7,7 @@
 This comprehensive reference covers every essential command pattern you'll encounter on the RHCE exam. All commands are organized by exam objectives and include practical variations, common parameters, and real-world usage patterns.
 
 **📚 Source Integration**: Commands and patterns synthesized from:
+
 - Sander van Vugt's RHCE Guide (16 chapters)
 - Jeff Geerling's Ansible for DevOps (15 chapters)
 - Michael Jang's RHCSA/RHCE Guide
@@ -15,6 +16,7 @@ This comprehensive reference covers every essential command pattern you'll encou
 **🎯 Exam Focus**: Every command has been verified for exam relevance and includes the most commonly tested parameters and use cases.
 
 **📊 Coverage Statistics**: This comprehensive reference includes:
+
 - 200+ essential command patterns
 - 50+ module documentation lookups
 - 100+ debugging and troubleshooting techniques
@@ -28,6 +30,7 @@ This comprehensive reference covers every essential command pattern you'll encou
 ## 1. Install and Configure Ansible Control Node
 
 ### Package Installation and Setup
+
 ```bash
 # RHEL 9 Installation (Primary Method)
 sudo dnf install ansible-core python3-pip
@@ -68,6 +71,7 @@ mkdir -p ~/ansible/files/{templates,scripts}
 ```
 
 ### Configuration Files and Management
+
 ```bash
 # Configuration hierarchy (highest priority first):
 # 1. ANSIBLE_CONFIG environment variable
@@ -134,6 +138,7 @@ ansible localhost -m setup | head -5
 ```
 
 ### Inventory Management and Validation
+
 ```bash
 # Basic inventory operations
 ansible-inventory --list                   # JSON format output
@@ -190,6 +195,7 @@ ansible-inventory --list | grep -A5 -B5 hostname
 ## 2. Configure Ansible Managed Nodes
 
 ### SSH Key Generation and Distribution
+
 ```bash
 # Generate SSH key pairs (various methods)
 ssh-keygen -t rsa -b 4096 -f ~/.ssh/id_rsa -N ""      # RSA 4096-bit
@@ -245,6 +251,7 @@ chmod 600 ~/.ssh/config
 ```
 
 ### Privilege Escalation Configuration
+
 ```bash
 # Configure sudo on managed nodes
 sudo visudo
@@ -289,6 +296,7 @@ sudo groups ansible                      # Check group membership
 ```
 
 ### Connectivity Testing and Validation
+
 ```bash
 # Basic connectivity tests
 ansible all -m ping                      # Basic ping test
@@ -360,6 +368,7 @@ ansible all -m command -a "uptime" --forks=20
 ## 3. Automation Content Navigator
 
 ### Basic Navigation Commands
+
 ```bash
 # Run playbooks (various modes)
 ansible-navigator run site.yml                    # Interactive TUI mode
@@ -409,6 +418,7 @@ ansible-navigator run site.yml --skip-tags "debug" # Skip specific tags
 ```
 
 ### Collection and Documentation Access
+
 ```bash
 # Browse collections interactively
 ansible-navigator collections                     # Interactive collection browser
@@ -455,6 +465,7 @@ ansible-navigator config dump                   # All config values
 ```
 
 ### Execution Environment Management
+
 ```bash
 # List and manage execution environments
 ansible-navigator images                         # Interactive image browser
@@ -506,6 +517,7 @@ podman run -it --rm registry.redhat.io/ubi8/ubi:latest /bin/bash
 ## 4. Content Collections Management
 
 ### Galaxy Collection Management
+
 ```bash
 # Collection discovery and search
 ansible-galaxy collection list                   # List installed collections
@@ -559,6 +571,7 @@ ansible-galaxy collection install git+https://github.com/user/collection.git
 ```
 
 ### Requirements File Formats and Examples
+
 ```yaml
 # requirements.yml - Basic format
 collections:
@@ -625,6 +638,7 @@ collections:
 ```
 
 ### Collection Usage and Module Discovery
+
 ```bash
 # FQCN documentation lookup
 ansible-navigator doc ansible.builtin.dnf
@@ -680,6 +694,7 @@ python3 -c "import ansible_collections.community.general; print(ansible_collecti
 ## 5. Role Management
 
 ### Role Creation and Structure Management
+
 ```bash
 # Create role structure (various methods)
 ansible-galaxy init role_name                    # Default role structure
@@ -723,6 +738,7 @@ ansible-galaxy init --role-skeleton ~/.ansible/galaxy_role_skeleton my_custom_ro
 ```
 
 ### Role Installation and Management
+
 ```bash
 # Install roles from Ansible Galaxy
 ansible-galaxy role install geerlingguy.apache
@@ -775,6 +791,7 @@ find ~/.ansible/roles -maxdepth 1 -type d 2>/dev/null
 ```
 
 ### Role Testing and Execution
+
 ```bash
 # Role syntax validation
 ansible-navigator run --syntax-check site.yml
@@ -836,6 +853,7 @@ ansible-navigator run include-role-test.yml      # Dynamic include
 ## 6. Playbook Development and Execution
 
 ### Playbook Syntax and Validation
+
 ```bash
 # Syntax validation (various methods)
 ansible-navigator run site.yml --syntax-check   # Navigator method
@@ -884,6 +902,7 @@ ansible localhost -m template -a "src=template.j2 dest=/tmp/test" --check
 ```
 
 ### Playbook Execution Options and Control
+
 ```bash
 # Verbosity levels
 ansible-navigator run site.yml --mode stdout -v    # Basic verbosity
@@ -950,6 +969,7 @@ ansible-navigator run site.yml --strategy debug    # Debug strategy
 ```
 
 ### Variable Management and Debugging
+
 ```bash
 # Command line variable passing (various formats)
 ansible-navigator run site.yml -e "var=value"
@@ -1016,6 +1036,7 @@ ansible all -m debug -a "var=variable_name is undefined"
 ## 7. RHCSA Task Automation Commands
 
 ### Package Management Automation
+
 ```bash
 # Module documentation and discovery
 ansible-navigator doc ansible.builtin.dnf       # Primary package manager
@@ -1085,6 +1106,7 @@ ansible all -m command -a "which httpd"
 ```
 
 ### Service Management Automation
+
 ```bash
 # Module documentation and discovery
 ansible-navigator doc ansible.builtin.systemd   # Systemd service management
@@ -1159,6 +1181,7 @@ ansible all -m wait_for -a "port=80 host={{ ansible_default_ipv4.address }} time
 ```
 
 ### File Management Automation
+
 ```bash
 # Module documentation and discovery
 ansible-navigator doc ansible.builtin.copy      # Copy files
@@ -1239,6 +1262,7 @@ ansible all -m command -a "du -sh /var/log" --become
 ```
 
 ### Storage Management
+
 ```bash
 # Module documentation
 ansible-navigator doc community.general.parted
@@ -1252,6 +1276,7 @@ ansible all -m setup -a "filter=ansible_mounts" --become
 ```
 
 ### User Management
+
 ```bash
 # Module documentation
 ansible-navigator doc ansible.builtin.user
@@ -1267,6 +1292,7 @@ ansible all -m group -a "name=testgroup state=present" --become
 ## 8. Ansible Vault Operations
 
 ### Comprehensive Vault Operations
+
 ```bash
 # Create encrypted files (various methods)
 ansible-vault create secrets.yml              # Interactive creation
@@ -1338,6 +1364,7 @@ head -1 secrets.yml | grep -q \$ANSIBLE_VAULT && echo "Encrypted" || echo "Plain
 ```
 
 ### Vault Integration with Playbooks
+
 ```bash
 # Basic vault integration
 ansible-navigator run site.yml --ask-vault-pass  # Interactive password prompt
@@ -1411,6 +1438,7 @@ ansible localhost -m debug -a "msg='Vault configuration working'" -e "@vault_tes
 ## 9. Debugging and Troubleshooting
 
 ### Advanced Playbook Debugging
+
 ```bash
 # Debug mode with various verbosity levels
 ansible-navigator run site.yml --mode stdout -v    # Basic verbosity
@@ -1480,6 +1508,7 @@ ansible all -m debug -a "var=ansible_facts" | grep -A 20 -B 5 "default_ipv4"
 ```
 
 ### Comprehensive Module Testing
+
 ```bash
 # System information modules
 ansible hostname -m setup                      # Gather all facts
@@ -1558,6 +1587,7 @@ ansible all -m copy -a "content={{ 'test' if true else omit }} dest=/tmp/conditi
 ```
 
 ### System Log Analysis and Troubleshooting
+
 ```bash
 # Ansible execution logs
 sudo tail -f /var/log/messages | grep ansible
@@ -1646,6 +1676,7 @@ ansible all -m setup -a "filter=ansible_kernel"
 ## 10. Documentation and Help Systems
 
 ### Comprehensive Documentation Access (Exam Critical)
+
 ```bash
 # Module documentation (complete reference)
 ansible-doc module_name                  # Full module documentation
@@ -1702,6 +1733,7 @@ ansible-doc file | grep -A 35 "OPTIONS:"
 ```
 
 ### Navigator Interface and Help
+
 ```bash
 # Navigator command help
 ansible-navigator --help                 # General help
@@ -1742,6 +1774,7 @@ ansible-navigator --help-all            # Complete help reference
 ```
 
 ### System Information and Fact Gathering
+
 ```bash
 # Comprehensive fact gathering
 ansible all -m setup                    # Gather all system facts
@@ -1800,6 +1833,7 @@ ansible all -m setup --tree /tmp/facts && cat /tmp/facts/hostname | jq '.ansible
 ## ⚡ Quick Command Combinations for Exam
 
 ### Rapid Testing Sequence
+
 ```bash
 # 1. Test connectivity
 ansible all -m ping
@@ -1818,6 +1852,7 @@ ansible all -m setup -a "filter=ansible_service_mgr"
 ```
 
 ### Emergency Documentation Lookup
+
 ```bash
 # Quick module search
 ansible-doc -l | grep -i package
@@ -1833,6 +1868,7 @@ ansible-doc -s systemd
 ## 🎯 Exam Success Strategies
 
 ### Essential Command Patterns for Exam Day
+
 ```bash
 # The "Big 4" - Master these patterns for 80% of exam tasks:
 
@@ -1850,6 +1886,7 @@ ansible-navigator run playbook.yml --mode stdout -v | tee execution.log
 ```
 
 ### Time-Saving Command Combinations
+
 ```bash
 # Quick validation sequence (use for every playbook):
 ansible-navigator run site.yml --syntax-check && \

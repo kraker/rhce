@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Automate standard RHCSA system administration tasks using Ansible
 - Master package management automation across different systems
 - Implement service management with systemd automation
@@ -17,6 +18,7 @@ By the end of this module, you will:
 ### Manual Administration vs Automation
 
 **Manual Administration Challenges**:
+
 - Time-consuming repetitive tasks
 - Human errors and inconsistency
 - Difficult to scale across many systems
@@ -24,6 +26,7 @@ By the end of this module, you will:
 - Knowledge concentrated in individuals
 
 **Automation Benefits**:
+
 - **Consistency**: Same configuration across all systems
 - **Speed**: Deploy changes to hundreds of systems simultaneously
 - **Reliability**: Eliminate human errors in routine tasks
@@ -33,6 +36,7 @@ By the end of this module, you will:
 ### RHCE System Administration Focus
 
 The RHCE exam tests automation of standard RHCSA tasks:
+
 - Software package and repository management
 - Service configuration and control
 - Storage device and filesystem management
@@ -47,6 +51,7 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ### Package Installation and Management
 
 **Basic Package Operations**:
+
 ```yaml
 ---
 - name: Package management examples
@@ -101,6 +106,7 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ### Repository Management
 
 **Repository Configuration**:
+
 ```yaml
 ---
 - name: Repository management
@@ -1003,6 +1009,7 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ### Exercise 1: Web Server Infrastructure
 
 **Create automation for a complete web server setup**:
+
 1. Package installation (Apache, PHP, MySQL)
 2. Service configuration and startup
 3. Firewall configuration for web services
@@ -1012,6 +1019,7 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ### Exercise 2: Database Server Configuration
 
 **Automate database server deployment**:
+
 1. MySQL/MariaDB installation and hardening
 2. User and database creation
 3. Backup automation setup
@@ -1021,6 +1029,7 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ### Exercise 3: Multi-Tier Application Deployment
 
 **Deploy a complete application stack**:
+
 1. Load balancer configuration
 2. Application server setup with clustering
 3. Database replication configuration
@@ -1030,6 +1039,7 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ### Exercise 4: System Compliance Automation
 
 **Create compliance automation**:
+
 1. Security hardening according to security benchmarks
 2. User account policy enforcement
 3. System auditing configuration
@@ -1041,24 +1051,28 @@ The RHCE exam tests automation of standard RHCSA tasks:
 ## 🎯 Key Takeaways
 
 ### System Administration Automation Excellence
+
 - **Comprehensive coverage**: Automate all standard RHCSA tasks with Ansible
 - **Consistency**: Ensure identical configuration across all managed systems
 - **Scalability**: Deploy changes to hundreds of systems simultaneously
 - **Reliability**: Eliminate human error in routine administrative tasks
 
 ### Package and Service Management Mastery
+
 - **Repository management**: Automate software repository configuration and updates
 - **Service dependencies**: Understand and manage service startup ordering
 - **Health checking**: Implement service monitoring and automated recovery
 - **Security updates**: Automate security patch management
 
 ### Storage and User Management
+
 - **LVM automation**: Create flexible storage solutions with logical volume management
 - **Filesystem management**: Automate filesystem creation, mounting, and maintenance
 - **User lifecycle**: Implement complete user account lifecycle management
 - **Security policies**: Enforce password policies and access controls
 
 ### Security and Compliance
+
 - **Firewall automation**: Implement comprehensive network security policies
 - **SELinux management**: Configure mandatory access controls appropriately
 - **System hardening**: Apply security benchmarks consistently

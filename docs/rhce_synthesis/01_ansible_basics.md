@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Understand Ansible architecture and core concepts
 - Install and configure Ansible on the control node
 - Create and manage inventory files effectively
@@ -33,22 +34,26 @@ By the end of this module, you will:
 ### Control Node Requirements
 
 **Supported Operating Systems**:
+
 - RHEL 8/9 (exam environment)
 - CentOS Stream 8/9
 - Fedora (recent versions)
 - Ubuntu LTS versions
 
 **Python Requirements**:
+
 - Python 3.8 or newer
 - pip for module installation
 
 **Software Requirements**:
+
 - SSH client
 - ansible-core package
 
 ### Managed Node Requirements
 
 **Minimal Requirements**:
+
 - SSH server running
 - Python 3.6 or newer
 - User account with appropriate privileges
@@ -106,6 +111,7 @@ source ./hacking/env-setup
 ### Ansible Configuration File
 
 **Configuration Hierarchy** (highest to lowest precedence):
+
 1. `ANSIBLE_CONFIG` environment variable
 2. `ansible.cfg` in current directory
 3. `~/.ansible.cfg` in user home directory
@@ -236,6 +242,7 @@ all:
 ### Host Patterns
 
 **Basic Patterns**:
+
 ```bash
 # All hosts
 ansible all -m ping
@@ -262,6 +269,7 @@ ansible ~web\d+ -m ping
 ### Inventory Variables
 
 **Host Variables** (`host_vars/hostname.yml`):
+
 ```yaml
 # host_vars/web01.example.com.yml
 ---
@@ -271,6 +279,7 @@ ssl_enabled: yes
 ```
 
 **Group Variables** (`group_vars/groupname.yml`):
+
 ```yaml
 # group_vars/webservers.yml
 ---
@@ -326,6 +335,7 @@ cat ~/.ssh/id_rsa.pub | ssh ansible@web01.example.com "mkdir -p ~/.ssh && cat >>
 ### SSH Client Configuration
 
 **SSH Config** (`~/.ssh/config`):
+
 ```
 Host web01.example.com
     User ansible
@@ -358,6 +368,7 @@ ansible all -m ping --private-key ~/.ssh/alternate_key
 ### Privilege Escalation Configuration
 
 **Sudo Configuration** (on managed nodes):
+
 ```bash
 # Add ansible user to sudoers
 echo "ansible ALL=(ALL) NOPASSWD: ALL" | sudo tee /etc/sudoers.d/ansible
@@ -367,6 +378,7 @@ sudo visudo -c
 ```
 
 **Ansible Configuration**:
+
 ```bash
 # Test privilege escalation
 ansible all -m shell -a "whoami" --become
@@ -382,6 +394,7 @@ ansible all -m shell -a "whoami" --become --ask-become-pass
 ### Command Structure
 
 **Basic Syntax**:
+
 ```bash
 ansible <pattern> -m <module> -a "<module_arguments>" [options]
 ```
@@ -389,6 +402,7 @@ ansible <pattern> -m <module> -a "<module_arguments>" [options]
 ### Essential Ad-hoc Command Patterns
 
 **System Information**:
+
 ```bash
 # Basic connectivity test
 ansible all -m ping
@@ -410,6 +424,7 @@ ansible all -m shell -a "free -m"
 ```
 
 **Package Management**:
+
 ```bash
 # Install packages
 ansible all -m dnf -a "name=httpd state=present" --become
@@ -425,6 +440,7 @@ ansible all -m dnf -a "name=httpd state=absent" --become
 ```
 
 **Service Management**:
+
 ```bash
 # Start services
 ansible all -m systemd -a "name=httpd state=started" --become
@@ -440,6 +456,7 @@ ansible all -m systemd -a "name=httpd" --become
 ```
 
 **File Operations**:
+
 ```bash
 # Copy files to managed nodes
 ansible all -m copy -a "src=/etc/hosts dest=/tmp/hosts" --become
@@ -458,6 +475,7 @@ ansible all -m file -a "path=/tmp/testfile state=absent" --become
 ```
 
 **User Management**:
+
 ```bash
 # Create users
 ansible all -m user -a "name=testuser groups=wheel shell=/bin/bash" --become
@@ -472,6 +490,7 @@ ansible all -m user -a "name=testuser state=absent remove=yes" --become
 ### Command Options
 
 **Common Options**:
+
 ```bash
 --become (-b)           # Enable privilege escalation
 --become-user USER      # Escalate to specific user
@@ -489,6 +508,7 @@ ansible all -m user -a "name=testuser state=absent remove=yes" --become
 ```
 
 **Examples with Options**:
+
 ```bash
 # Dry run with diff output
 ansible webservers -m copy -a "src=index.html dest=/var/www/html/" --check --diff --become
@@ -510,21 +530,25 @@ ansible all -m setup --limit web01.example.com -vvv
 ### Module Categories
 
 **Core System Modules**:
+
 - `ansible.builtin.command` - Execute commands
 - `ansible.builtin.shell` - Execute shell commands
 - `ansible.builtin.script` - Execute scripts
 - `ansible.builtin.raw` - Execute raw SSH commands
 
 **Package Management**:
+
 - `ansible.builtin.dnf` - DNF/YUM package manager
 - `ansible.builtin.package` - Generic package manager
 - `ansible.builtin.rpm_key` - RPM key management
 
 **Service Management**:
+
 - `ansible.builtin.systemd` - Systemd service management
 - `ansible.builtin.service` - Generic service management
 
 **File Operations**:
+
 - `ansible.builtin.copy` - Copy files
 - `ansible.builtin.file` - File/directory management
 - `ansible.builtin.template` - Jinja2 templating
@@ -555,12 +579,14 @@ ansible-doc dnf | grep -A 20 EXAMPLES
 ### Command vs Shell vs Raw Modules
 
 **command module** (default, secure):
+
 ```bash
 # Cannot use pipes, redirects, or shell variables
 ansible all -m command -a "ls -l /tmp"
 ```
 
 **shell module** (allows shell features):
+
 ```bash
 # Can use pipes, redirects, and shell variables
 ansible all -m shell -a "ps aux | grep httpd"
@@ -568,6 +594,7 @@ ansible all -m shell -a "echo $HOME"
 ```
 
 **raw module** (minimal processing):
+
 ```bash
 # Bypasses module system entirely
 ansible all -m raw -a "uptime"
@@ -617,24 +644,28 @@ ansible all -m raw -a "uptime"
 ## 🎯 Key Takeaways
 
 ### Architecture Understanding
+
 - **Agentless**: No software required on managed nodes
 - **SSH-based**: Secure communication using existing SSH infrastructure
 - **Python execution**: Modules run Python code on managed nodes
 - **Idempotent**: Safe to run repeatedly
 
 ### Configuration Mastery
+
 - **ansible.cfg precedence**: Know where Ansible looks for configuration
 - **Essential settings**: remote_user, host_key_checking, become settings
 - **Inventory formats**: Both INI and YAML, choose based on complexity
 - **Variable organization**: Use host_vars and group_vars directories
 
 ### Ad-hoc Command Proficiency
+
 - **Module selection**: Choose appropriate modules for tasks
 - **Option usage**: Master common options like --become, --check, --limit
 - **Pattern matching**: Use flexible host patterns for targeting
 - **Documentation**: Use ansible-doc for quick reference
 
 ### Best Practices
+
 - **Start simple**: Master basic concepts before advanced features
 - **Test first**: Use ping and check mode to validate before execution
 - **Document decisions**: Use clear naming and organization

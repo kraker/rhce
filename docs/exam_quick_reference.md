@@ -9,6 +9,7 @@
 ## ⚙️ Core Configuration
 
 ### ansible.cfg Essential Settings
+
 ```ini
 [defaults]
 inventory = inventory.ini
@@ -28,6 +29,7 @@ become_user = root
 ```
 
 ### Inventory Patterns
+
 ```ini
 # INI Format
 [webservers]
@@ -46,6 +48,7 @@ ansible_user=ansible
 ```
 
 ### SSH Setup
+
 ```bash
 ssh-keygen -t rsa -b 4096 -N ""
 ssh-copy-id ansible@managed_node
@@ -57,9 +60,11 @@ ansible all -m ping
 ## 🔧 Ad-hoc Commands
 
 ### Command Structure
+
 `ansible <pattern> -m <module> -a "<arguments>" [options]`
 
 ### Essential Ad-hoc Patterns
+
 ```bash
 # Connectivity and info
 ansible all -m ping
@@ -82,6 +87,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 ```
 
 ### Common Options
+
 ```bash
 --become (-b)          # Privilege escalation
 --check (-C)           # Dry run
@@ -96,6 +102,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 ## 📝 Playbook Syntax
 
 ### Basic Structure
+
 ```yaml
 ---
 - name: Playbook description
@@ -126,6 +133,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 ```
 
 ### Task Keywords (Complete Reference)
+
 ```yaml
 - name: Task name                    # Required
   module_name:                      # Required
@@ -152,6 +160,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 ## 📦 Essential Modules with FQCN
 
 ### System Management
+
 | Module | FQCN | Key Parameters | Example |
 |--------|------|---------------|---------|
 | **systemd** | `ansible.builtin.systemd` | name, state, enabled, daemon_reload | `name: httpd, state: started, enabled: yes` |
@@ -161,6 +170,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 | **cron** | `ansible.builtin.cron` | name, job, minute, hour, user | `job: "backup.sh", minute: "0", hour: "2"` |
 
 ### Package Management
+
 | Module | FQCN | Key Parameters | Example |
 |--------|------|---------------|---------|
 | **dnf** | `ansible.builtin.dnf` | name, state, enablerepo, disablerepo | `name: httpd, state: present` |
@@ -168,6 +178,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 | **rpm_key** | `ansible.builtin.rpm_key` | key, state | `key: https://example.com/key.asc` |
 
 ### File Operations
+
 | Module | FQCN | Key Parameters | Example |
 |--------|------|---------------|---------|
 | **copy** | `ansible.builtin.copy` | src, dest, owner, group, mode, backup | `src: file.txt, dest: /etc/file.txt, mode: '0644'` |
@@ -178,6 +189,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 | **blockinfile** | `ansible.builtin.blockinfile` | path, block, marker | `path: /etc/config, block: "content here"` |
 
 ### Storage Management
+
 | Module | FQCN | Key Parameters | Example |
 |--------|------|---------------|---------|
 | **parted** | `community.general.parted` | device, number, state, part_type | `device: /dev/sdb, number: 1, state: present` |
@@ -187,6 +199,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 | **mount** | `ansible.posix.mount` | path, src, fstype, state, opts | `path: /mnt, src: /dev/sdb1, fstype: xfs, state: mounted` |
 
 ### Network & Security
+
 | Module | FQCN | Key Parameters | Example |
 |--------|------|---------------|---------|
 | **firewalld** | `ansible.posix.firewalld` | service, port, zone, permanent, immediate, state | `service: http, permanent: yes, immediate: yes, state: enabled` |
@@ -200,6 +213,7 @@ ansible all -m user -a "name=webuser groups=apache" --become
 ## 🔄 Variables & Facts
 
 ### Variable Precedence (High to Low)
+
 1. Command line `-e`
 2. Task vars
 3. Block vars  
@@ -210,14 +224,15 @@ ansible all -m user -a "name=webuser groups=apache" --become
 8. Play vars
 9. Host facts
 10. Host vars (inventory)
-11. Group vars (inventory) 
+11. Group vars (inventory)
 12. Group vars (/all)
-13. Group vars (/*) 
+13. Group vars (/*)
 14. Role defaults
 15. Command line inventory vars
 16. Default vars (deprecated)
 
 ### Magic Variables
+
 ```yaml
 inventory_hostname          # Current host name
 inventory_hostname_short    # Short hostname
@@ -230,6 +245,7 @@ ansible_facts              # All gathered facts
 ```
 
 ### Fact Access Patterns
+
 ```yaml
 "{{ ansible_facts['distribution'] }}"
 "{{ ansible_facts['default_ipv4']['address'] }}"
@@ -239,6 +255,7 @@ ansible_facts              # All gathered facts
 ```
 
 ### Register and Debug
+
 ```yaml
 - name: Run command
   ansible.builtin.command: uptime
@@ -256,6 +273,7 @@ ansible_facts              # All gathered facts
 ## 🔀 Task Control
 
 ### Conditionals
+
 ```yaml
 when: ansible_facts['distribution'] == "RedHat"
 when: ansible_facts['distribution_major_version'] == "8"
@@ -268,6 +286,7 @@ when: item != "excluded_item"
 ```
 
 ### Loops
+
 ```yaml
 # Simple loop
 loop:
@@ -291,6 +310,7 @@ loop: "{{ query('fileglob', '/etc/*.conf') }}"
 ```
 
 ### Error Handling
+
 ```yaml
 # Block structure
 - name: Handle errors
@@ -317,6 +337,7 @@ ignore_errors: yes
 ## 🎨 Templates & Jinja2
 
 ### Variable Substitution
+
 ```jinja2
 {{ variable_name }}
 {{ ansible_facts['hostname'] }}
@@ -325,6 +346,7 @@ ignore_errors: yes
 ```
 
 ### Control Structures
+
 ```jinja2
 # Conditionals
 {% if ansible_facts['distribution'] == "RedHat" %}
@@ -345,6 +367,7 @@ server {{ hostvars[host]['ansible_default_ipv4']['address'] }}
 ```
 
 ### Essential Filters
+
 ```jinja2
 {{ variable | default('default_value') }}
 {{ string_var | upper }}
@@ -364,6 +387,7 @@ server {{ hostvars[host]['ansible_default_ipv4']['address'] }}
 ## 📁 Roles & Collections
 
 ### Role Structure
+
 ```
 roles/rolename/
 ├── defaults/main.yml     # Default variables
@@ -376,6 +400,7 @@ roles/rolename/
 ```
 
 ### Galaxy Commands
+
 ```bash
 # Role operations
 ansible-galaxy init rolename
@@ -389,6 +414,7 @@ ansible-galaxy collection list
 ```
 
 ### FQCN Requirements
+
 ```yaml
 # Always use Fully Qualified Collection Names
 tasks:
@@ -403,6 +429,7 @@ tasks:
 ## 🔒 Ansible Vault
 
 ### Vault Commands
+
 ```bash
 # File operations
 ansible-vault create secrets.yml
@@ -417,6 +444,7 @@ ansible-vault encrypt_string 'secret_password' --name 'db_password'
 ```
 
 ### Playbook Integration
+
 ```bash
 # Password prompt
 ansible-navigator run site.yml --ask-vault-pass
@@ -431,6 +459,7 @@ ansible-navigator run site.yml --vault-id prod@prompt --vault-id dev@.vault_pass
 ```
 
 ### Vault File Usage
+
 ```yaml
 # In playbook
 vars_files:
@@ -448,6 +477,7 @@ vars:
 ## 🧭 Navigator Commands
 
 ### Execution Modes
+
 ```bash
 # Interactive TUI
 ansible-navigator run site.yml
@@ -464,6 +494,7 @@ ansible-navigator run site.yml --ask-vault-pass
 ```
 
 ### TUI Navigation
+
 ```bash
 :help                    # Show help
 :doc module_name         # Module documentation
@@ -473,6 +504,7 @@ ansible-navigator run site.yml --ask-vault-pass
 ```
 
 ### Documentation Access
+
 ```bash
 ansible-navigator doc ansible.builtin.dnf
 ansible-navigator doc -l | grep firewall
@@ -485,6 +517,7 @@ ansible-doc -s module_name  # Synopsis only
 ## 🐛 Troubleshooting
 
 ### Debug Strategies
+
 ```yaml
 # Debug module
 - name: Show variable
@@ -500,6 +533,7 @@ ansible-navigator run site.yml -vvvv   # Everything
 ```
 
 ### Common Patterns
+
 ```bash
 # Check syntax
 ansible-navigator run site.yml --syntax-check
@@ -522,6 +556,7 @@ ansible all -m systemd -a "name=httpd" --become
 ## ⚡ Exam Success Patterns
 
 ### Time-Saving Commands
+
 ```bash
 # Quick validation sequence
 ansible all -m ping && \
@@ -535,6 +570,7 @@ ansible-doc -s module_name
 ```
 
 ### Essential Verifications
+
 ```bash
 # Services
 ansible all -m systemd -a "name=httpd" --become
@@ -550,6 +586,7 @@ ansible all -m uri -a "url=http://{{ ansible_default_ipv4.address }}"
 ```
 
 ### Must-Remember for Exam
+
 - **Always use FQCN**: `ansible.builtin.dnf` not `dnf`
 - **Test first**: `--syntax-check`, `--check`, then execute
 - **Use ansible-navigator**: Primary tool, not ansible-playbook

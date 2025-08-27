@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Master Ansible Vault for encrypting sensitive data and secure automation
 - Implement advanced security practices for credential management
 - Use dynamic inventories for cloud and large-scale environments
@@ -16,12 +17,14 @@ By the end of this module, you will:
 ### Security Challenges in Automation
 
 **Common Security Issues**:
+
 - Passwords and API keys stored in plain text
 - Sensitive configuration data exposed in version control
 - Inadequate access controls on automation systems
 - Lack of audit trails for automated changes
 
 **Ansible Vault Solutions**:
+
 - **Encryption at rest**: Sensitive data encrypted in files
 - **Granular encryption**: Encrypt individual variables or entire files
 - **Multiple vault passwords**: Different encryption keys for different purposes
@@ -30,6 +33,7 @@ By the end of this module, you will:
 ### Advanced Features for Enterprise
 
 **Enterprise Requirements**:
+
 - **Scale**: Manage thousands of systems efficiently
 - **Performance**: Minimize execution time across large infrastructures  
 - **Flexibility**: Adapt to dynamic, cloud-native environments
@@ -43,6 +47,7 @@ By the end of this module, you will:
 ### Basic Vault Operations
 
 **Creating Encrypted Files**:
+
 ```bash
 # Create new encrypted file
 ansible-vault create secrets.yml
@@ -59,6 +64,7 @@ ssl_private_key: |
 ```
 
 **Viewing Encrypted Files**:
+
 ```bash
 # View encrypted file content
 ansible-vault view secrets.yml
@@ -71,6 +77,7 @@ cat secrets.yml
 ```
 
 **File Encryption Operations**:
+
 ```bash
 # Encrypt existing plain text file
 ansible-vault encrypt existing_secrets.yml
@@ -105,6 +112,7 @@ ansible-vault encrypt_string --stdin-name 'variable_name'
 ```
 
 **Using Encrypted Strings in Playbooks**:
+
 ```yaml
 ---
 - name: Deploy application with encrypted credentials
@@ -160,6 +168,7 @@ EOF
 ### Multiple Vault IDs
 
 **Creating Multiple Vault Files**:
+
 ```bash
 # Create different vault files with different IDs
 ansible-vault create --vault-id dev@prompt dev_secrets.yml
@@ -173,6 +182,7 @@ chmod 600 .vault_password_*
 ```
 
 **Using Multiple Vault IDs**:
+
 ```bash
 # Specify multiple vault password sources
 ansible-navigator run site.yml \
@@ -189,6 +199,7 @@ ansible-navigator run deploy.yml \
 ```
 
 **Vault ID in Playbook Structure**:
+
 ```yaml
 ---
 - name: Multi-environment deployment
@@ -213,6 +224,7 @@ ansible-navigator run deploy.yml \
 ### Script-Based Password Retrieval
 
 **Password Retrieval Script** (`get_vault_password.py`):
+
 ```python
 #!/usr/bin/env python3
 import os
@@ -265,6 +277,7 @@ if __name__ == "__main__":
 ```
 
 **Using Password Script**:
+
 ```bash
 # Make script executable
 chmod +x get_vault_password.py
@@ -283,6 +296,7 @@ ansible-navigator run site.yml \
 ### Vault File Organization
 
 **Directory Structure**:
+
 ```
 inventory/
 ├── group_vars/
@@ -306,6 +320,7 @@ inventory/
 ```
 
 **Variable Naming Convention**:
+
 ```yaml
 # group_vars/all/vault.yml
 ---
@@ -329,6 +344,7 @@ vault_ssl_private_key: !vault |
 ```
 
 **Reference from Plain Text Files**:
+
 ```yaml
 # group_vars/all/common.yml
 ---
@@ -346,6 +362,7 @@ backup_schedule: "0 2 * * *"
 ### Mixed Encryption Patterns
 
 **Template with Encrypted Content**:
+
 ```yaml
 ---
 - name: Deploy configuration with mixed content
@@ -378,6 +395,7 @@ backup_schedule: "0 2 * * *"
 ```
 
 **Template File** (`templates/app.conf.j2`):
+
 ```jinja2
 # {{ app_name }} Configuration
 # Version: {{ app_version }}
@@ -412,6 +430,7 @@ endpoint={{ monitoring_endpoint }}
 ### Cloud-Based Dynamic Inventories
 
 **AWS EC2 Dynamic Inventory**:
+
 ```yaml
 # aws_ec2.yml
 ---
@@ -455,6 +474,7 @@ cache_connection: /tmp/ansible-aws-inventory
 ```
 
 **Using Dynamic Inventory**:
+
 ```bash
 # Test dynamic inventory
 ansible-inventory -i aws_ec2.yml --list
@@ -469,6 +489,7 @@ ansible-navigator run web_deploy.yml -i aws_ec2.yml --limit type_t3_medium --mod
 ### Custom Dynamic Inventory Scripts
 
 **Python Inventory Script** (`custom_inventory.py`):
+
 ```python
 #!/usr/bin/env python3
 import json
@@ -552,6 +573,7 @@ if __name__ == "__main__":
 ```
 
 **Making Script Executable and Testing**:
+
 ```bash
 # Make script executable
 chmod +x custom_inventory.py
@@ -573,6 +595,7 @@ ansible-navigator run site.yml -i ./custom_inventory.py --mode stdout
 ### Execution Performance Tuning
 
 **Ansible Configuration** (`ansible.cfg`):
+
 ```ini
 [defaults]
 # Increase parallelism
@@ -591,6 +614,7 @@ retries = 3
 ```
 
 **Performance-Optimized Playbook Patterns**:
+
 ```yaml
 ---
 - name: High-performance deployment
@@ -641,6 +665,7 @@ retries = 3
 ### Memory and Resource Optimization
 
 **Large File Handling**:
+
 ```yaml
 ---
 - name: Efficient large file operations
@@ -676,6 +701,7 @@ retries = 3
 ```
 
 **Connection Pooling and Reuse**:
+
 ```yaml
 ---
 - name: Connection optimization example
@@ -706,6 +732,7 @@ retries = 3
 ### Debug Information Collection
 
 **Comprehensive Debug Playbook**:
+
 ```yaml
 ---
 - name: Ansible debugging and diagnostics
@@ -788,6 +815,7 @@ retries = 3
 ### Error Analysis and Resolution
 
 **Common Error Patterns and Solutions**:
+
 ```yaml
 ---
 - name: Error handling and resolution patterns
@@ -862,6 +890,7 @@ retries = 3
 ### Custom Modules and Plugins
 
 **Simple Custom Module** (`library/custom_service_check.py`):
+
 ```python
 #!/usr/bin/python
 
@@ -939,6 +968,7 @@ if __name__ == '__main__':
 ```
 
 **Using Custom Module**:
+
 ```yaml
 ---
 - name: Use custom service health check module
@@ -965,6 +995,7 @@ if __name__ == '__main__':
 ### Advanced Templating and Filters
 
 **Custom Filter Plugin** (`filter_plugins/network_filters.py`):
+
 ```python
 def calculate_network(ip_address, subnet_mask):
     """Calculate network address from IP and subnet mask"""
@@ -1001,6 +1032,7 @@ class FilterModule(object):
 ```
 
 **Using Custom Filters**:
+
 ```yaml
 ---
 - name: Network configuration with custom filters
@@ -1038,6 +1070,7 @@ class FilterModule(object):
 ### Exercise 1: Comprehensive Vault Implementation
 
 **Create a secure automation setup**:
+
 1. Set up multiple vault password files for different environments
 2. Create encrypted variable files for database passwords, API keys, and SSL certificates
 3. Implement a password retrieval script using environment variables
@@ -1047,6 +1080,7 @@ class FilterModule(object):
 ### Exercise 2: Dynamic Inventory Integration
 
 **Build dynamic inventory system**:
+
 1. Create a Python script that fetches inventory from a REST API
 2. Implement caching for performance optimization
 3. Add custom group creation based on host attributes
@@ -1056,6 +1090,7 @@ class FilterModule(object):
 ### Exercise 3: Performance Optimization Project
 
 **Optimize automation for large-scale deployment**:
+
 1. Configure Ansible for high-performance execution
 2. Implement async operations for long-running tasks
 3. Use connection pooling and SSH optimizations
@@ -1065,6 +1100,7 @@ class FilterModule(object):
 ### Exercise 4: Advanced Debugging and Monitoring
 
 **Create comprehensive debugging toolkit**:
+
 1. Build debugging playbooks for common issues
 2. Implement custom modules for health checking
 3. Create logging and monitoring integration
@@ -1076,24 +1112,28 @@ class FilterModule(object):
 ## 🎯 Key Takeaways
 
 ### Security Mastery with Ansible Vault
+
 - **Data protection**: Encrypt all sensitive data including passwords, keys, and certificates
 - **Vault organization**: Use consistent naming and directory structures for encrypted files
 - **Multiple environments**: Implement separate vault passwords for different environments
 - **Automation integration**: Seamlessly integrate vault operations into CI/CD pipelines
 
 ### Advanced Features Proficiency
+
 - **Dynamic inventories**: Adapt to cloud and container environments with automatic discovery
 - **Performance optimization**: Configure Ansible for enterprise-scale deployments
 - **Extensibility**: Create custom modules and plugins for specific organizational needs
 - **Debugging expertise**: Develop systematic approaches to troubleshooting complex automation
 
 ### Production Best Practices
+
 - **Security first**: Implement defense-in-depth security practices for automation systems
 - **Scalability**: Design automation that grows with infrastructure needs
 - **Monitoring**: Implement comprehensive logging and monitoring of automation activities
 - **Documentation**: Maintain detailed documentation of advanced configurations and customizations
 
 ### Enterprise Integration
+
 - **External systems**: Integrate with Configuration Management Databases and monitoring systems
 - **Compliance**: Implement automation that supports regulatory and security compliance
 - **Change management**: Integrate automation with organizational change management processes
@@ -1104,7 +1144,9 @@ class FilterModule(object):
 ## 🔗 Final Steps and Continuing Education
 
 ### RHCE Exam Readiness
+
 With completion of all 8 modules, you have comprehensive coverage of:
+
 - ✅ **Exam Objective 1**: Understanding core Ansible components
 - ✅ **Exam Objective 2**: Using roles and Ansible Content Collections
 - ✅ **Exam Objective 3**: Installing and configuring Ansible control node
@@ -1115,6 +1157,7 @@ With completion of all 8 modules, you have comprehensive coverage of:
 - ✅ **Exam Objective 8**: Managing content with templates and Ansible Vault
 
 ### Continuing Your Ansible Journey
+
 - **Advanced Automation Platform**: Explore Red Hat Ansible Automation Platform (AAP)
 - **Ansible Tower/AWX**: Learn enterprise automation with web UI and API
 - **CI/CD Integration**: Integrate Ansible with GitLab CI, Jenkins, and other tools
@@ -1123,6 +1166,7 @@ With completion of all 8 modules, you have comprehensive coverage of:
 - **Community Contribution**: Contribute to Ansible community projects and collections
 
 ### Professional Development
+
 - **Certification Progression**: Consider DCI (Deployment and Continuous Integration) specialization
 - **Advanced Specializations**: Pursue OpenShift, Security, or Networking specializations
 - **Community Engagement**: Join Ansible user groups and contribute to open source projects

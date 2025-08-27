@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Create well-structured Ansible playbooks using YAML syntax
 - Understand playbook components and execution flow
 - Master task definition and module usage with FQCN
@@ -17,6 +18,7 @@ By the end of this module, you will:
 
 **Ad-hoc Commands**: Great for quick, one-time tasks
 **Playbooks**: Essential for:
+
 - Complex multi-step automation
 - Repeatable infrastructure management  
 - Configuration management
@@ -38,6 +40,7 @@ By the end of this module, you will:
 ### YAML Syntax Essentials
 
 **Basic Structure**:
+
 ```yaml
 ---  # Document start marker (optional but recommended)
 # This is a comment
@@ -69,11 +72,13 @@ person: {name: John, age: 30, active: true}
 ### YAML Best Practices for Ansible
 
 **Indentation Rules**:
+
 - Use 2 spaces for indentation (not tabs)
 - Be consistent throughout the file
 - Align items at the same level
 
 **Quoting Guidelines**:
+
 ```yaml
 # Quote when necessary
 shell_command: "echo 'Hello World'"
@@ -85,6 +90,7 @@ when: "ansible_distribution == 'RedHat'"
 ```
 
 **Multi-line Strings**:
+
 ```yaml
 # Literal scalar (preserves line breaks)
 script_content: |
@@ -157,6 +163,7 @@ when: variable == "yes"
 ### Play-Level Keywords
 
 **Essential Play Keywords**:
+
 ```yaml
 ---
 - name: Web server configuration               # Play description
@@ -282,6 +289,7 @@ tasks:
 ### Common Module Patterns
 
 **Package Management**:
+
 ```yaml
 - name: Install single package
   ansible.builtin.dnf:
@@ -309,6 +317,7 @@ tasks:
 ```
 
 **Service Management**:
+
 ```yaml
 - name: Start and enable service
   ansible.builtin.systemd:
@@ -330,6 +339,7 @@ tasks:
 ```
 
 **File Operations**:
+
 ```yaml
 - name: Copy file to remote host
   ansible.builtin.copy:
@@ -361,6 +371,7 @@ tasks:
 ```
 
 **User Management**:
+
 ```yaml
 - name: Create user account
   ansible.builtin.user:
@@ -386,7 +397,8 @@ tasks:
 ### Handler Concepts
 
 **Purpose**: Execute tasks only when notified by changed tasks
-**Common Use Cases**: 
+**Common Use Cases**:
+
 - Restart services after configuration changes
 - Reload configurations
 - Run cleanup tasks
@@ -435,6 +447,7 @@ tasks:
 ### Handler Execution Rules
 
 **Key Behaviors**:
+
 - Handlers run at the end of each play
 - Handlers only run if notified by a changed task
 - Each handler runs only once, even if notified multiple times
@@ -442,6 +455,7 @@ tasks:
 - Failed tasks prevent handler execution
 
 **Force Handler Execution**:
+
 ```yaml
 - name: Force handlers to run immediately
   ansible.builtin.meta: flush_handlers
@@ -573,6 +587,7 @@ tasks:
 ### Basic Error Control
 
 **Failed When**: Define custom failure conditions
+
 ```yaml
 - name: Check web service response
   ansible.builtin.uri:
@@ -585,6 +600,7 @@ tasks:
 ```
 
 **Changed When**: Define when tasks register as changed
+
 ```yaml
 - name: Run application deployment
   ansible.builtin.command: /opt/app/deploy.sh
@@ -593,6 +609,7 @@ tasks:
 ```
 
 **Ignore Errors**: Continue despite failures
+
 ```yaml
 - name: Attempt optional configuration
   ansible.builtin.copy:
@@ -686,6 +703,7 @@ ansible-navigator run site.yml --start-at-task "Configure Apache" --mode stdout
 ### Testing Workflow
 
 **Recommended Test Sequence**:
+
 ```bash
 # 1. Syntax check
 ansible-navigator run site.yml --syntax-check
@@ -710,6 +728,7 @@ ansible-navigator run site.yml --mode stdout
 ### Exercise 1: Basic Playbook Creation
 
 **Create a playbook that:**
+
 1. Installs Apache web server
 2. Copies a custom index.html file  
 3. Starts and enables the service
@@ -757,6 +776,7 @@ ansible-navigator run site.yml --mode stdout
 ### Exercise 2: Error Handling Practice
 
 **Create a playbook with:**
+
 1. Block/rescue/always structure
 2. Custom failed_when conditions
 3. Ignore_errors usage
@@ -765,6 +785,7 @@ ansible-navigator run site.yml --mode stdout
 ### Exercise 3: Multi-Play Workflow
 
 **Create a multi-play playbook that:**
+
 1. Configures database servers (first play)
 2. Configures web servers (second play)  
 3. Configures load balancers (third play)
@@ -773,6 +794,7 @@ ansible-navigator run site.yml --mode stdout
 ### Exercise 4: Tag Organization
 
 **Create a comprehensive playbook with:**
+
 1. Install, configure, and service tags
 2. Environment-specific tags (dev, prod)
 3. Practice selective execution
@@ -782,24 +804,28 @@ ansible-navigator run site.yml --mode stdout
 ## 🎯 Key Takeaways
 
 ### Playbook Structure Mastery
+
 - **YAML syntax**: Proper indentation and quoting
 - **Play organization**: Logical grouping of related tasks
 - **FQCN requirement**: Always use fully qualified collection names
 - **Documentation**: Clear, descriptive names for plays and tasks
 
 ### Task Design Principles  
+
 - **Idempotency**: Tasks should be safe to run repeatedly
 - **Atomicity**: Each task should accomplish one specific goal
 - **Clarity**: Task names should clearly describe the action
 - **Error handling**: Anticipate and handle failure scenarios
 
 ### Handler Usage
+
 - **Event-driven**: Only run when notified by changed tasks
 - **Service management**: Ideal for service restarts and reloads
 - **Execution timing**: Understand when handlers run
 - **Notification patterns**: Multiple tasks can notify same handler
 
 ### Testing Best Practices
+
 - **Syntax validation**: Always check syntax before execution
 - **Dry run testing**: Use --check mode to validate logic
 - **Limited testing**: Test on single host before full deployment

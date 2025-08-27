@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Automate all major RHCSA system administration tasks using Ansible
 - Master the Ansible modules critical for the RHCE exam
 - Understand the exam's emphasis on RHCSA task automation
@@ -41,6 +42,7 @@ The RHCE exam assumes RHCSA knowledge but requires **automating** these tasks:
 **Manual RHCSA Task**: `dnf install httpd -y && systemctl enable --now httpd`
 
 **RHCE Automation**:
+
 ```yaml
 - name: Install and start web server
   hosts: webservers
@@ -1163,6 +1165,7 @@ The RHCE exam assumes RHCSA knowledge but requires **automating** these tasks:
 ### Module Selection Strategy
 
 **Always use FQCN in exam**:
+
 - `ansible.builtin.dnf` not `dnf`
 - `ansible.builtin.systemd` not `systemd`
 - `community.general.parted` not `parted`
@@ -1171,6 +1174,7 @@ The RHCE exam assumes RHCSA knowledge but requires **automating** these tasks:
 ### Task Ordering
 
 **Critical sequence for system setup**:
+
 1. Package installation
 2. User/group creation
 3. Storage configuration
@@ -1226,6 +1230,7 @@ The RHCE exam assumes RHCSA knowledge but requires **automating** these tasks:
 ### Essential Module Quick Reference
 
 **Must memorize for exam:**
+
 - `ansible.builtin.dnf` - Package management
 - `ansible.builtin.systemd` - Service management  
 - `ansible.builtin.user`/`group` - Account management

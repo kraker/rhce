@@ -1,0 +1,61 @@
+# Markdownlint configuration based on CISA skeleton-generic
+# See: https://github.com/DavidAnson/markdownlint/blob/v0.34.0/schema/.markdownlint.yaml
+
+# Default state for all rules
+default: true
+
+# MD003/heading-style - Heading style
+MD003:
+  # Heading style
+  style: "atx"
+
+# MD004/ul-style - Unordered list style
+MD004:
+  style: "dash"
+
+# MD007/ul-indent - Unordered list indentation
+MD007:
+  # Spaces for indent
+  indent: 2
+  # Whether to indent the first level of the list
+  start_indented: false
+
+# MD013/line-length - Line length
+MD013: false
+
+# MD024/no-duplicate-heading - Multiple headings with the same content
+MD024: false
+
+# MD029/ol-prefix - Ordered list item prefix
+MD029: false
+
+# MD033/no-inline-html - Inline HTML
+MD033:
+  # Allowed elements
+  allowed_elements: ["h1", "img"]
+
+# MD035/hr-style - Horizontal rule style
+MD035:
+  # Horizontal rule style
+  style: "---"
+
+# MD036/no-emphasis-as-heading - Emphasis used instead of a heading
+MD036: false
+
+# MD040/fenced-code-language - Fenced code blocks should have a language specified
+MD040: false
+
+# MD046/code-block-style - Code block style
+MD046:
+  # Block style
+  style: "fenced"
+
+# MD049/emphasis-style - Emphasis style should be consistent
+MD049:
+  # Emphasis style should be consistent
+  style: "asterisk"
+
+# MD050/strong-style - Strong style should be consistent
+MD050:
+  # Strong style should be consistent
+  style: "asterisk"

@@ -27,4 +27,12 @@ repos:
       - id: ansible-lint
         args: [-c=.ansible-lint]
         files: \.(yml|yaml)$
-        exclude: ^(site/|\.github/workflows/)
+        exclude: ^(site/|\.github/workflows/|vagrant/.*)
+
+  # Markdown linting (for documentation quality)
+  - repo: https://github.com/igorshubovych/markdownlint-cli
+    rev: v0.44.0
+    hooks:
+      - id: markdownlint
+        args:
+          - --config=.mdl_config.yaml

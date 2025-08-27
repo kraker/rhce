@@ -3,6 +3,7 @@
 ## 🎯 Learning Objectives
 
 By the end of this module, you will:
+
 - Design and create Ansible roles for code reusability and organization
 - Understand role structure and best practices for maintainable automation
 - Master role dependencies and variable handling within roles
@@ -16,12 +17,14 @@ By the end of this module, you will:
 ### Playbook Limitations vs Role Benefits
 
 **Large Playbook Problems**:
+
 - Difficult to maintain and debug
 - Hard to reuse across projects
 - Variables and tasks become unorganized
 - Testing becomes complex
 
 **Role-Based Solutions**:
+
 - **Modular Design**: Each role handles a specific function
 - **Reusability**: Same role works across multiple projects
 - **Organization**: Clear structure with defined variable locations
@@ -160,6 +163,7 @@ dependencies:
 ### Modular Task Files
 
 **tasks/install.yml**:
+
 ```yaml
 ---
 - name: Install web server package
@@ -187,6 +191,7 @@ dependencies:
 ```
 
 **tasks/configure.yml**:
+
 ```yaml
 ---
 - name: Create configuration directories
@@ -228,6 +233,7 @@ dependencies:
 ### Variable Organization
 
 **defaults/main.yml** (Default values):
+
 ```yaml
 ---
 # Default variables for web role
@@ -260,6 +266,7 @@ virtual_hosts: []
 ```
 
 **vars/main.yml** (Role-specific variables):
+
 ```yaml
 ---
 # Internal role variables (high precedence)
@@ -275,6 +282,7 @@ web_packages:
 ```
 
 **vars/redhat.yml** (OS-specific variables):
+
 ```yaml
 ---
 web_package_name: httpd
@@ -288,6 +296,7 @@ firewall_service_name: firewalld
 ```
 
 **vars/ubuntu.yml**:
+
 ```yaml
 ---
 web_package_name: apache2
@@ -507,12 +516,14 @@ ansible-galaxy install -r requirements.yml --force
 ### Understanding Collections
 
 **Collections provide**:
+
 - **Modules**: Task plugins for specific functionality
 - **Roles**: Pre-built automation patterns  
 - **Plugins**: Extend Ansible capabilities
 - **Playbooks**: Example automation workflows
 
 **FQCN (Fully Qualified Collection Names)** required for modules:
+
 ```yaml
 # Correct - FQCN format
 - name: Configure firewall
@@ -530,6 +541,7 @@ ansible-galaxy install -r requirements.yml --force
 ### Essential Collections for RHCE
 
 **ansible.builtin** (Core Modules):
+
 ```yaml
 tasks:
   - name: Install package
@@ -550,6 +562,7 @@ tasks:
 ```
 
 **ansible.posix** (POSIX System Tools):
+
 ```yaml
 tasks:
   - name: Configure firewall
@@ -572,6 +585,7 @@ tasks:
 ```
 
 **community.general** (Extended Modules):
+
 ```yaml
 tasks:
   - name: Create partition
@@ -639,6 +653,7 @@ collections/
 ### Role Dependencies
 
 **meta/main.yml with dependencies**:
+
 ```yaml
 ---
 dependencies:
@@ -675,6 +690,7 @@ dependencies:
 ### Role Composition Patterns
 
 **Site Playbook (site.yml)**:
+
 ```yaml
 ---
 - name: Configure infrastructure
@@ -746,6 +762,7 @@ dependencies:
 ### Role Testing Structure
 
 **tests/test.yml**:
+
 ```yaml
 ---
 - hosts: localhost
@@ -840,6 +857,7 @@ dependencies:
 ### Exercise 1: Create a Comprehensive Web Server Role
 
 **Requirements**:
+
 1. Support multiple OS distributions (RHEL, Ubuntu)
 2. Configure SSL conditionally
 3. Deploy virtual hosts from variables
@@ -849,6 +867,7 @@ dependencies:
 ### Exercise 2: Database Configuration Role
 
 **Create a role that**:
+
 1. Installs database server (MySQL/PostgreSQL)
 2. Configures performance tuning based on available memory
 3. Creates databases and users from variables
@@ -858,6 +877,7 @@ dependencies:
 ### Exercise 3: Multi-Tier Application Role
 
 **Design roles for**:
+
 1. Load balancer configuration
 2. Application server deployment
 3. Database setup with replication
@@ -867,6 +887,7 @@ dependencies:
 ### Exercise 4: Collection Creation
 
 **Build a custom collection that includes**:
+
 1. Multiple related roles
 2. Custom modules for specific tasks
 3. Plugins for data manipulation
@@ -878,24 +899,28 @@ dependencies:
 ## 🎯 Key Takeaways
 
 ### Role Design Excellence
+
 - **Single responsibility**: Each role should have one clear purpose
 - **Parameterization**: Use variables to make roles flexible and reusable
 - **Documentation**: Include clear README files and inline comments
 - **Testing**: Write tests to validate role functionality
 
 ### Organization and Structure
+
 - **Standard layout**: Follow Ansible's standard role directory structure
 - **Variable precedence**: Understand how role variables interact with other variable sources
 - **Dependencies**: Use role dependencies to ensure proper ordering and prerequisites
 - **Modular tasks**: Break complex roles into smaller, manageable task files
 
 ### Collection Mastery
+
 - **FQCN usage**: Always use fully qualified collection names for modules
 - **Collection installation**: Know how to install and manage collections
 - **Collection organization**: Understand how collections organize related automation content
 - **Requirements management**: Use requirements.yml for reproducible environments
 
 ### Best Practices
+
 - **Version control**: Track roles and requirements files in version control
 - **Environment consistency**: Use the same collection versions across environments
 - **Performance**: Consider role execution performance in large deployments

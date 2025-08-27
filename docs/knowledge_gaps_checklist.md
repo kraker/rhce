@@ -9,11 +9,13 @@
 ## 📋 How to Use This Checklist
 
 **Rating Scale:**
+
 - ✅ **Confident**: I can do this without reference materials
 - ⚠️ **Uncertain**: I know the concept but need to verify syntax/approach
 - ❌ **Gap**: I need to learn/practice this area
 
 **Focus Strategy:**
+
 - **✅ Items**: Quick review only
 - **⚠️ Items**: Practice and verify, but don't over-study
 - **❌ Items**: Intensive study and lab practice required
@@ -99,6 +101,7 @@
 ## 📋 5. RHCSA Task Automation (Critical Exam Area)
 
 ### Package Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Install packages with ansible.builtin.dnf | ⬜ | Single and multiple packages |
@@ -108,6 +111,7 @@
 | Configure repositories | ⬜ | yum_repository module |
 
 ### Service Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Start/stop services with systemd module | ⬜ | state parameter |
@@ -117,6 +121,7 @@
 | Check service status | ⬜ | Using setup module |
 
 ### Storage Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Create partitions with parted | ⬜ | community.general.parted |
@@ -127,6 +132,7 @@
 | Manage /etc/fstab | ⬜ | Persistent mounts |
 
 ### User Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Create users with user module | ⬜ | All common parameters |
@@ -136,6 +142,7 @@
 | Set user properties | ⬜ | shell, home, groups |
 
 ### File Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Copy files with copy module | ⬜ | Local to remote |
@@ -145,6 +152,7 @@
 | Create directories | ⬜ | Directory hierarchies |
 
 ### Firewall Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Configure firewalld services | ⬜ | ansible.posix.firewalld |
@@ -154,6 +162,7 @@
 | Apply changes immediately | ⬜ | immediate parameter |
 
 ### SELinux Management
+
 | Task | Rating | Notes |
 |------|--------|-------|
 | Set SELinux booleans | ⬜ | ansible.posix.seboolean |
@@ -243,30 +252,35 @@
 ## 📊 Gap Analysis Summary
 
 ### Count Your Ratings
+
 - **✅ Confident**: ___/90 items
 - **⚠️ Uncertain**: ___/90 items  
 - **❌ Gap**: ___/90 items
 
 ### Study Priority Calculation
+
 - **70-90% Confident**: Light review, focus on uncertain items
 - **50-69% Confident**: Moderate study needed, practice labs
 - **Below 50% Confident**: Intensive study required
 
 ### Recommended Study Path Based on Gaps
 
-**High Gap Count (>30 items)**: 
+**High Gap Count (>30 items)**:
+
 - Start with Automation Content Navigator
 - Master Content Collections next
 - Focus heavily on RHCSA task automation
 - Practice exam scenarios extensively
 
 **Medium Gap Count (15-30 items)**:
+
 - Target specific weak areas
 - Practice time management
 - Focus on exam-specific differences
 - Do realistic practice scenarios
 
 **Low Gap Count (<15 items)**:
+
 - Quick review of uncertain items
 - Practice exam timing
 - Focus on exam environment adaptation
@@ -279,21 +293,25 @@
 Based on your gap analysis, create a focused study plan:
 
 ### Week 1: Foundation Gaps
+
 **Focus Areas**: _______________  
 **Lab Time**: ___ hours/day  
 **Key Tasks**: _______________
 
 ### Week 2: Advanced Skills  
+
 **Focus Areas**: _______________  
 **Lab Time**: ___ hours/day  
 **Key Tasks**: _______________
 
 ### Week 3: Exam Simulation
+
 **Focus Areas**: Time management, exam scenarios  
 **Lab Time**: ___ hours/day  
 **Key Tasks**: Full practice exams
 
 ### Week 4: Final Preparation
+
 **Focus Areas**: Review weak areas, confidence building  
 **Lab Time**: ___ hours/day  
 **Key Tasks**: Final practice, review quick references
