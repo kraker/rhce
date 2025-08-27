@@ -4,39 +4,16 @@ sources/
 # MkDocs build output
 site/
 
-# Python
+# Python virtual environments and cache
 __pycache__/
 *.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-pip-wheel-metadata/
-share/python-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
-MANIFEST
-
-# Virtual environments
 .env
 .venv
 env/
 venv/
 ENV/
-env.bak/
-venv.bak/
+*.egg-info/
+.installed.cfg
 
 # IDE and editor files
 .vscode/
@@ -47,31 +24,21 @@ venv.bak/
 
 # OS generated files
 .DS_Store
-.DS_Store?
 ._*
-.Spotlight-V100
-.Trashes
-ehthumbs.db
 Thumbs.db
 
 # Ansible
 *.retry
 .vault_pass
+.ansible/
 
-# Temporary files
-*.tmp
-*.temp
-
-# Pre-commit cache
-.pre-commit-cache/
+# Vagrant and RHEL credentials
+vagrant/.rhel-credentials
+.vagrant/
 
 # Development and testing
+.pre-commit-cache/
 .tox/
 .coverage
-htmlcov/
 .pytest_cache/
 .cache/
-
-# Ansible testing
-tests/output/
-tests/test_*.retry

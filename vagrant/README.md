@@ -1,6 +1,6 @@
 # RHCE Vagrant Lab Environment
 
-Automated lab environment for Red Hat Certified Engineer (RHCE) exam preparation using Vagrant and Ansible. This setup creates a complete multi-node environment for practicing Ansible automation.
+Minimal lab environment for Red Hat Certified Engineer (RHCE) exam preparation using Vagrant and Ansible. This setup creates a clean multi-node environment for practicing Ansible automation from scratch.
 
 ## Overview
 
@@ -8,11 +8,11 @@ This Vagrant configuration creates **5 RHEL 9 VMs**:
 
 | VM Name | IP Address | RAM | Role | Purpose |
 |---------|------------|-----|------|---------|
-| control | 192.168.4.200 | 2GB | Ansible Controller | Central management node with Ansible installed |
-| ansible1 | 192.168.4.201 | 1GB | Web Server | HTTP services and web automation |
-| ansible2 | 192.168.4.202 | 1GB | Web Server | Load balancing and clustering practice |
-| ansible3 | 192.168.4.203 | 1GB | Database Server | Database automation and management |
-| ansible4 | 192.168.4.204 | 1GB | Development | Testing and development scenarios |
+| control | 192.168.4.200 | 2GB | Control Node | Clean RHEL system for Ansible practice |
+| ansible1 | 192.168.4.201 | 1GB | Managed Node | Target system for automation practice |
+| ansible2 | 192.168.4.202 | 1GB | Managed Node | Target system for automation practice |
+| ansible3 | 192.168.4.203 | 1GB | Managed Node | Target system for automation practice |
+| ansible4 | 192.168.4.204 | 1GB | Managed Node | Target system for automation practice |
 
 ## Prerequisites
 
@@ -51,10 +51,10 @@ vim .rhel-credentials
 This will:
 - Create and start all 5 VMs
 - Register with Red Hat subscription
-- Install and configure Ansible
-- Set up SSH key authentication
-- Deploy inventory and configuration files
-- Configure host groups and roles
+- Create ansible user with sudo privileges
+- Set up SSH key authentication between nodes
+- Configure basic networking (/etc/hosts)
+- Install essential packages only
 
 ### 3. Access Control Node
 ```bash

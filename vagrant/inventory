@@ -2,31 +2,17 @@
 # This inventory is used during the initial setup phase
 
 [control]
-control ansible_host=192.168.4.200
+control ansible_host=127.0.0.1 ansible_port=2222 ansible_ssh_private_key_file=.vagrant/machines/control/virtualbox/private_key
 
 [managed]
-ansible1 ansible_host=192.168.4.201
-ansible2 ansible_host=192.168.4.202
-ansible3 ansible_host=192.168.4.203
-ansible4 ansible_host=192.168.4.204
+ansible1 ansible_host=127.0.0.1 ansible_port=2200 ansible_ssh_private_key_file=.vagrant/machines/ansible1/virtualbox/private_key
+ansible2 ansible_host=127.0.0.1 ansible_port=2201 ansible_ssh_private_key_file=.vagrant/machines/ansible2/virtualbox/private_key
+ansible3 ansible_host=127.0.0.1 ansible_port=2202 ansible_ssh_private_key_file=.vagrant/machines/ansible3/virtualbox/private_key
+ansible4 ansible_host=127.0.0.1 ansible_port=2203 ansible_ssh_private_key_file=.vagrant/machines/ansible4/virtualbox/private_key
 
-# Functional groups for RHCE practice
-[webservers]
-ansible1
-ansible2
-
-[databases]
-ansible3
-
-[development]
-ansible4
-
-[production:children]
-webservers
-databases
+# Add your own groups here as needed for RHCE practice
 
 # Variables for all hosts
 [all:vars]
 ansible_user=vagrant
-ansible_ssh_private_key_file=~/.vagrant.d/insecure_private_key
 ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
