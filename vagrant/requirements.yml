@@ -1,0 +1,15 @@
+# Ansible Collections and Roles Requirements
+# Following best practices from Jeff Geerling: https://www.jeffgeerling.com/blog/2020/ansible-best-practices-using-project-local-collections-and-roles
+# Install with: ansible-galaxy install -r requirements.yml
+
+collections:
+  # Core collections needed for RHCE lab environment
+  - name: ansible.posix
+    version: ">=1.5.0"
+  - name: community.general
+    version: ">=7.0.0"
+  - name: community.crypto
+    version: ">=2.0.0"
+
+# Roles (none currently required for basic RHCE lab setup)
+roles: []

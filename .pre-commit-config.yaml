@@ -27,7 +27,7 @@ repos:
       - id: ansible-lint
         args: [-c=.ansible-lint]
         files: \.(yml|yaml)$
-        exclude: ^(site/|\.github/workflows/|vagrant/.*)
+        exclude: ^(site/|\.github/workflows/)
 
   # Markdown linting (for documentation quality)
   - repo: https://github.com/igorshubovych/markdownlint-cli

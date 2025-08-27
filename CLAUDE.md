@@ -290,3 +290,17 @@ ansible-vault create secrets.yml
 ansible-vault edit secrets.yml
 ansible-playbook playbook.yml --ask-vault-pass
 ```
+
+## Dependency Management Guidelines
+
+**Python Dependencies**: Always use the python virtual environment and manage project dependencies with the requirements.txt
+
+**Ansible Dependencies**: Follow Jeff Geerling's best practices for project-local collections and roles:
+- Ansible configuration files are located in the `vagrant/` directory for lab environment isolation
+- Use `vagrant/requirements.yml` to specify Ansible collection and role dependencies
+- Configure `vagrant/ansible.cfg` to use project-local paths (`collections_paths = collections`, `roles_path = roles`)
+- Install dependencies with `cd vagrant && ansible-galaxy install -r requirements.yml`
+- Collections are installed to `vagrant/collections/` and excluded from git via .gitignore
+- Never install collections globally - keep them project-local for consistency and isolation
+- This ensures reproducible builds, faster dependency scanning, and team consistency
+- Reference: https://www.jeffgeerling.com/blog/2020/ansible-best-practices-using-project-local-collections-and-roles

@@ -9,6 +9,8 @@ exclude_paths:
   - .github/
   - ansible/practice/site.yml  # Requires collections not installed in CI
   - vagrant/playbook.yml       # Requires collections not installed in CI
+  - vagrant/collections/       # Project-local collections, don't lint
+  - vagrant/roles/             # Project-local roles, don't lint
 
 # Directories to search for roles
 rulesdir:
@@ -25,6 +27,7 @@ skip_list:
   - yaml[line-length]  # Allow longer lines in YAML for readability
   - name[template]     # Allow template expressions in task names for examples
   - var-naming[no-role-prefix]  # Allow variables without role prefixes in examples
+  - run-once[task]     # Allow run_once in lab setup for key distribution
 
 # Only warn for certain rules instead of failing
 warn_list:
