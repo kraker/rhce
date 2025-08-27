@@ -1,0 +1,25 @@
+---
+# Configure control nodes
+
+- name: Configure control nodes
+  hosts: control
+  become: true
+  tasks:
+    - name: Create SSH key for ansible user
+      ansible.builtin.user:
+        name: ansible
+        generate_ssh_key: true
+        ssh_key_type: rsa
+        ssh_key_bits: 2048
+        ssh_key_file: .ssh/id_rsa
+
+    - name: Read the public key for distribution
+      ansible.builtin.slurp:
+        src: /home/ansible/.ssh/id_rsa.pub
+      register: ansible_public_key
+      run_once: true
+
+    - name: Store public key as fact
+      ansible.builtin.set_fact:
+        ansible_pubkey_content: "{{ ansible_public_key.content | b64decode | trim }}"
+      run_once: true

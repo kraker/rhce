@@ -1,9 +1,8 @@
+---
 # Master playbook for RHCE lab environment
-# Simple approach following Ansible best practices without over-engineering
 
 - name: Configure all hosts with common settings
   hosts: all
-  gather_facts: true
   become: true
   tasks:
     # Skip package updates to avoid EPEL conflicts in lab environment
@@ -12,8 +11,6 @@
     #     name: '*'
     #     state: present
     #     update_cache: true
-    #   tags:
-    #     - packages
 
     - name: Install essential packages
       ansible.builtin.dnf:
@@ -26,8 +23,6 @@
           - bash-completion
           - python3-pip
         state: present
-      tags:
-        - packages
 
     - name: Create ansible user
       ansible.builtin.user:
@@ -37,125 +32,30 @@
         create_home: true
         groups: wheel
         append: true
-      tags:
-        - users
 
+    # Update this to sudoers module?
     - name: Set up passwordless sudo for ansible user
       ansible.builtin.copy:
         content: "ansible ALL=(ALL) NOPASSWD: ALL"
         dest: /etc/sudoers.d/ansible
         mode: '0440'
         validate: 'visudo -cf %s'
-      tags:
-        - users
 
+    # Is there a module for managing hosts file?
     - name: Configure /etc/hosts for all lab VMs
       ansible.builtin.blockinfile:
         path: /etc/hosts
         block: |
           # RHCE Lab VMs
-          192.168.4.200 control1.example.com control
+          192.168.4.200 control1.example.com control1
           192.168.4.201 ansible1.example.com ansible1
           192.168.4.202 ansible2.example.com ansible2
           192.168.4.203 ansible3.example.com ansible3
           192.168.4.204 ansible4.example.com ansible4
         marker: "# {mark} RHCE LAB HOSTS"
-      tags:
-        - networking
 
-    - name: Configure firewall for SSH
-      ansible.posix.firewalld:
-        service: ssh
-        permanent: true
-        state: enabled
-        immediate: true
-      tags:
-        - firewall
+- name: Control
+  ansible.builtin.import_playbook: control.yml
 
-
-- name: Configure control node
-  hosts: control
-  gather_facts: true
-  become: true
-  strategy: linear
-  tasks:
-    - name: Create SSH key for ansible user
-      ansible.builtin.user:
-        name: ansible
-        generate_ssh_key: true
-        ssh_key_type: rsa
-        ssh_key_bits: 2048
-        ssh_key_file: .ssh/id_rsa
-      tags:
-        - ssh
-
-    - name: Read the public key for distribution
-      ansible.builtin.slurp:
-        src: /home/ansible/.ssh/id_rsa.pub
-      register: ansible_public_key
-      run_once: true
-      tags:
-        - ssh
-
-    - name: Store public key as fact
-      ansible.builtin.set_fact:
-        ansible_pubkey_content: "{{ ansible_public_key.content | b64decode | trim }}"
-      run_once: true
-      tags:
-        - ssh
-
-- name: Configure managed nodes and distribute SSH keys
-  hosts: managed
-  gather_facts: false
-  become: true
-  tasks:
-    - name: Install Python packages for Ansible modules
-      ansible.builtin.dnf:
-        name:
-          - python3-dnf
-          - python3-firewall
-        state: present
-      tags:
-        - packages
-
-    - name: Create .ssh directory for ansible user
-      ansible.builtin.file:
-        path: /home/ansible/.ssh
-        state: directory
-        owner: ansible
-        group: ansible
-        mode: '0700'
-      tags:
-        - ssh
-
-    - name: Copy public key to managed nodes
-      ansible.posix.authorized_key:
-        user: ansible
-        state: present
-        key: "{{ hostvars['control']['ansible_pubkey_content'] }}"
-      when: hostvars['control']['ansible_pubkey_content'] is defined
-      tags:
-        - ssh
-
-# You can add specific server configurations here as needed for RHCE practice
-
-- name: Test Ansible connectivity from control node
-  hosts: control
-  gather_facts: false
-  become: true
-  become_user: ansible
-  tasks:
-    - name: Test connectivity to all managed nodes
-      ansible.builtin.command:
-        cmd: ansible all -m ping
-      register: connectivity_test
-      ignore_errors: true
-      changed_when: false
-      tags:
-        - test
-
-    - name: Display connectivity test results
-      ansible.builtin.debug:
-        var: connectivity_test.stdout_lines
-      tags:
-        - test
+- name: Managed
+  ansible.builtin.import_playbook: managed.yml

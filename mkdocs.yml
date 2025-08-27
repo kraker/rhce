@@ -1,3 +1,6 @@
+---
+# mkdocs.yml
+
 site_name: RHCE Certification Study Guide
 site_description: >-
   Comprehensive study materials and resources for Red Hat Certified Engineer (RHCE)

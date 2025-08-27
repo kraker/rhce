@@ -1,15 +1,17 @@
 # MkDocs and dependencies for RHCE documentation site
-mkdocs>=1.5.0
+mkdocs
 
 # Ansible and automation tools for development and testing
-ansible>=8.0.0
-ansible-core>=2.15.0
+ansible
+ansible-core
+ansible-builder
+ansible-navigator
 
 # Python packages commonly used with Ansible
-PyYAML>=6.0
-Jinja2>=3.1.0
+PyYAML
+Jinja2
 
-# Pre-commit and linting (for code quality)
-pre-commit>=4.0.0
-yamllint>=1.32.0
-ansible-lint>=6.0.0
+# Pre-commit and linting
+ansible-lint
+pre-commit
+yamllint
