@@ -1,49 +1,32 @@
 # Ansible-lint configuration for RHCE study repository
 # Tailored for educational playbooks and practice scenarios
 
-# List of directories to exclude
+# Directories and files to exclude from linting
 exclude_paths:
-  - .cache/  # implicit unless exclude_paths is defined in config
-  - site/
-  - sources/
-  - .github/
-  - ansible/practice/site.yml  # Requires collections not installed in CI
-  - vagrant/playbook.yml       # Requires collections not installed in CI
-  - vagrant/collections/       # Project-local collections, don't lint
-  - vagrant/roles/             # Project-local roles, don't lint
+  - .cache/          # Implicit cache directory
+  - site/            # MkDocs build output
+  - sources/         # External copyrighted materials
+  - .github/         # GitHub workflows
+  - vagrant/collections/  # Project-local collections
+  - vagrant/roles/        # Project-local roles
 
-# Directories to search for roles
-rulesdir:
-  - ~/.ansible-lint/custom-rules/
-
-# Enable offline mode to disable rules requiring internet access
-offline: false
-
-# Enforce use of fully qualified collection names (FQCN)
-use_default_rules: true
-
-# Skip list for rules that may be too strict for study materials
+# Skip rules that may be too strict for educational content
 skip_list:
-  - yaml[line-length]  # Allow longer lines in YAML for readability
-  - name[template]     # Allow template expressions in task names for examples
-  - var-naming[no-role-prefix]  # Allow variables without role prefixes in examples
-  - run-once[task]     # Allow run_once in lab setup for key distribution
+  - yaml[line-length]           # Allow longer lines for readability
+  - name[template]              # Allow template expressions in task names
+  - var-naming[no-role-prefix]  # Allow variables without role prefixes
+  - run-once[task]              # Allow run_once for lab setup tasks
 
-# Only warn for certain rules instead of failing
+# Warn instead of fail for certain rules (educational purposes)
 warn_list:
-  - experimental  # Allow experimental features for learning
-  - command-instead-of-module  # Warn but don't fail for shell/command usage in examples
+  - command-instead-of-module  # Warn about shell/command usage
+  - experimental               # Allow experimental features
 
-
-# Enable checking of vars files
+# Enable additional checks
 enable_list:
-  - fqcn-builtins  # Require FQCN for builtin actions
-  - no-changed-when  # Tasks should tell when they have changed something
+  - fqcn-builtins    # Require FQCN for builtin actions
+  - no-changed-when  # Tasks should indicate when they change things
 
-# Mock modules or roles for linting purposes
-mock_modules:
-  - community.general.rhsm_subscription
-  - community.general.subscription_manager
-
-mock_roles:
-  - example_role
+# Use default rules with FQCN enforcement
+use_default_rules: true
+offline: false
