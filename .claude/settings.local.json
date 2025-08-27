@@ -17,7 +17,9 @@
       "Bash(pre-commit:*)",
       "Bash(sudo dnf install:*)",
       "WebFetch(domain:www.redhat.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(ansible:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

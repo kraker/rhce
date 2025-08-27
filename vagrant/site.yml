@@ -54,7 +54,7 @@
         path: /etc/hosts
         block: |
           # RHCE Lab VMs
-          192.168.4.200 control.example.com control
+          192.168.4.200 control1.example.com control
           192.168.4.201 ansible1.example.com ansible1
           192.168.4.202 ansible2.example.com ansible2
           192.168.4.203 ansible3.example.com ansible3
