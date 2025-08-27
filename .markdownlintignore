@@ -1,0 +1,14 @@
+# Markdownlint ignore file
+# See: https://github.com/igorshubovych/markdownlint-cli#ignoring-files
+
+# Claude Code instruction file (not user-facing documentation)
+CLAUDE.md
+
+# Node.js dependencies
+node_modules/
+
+# Build outputs
+site/
+
+# External copyrighted materials
+sources/

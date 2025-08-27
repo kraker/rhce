@@ -36,6 +36,12 @@ Thumbs.db
 vagrant/.rhel-credentials
 .vagrant/
 
+# Node.js dependencies and build artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
 # Development and testing
 .pre-commit-cache/
 .tox/

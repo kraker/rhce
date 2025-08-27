@@ -26,8 +26,10 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 
 - **`vagrant/`** - Automated RHEL 9 lab with 5 VMs (1 control + 4 managed nodes)
   - `Vagrantfile` - Complete multi-VM configuration
-  - `lab-up.sh` - Automated lab startup script
-  - `playbook.yml` - Comprehensive provisioning automation
+  - `lab.sh` - Unified lab management script
+  - `site.yml` - Comprehensive provisioning automation
+  - `inventory` - Pre-configured Ansible inventory
+  - `ansible.cfg` - Lab-specific Ansible configuration
 - **`ansible/practice/`** - Practice playbooks and automation exercises
 - Supports complete RHCE practice with pre-configured Ansible environment
 - Includes SSH key distribution, inventory setup, and service configuration
@@ -63,7 +65,7 @@ A comprehensive study repository for Red Hat Certified Engineer (RHCE) exam prep
 cd vagrant/
 cp .rhel-credentials.template .rhel-credentials
 # Edit .rhel-credentials with your Red Hat Developer account
-./lab-up.sh  # Creates 5 VMs with complete Ansible setup
+./lab.sh up  # Creates 5 VMs with complete Ansible setup
 ```
 
 This creates:
@@ -89,10 +91,17 @@ This creates:
 
 #### Development Environment (Optional)
 
-For playbook development and testing outside the lab:
+For documentation development and linting:
 
 ```bash
-pip install -r requirements.txt  # Installs Ansible, linting, and testing tools
+# Python dependencies (MkDocs, Ansible, linting tools)
+pip install -r requirements.txt
+
+# Node.js dependencies (markdownlint)
+npm install
+
+# Pre-commit hooks for code quality
+pre-commit install
 ```
 
 ## Study Workflow

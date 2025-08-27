@@ -183,12 +183,15 @@ ansible-playbook site.yml --vault-password-file .vault_pass
 - Use hands-on lab practice with real RHEL 9 systems for effective learning
 - Commands in the Anki flashcards represent real RHCE exam tasks and should be practiced in lab environments
 - **MkDocs Development**: Use `mkdocs serve` for local development, `mkdocs build` for static generation
+- **Markdownlint Configuration**: Uses `.markdownlintignore` to exclude files (CLAUDE.md, node_modules/, sources/, site/). See [markdownlint-cli documentation](https://github.com/igorshubovych/markdownlint-cli#ignoring-files) for ignore file patterns.
 - **Always read CLAUDE.md, README.md, and COPYRIGHT_NOTICE.md before making changes**
 
 ## Development Principles
 
 - **Minimal Dependencies**: Only include dependencies actually used in configuration files. Before adding any dependency to requirements.txt, verify it's referenced in mkdocs.yml or other config files. Remove unused dependencies to keep the project lean and maintainable.
 - **Node.js Dependencies**: Use idiomatic npm workflow - run `npm install package-name --save-dev` to automatically create/update package.json rather than manually creating the file. This ensures proper dependency management and follows Node.js best practices.
+- **Documentation Maintenance**: When making significant changes (features, reorganizations, refactors), always update project documentation (README.md, CLAUDE.md, and relevant docs/) to reflect the current state. Keep documentation in sync with actual project structure and capabilities.
+- **Gitignore Management**: When adding new dependencies or tooling, always update .gitignore to exclude generated files, build artifacts, and dependency directories (e.g., node_modules/, *pycache*/, .env files). Review .gitignore patterns whenever introducing new technology stacks.
 
 ## Git Commit Style Guide
 
