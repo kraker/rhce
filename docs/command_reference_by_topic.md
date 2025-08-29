@@ -1,10 +1,23 @@
-# RHCE Command Reference by Exam Topic
+# RHCE Comprehensive Command Reference
 
-## 🎯 Comprehensive Command Reference for RHCE Exam Success
+## 📚 Complete Command Reference for RHCE Study & Production Use
 
-*Complete command reference organized by official RHCE exam objectives with all variations, parameters, and use cases*
+*Comprehensive reference organized by RHCE exam topics - includes all command variations, parameters, and use cases*
 
-This comprehensive reference covers every essential command pattern you'll encounter on the RHCE exam. All commands are organized by exam objectives and include practical variations, common parameters, and real-world usage patterns.
+⚠️ **FOR EXAM PREPARATION**: This is a comprehensive learning reference. For focused exam day commands, use `rhce_exam_commands.md` and `exam_quick_reference.md` instead.
+
+### Purpose
+
+Complete command coverage for:
+
+- Learning and understanding all Ansible capabilities  
+- Production environment reference
+- Comprehensive study of all command options
+- Understanding the full scope of Ansible automation
+
+### Important Note
+
+**NOT for exam day**: Many commands here are ad-hoc administration tasks that you'll implement in PLAYBOOKS during the actual exam.
 
 **📚 Source Integration**: Commands and patterns synthesized from:
 

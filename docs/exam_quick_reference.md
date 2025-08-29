@@ -4,6 +4,8 @@
 
 *Concise reference for exam day - copy-paste ready syntax and parameters*
 
+⚠️ **IMPORTANT**: This focuses on PLAYBOOK syntax and essential commands you'll actually use on the exam. For detailed command-line operations, see `rhce_exam_commands.md`. The RHCE exam tests your ability to write PLAYBOOKS, not run ad-hoc commands.
+
 ---
 
 ## ⚙️ Core Configuration
@@ -57,44 +59,37 @@ ansible all -m ping
 
 ---
 
-## 🔧 Ad-hoc Commands
+## 🔧 Essential Exam Commands
 
-### Command Structure
-
-`ansible <pattern> -m <module> -a "<arguments>" [options]`
-
-### Essential Ad-hoc Patterns
+### Core Test Commands (Use These Constantly)
 
 ```bash
-# Connectivity and info
+# Initial connectivity test (ALWAYS start here)
 ansible all -m ping
-ansible all -m setup
-ansible all -m command -a "uptime"
 
-# Package management
-ansible all -m dnf -a "name=httpd state=present" --become
-ansible all -m dnf -a "name='*' state=latest" --become
-
-# Service control
-ansible all -m systemd -a "name=httpd state=started enabled=yes" --become
-
-# File operations
-ansible all -m copy -a "src=file.txt dest=/tmp/" --become
-ansible all -m file -a "path=/tmp/dir state=directory" --become
-
-# User management
-ansible all -m user -a "name=webuser groups=apache" --become
+# Quick verification commands
+ansible-inventory --list                 # View inventory structure
+ansible-galaxy collection list           # Check available collections
 ```
 
-### Common Options
+### Playbook Execution Pattern
 
 ```bash
---become (-b)          # Privilege escalation
---check (-C)           # Dry run
---diff (-D)            # Show changes
---limit                # Target specific hosts
--e "var=value"        # Extra variables
--v/-vv/-vvv           # Verbosity levels
+# Standard validation sequence (copy-paste this)
+ansible-navigator run playbook.yml --syntax-check && \
+ansible-navigator run playbook.yml --check && \
+ansible-navigator run playbook.yml --mode stdout
+
+# With variables and targeting
+ansible-navigator run site.yml -e "env=prod" --limit webservers
+```
+
+### Documentation Commands (Your Lifeline)
+
+```bash
+ansible-doc -s module_name              # Quick syntax (fastest)
+ansible-doc module_name                 # Full documentation
+ansible-doc -l | grep keyword           # Find modules
 ```
 
 ---

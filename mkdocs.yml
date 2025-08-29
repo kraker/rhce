@@ -40,8 +40,9 @@ nav:
       - 'Module 08: Vault & Advanced Features': rhce_synthesis/08_advanced_features.md
   - Quick References:
       - 'eBook Summary': ebook_summary.md
+      - 'Exam Day Commands': rhce_exam_commands.md
       - 'Exam Quick Reference': exam_quick_reference.md
-      - 'Command Reference by Topic': command_reference_by_topic.md
+      - 'Comprehensive Command Reference': command_reference_by_topic.md
       - 'RHCE Acronyms & Glossary': rhce_acronyms_glossary.md
       - 'Knowledge Gaps Checklist': knowledge_gaps_checklist.md
 
