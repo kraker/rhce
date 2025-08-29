@@ -76,12 +76,12 @@ ansible-galaxy collection list           # Check available collections
 
 ```bash
 # Standard validation sequence (copy-paste this)
-ansible-navigator run playbook.yml --syntax-check && \
-ansible-navigator run playbook.yml --check && \
-ansible-navigator run playbook.yml --mode stdout
+ansible-playbook playbook.yml --syntax-check && \
+ansible-playbook playbook.yml --check && \
+ansible-playbook playbook.yml
 
 # With variables and targeting
-ansible-navigator run site.yml -e "env=prod" --limit webservers
+ansible-playbook site.yml -e "env=prod" --limit webservers
 ```
 
 ### Documentation Commands (Your Lifeline)
@@ -469,23 +469,32 @@ vars:
 
 ---
 
-## 🧭 Navigator Commands
+## 🧭 Playbook Execution Commands
 
-### Execution Modes
+### Primary Method: ansible-playbook
 
 ```bash
-# Interactive TUI
-ansible-navigator run site.yml
-
-# Command-line output
-ansible-navigator run site.yml --mode stdout
+# Standard execution pattern
+ansible-playbook site.yml --syntax-check    # Always check syntax first
+ansible-playbook site.yml --check --diff    # Dry run with changes
+ansible-playbook site.yml                   # Execute playbook
 
 # Common options
-ansible-navigator run site.yml --check --diff
-ansible-navigator run site.yml --syntax-check
-ansible-navigator run site.yml --limit webservers
-ansible-navigator run site.yml -e "env=prod"
-ansible-navigator run site.yml --ask-vault-pass
+ansible-playbook site.yml --limit webservers
+ansible-playbook site.yml -e "env=prod"
+ansible-playbook site.yml --ask-vault-pass
+ansible-playbook site.yml -v               # Verbosity levels: -v, -vv, -vvv
+```
+
+### Alternative: ansible-navigator (RHEL/AAP)
+
+```bash
+# Interactive TUI mode
+ansible-navigator run site.yml
+
+# Command-line output (equivalent to ansible-playbook)
+ansible-navigator run site.yml --mode stdout
+ansible-navigator run site.yml --check --diff --mode stdout
 ```
 
 ### TUI Navigation
@@ -521,20 +530,20 @@ ansible-doc -s module_name  # Synopsis only
     msg: "Value is {{ variable_name }}"
 
 # Verbosity levels
-ansible-navigator run site.yml -v      # Basic
-ansible-navigator run site.yml -vv     # More info
-ansible-navigator run site.yml -vvv    # Connection debug
-ansible-navigator run site.yml -vvvv   # Everything
+ansible-playbook site.yml -v          # Basic
+ansible-playbook site.yml -vv         # More info
+ansible-playbook site.yml -vvv        # Connection debug
+ansible-playbook site.yml -vvvv       # Everything
 ```
 
 ### Common Patterns
 
 ```bash
 # Check syntax
-ansible-navigator run site.yml --syntax-check
+ansible-playbook site.yml --syntax-check
 
 # Dry run with changes
-ansible-navigator run site.yml --check --diff
+ansible-playbook site.yml --check --diff
 
 # Test connectivity
 ansible all -m ping
@@ -555,9 +564,9 @@ ansible all -m systemd -a "name=httpd" --become
 ```bash
 # Quick validation sequence
 ansible all -m ping && \
-ansible-navigator run site.yml --syntax-check && \
-ansible-navigator run site.yml --check && \
-ansible-navigator run site.yml --mode stdout
+ansible-playbook site.yml --syntax-check && \
+ansible-playbook site.yml --check && \
+ansible-playbook site.yml
 
 # Fast documentation lookup
 ansible-doc -l | grep keyword
@@ -584,7 +593,7 @@ ansible all -m uri -a "url=http://{{ ansible_default_ipv4.address }}"
 
 - **Always use FQCN**: `ansible.builtin.dnf` not `dnf`
 - **Test first**: `--syntax-check`, `--check`, then execute
-- **Use ansible-navigator**: Primary tool, not ansible-playbook
+- **Use ansible-playbook**: Standard tool, works everywhere
 - **Know ansible-doc**: Your main reference during exam
 - **Vault everything**: Encrypt all sensitive data
 - **Check connectivity**: `ansible all -m ping` at start
