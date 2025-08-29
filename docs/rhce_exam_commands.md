@@ -8,7 +8,13 @@
 
 This is your exam day cheat sheet. Every command here is essential for RHCE exam success. These are the commands you'll type in the terminal - NOT the module parameters you'll write in playbooks.
 
-**Command Preference**: This guide prioritizes `ansible-playbook` commands (standard across all Ansible installations) over `ansible-navigator` (Red Hat AAP specific). Both work on the RHCE exam, but `ansible-playbook` is more portable and widely used.
+**⚠️ EXAM REQUIREMENT**: The RHCE exam objectives specifically require using **Automation content navigator** (`ansible-navigator`). While `ansible-playbook` commands are shown for completeness and general Ansible knowledge, you **MUST** demonstrate proficiency with `ansible-navigator` to pass the exam.
+
+**Official Exam Objectives Requiring ansible-navigator**:
+
+- "Run playbooks with Automation content navigator"
+- "Use Automation content navigator to find new modules in available Ansible Content Collections"
+- "Use Automation content navigator to create inventories and configure the Ansible environment"
 
 ---
 
@@ -28,8 +34,18 @@ ansible-galaxy collection list          # Check available collections
 
 ### Phase 2: Documentation Lookup (Throughout Exam)
 
+#### EXAM OBJECTIVE: Use Automation content navigator to find new modules in available Ansible Content Collections
+
 ```bash
-# Quick module reference (your primary resource)
+# Navigator documentation (EXAM REQUIRED)
+ansible-navigator doc module_name        # Interactive docs
+ansible-navigator doc -l | grep keyword  # Search for modules in collections
+ansible-navigator collections            # Browse available collections
+ansible-navigator doc ansible.builtin.dnf
+ansible-navigator doc community.general.firewalld
+ansible-navigator doc ansible.posix.mount
+
+# Traditional ansible-doc (also available)
 ansible-doc -l | grep keyword           # Find modules quickly
 ansible-doc -s module_name               # Get module syntax (fastest)
 ansible-doc module_name                  # Full module documentation
@@ -44,59 +60,55 @@ ansible-doc ansible.posix.mount
 ansible-doc -t lookup file
 ansible-doc -t filter default
 ansible-doc -t test defined
-
-# Navigator documentation
-ansible-navigator doc module_name        # Interactive docs
-ansible-navigator doc -l | grep keyword  # Search in navigator
-ansible-navigator collections            # Browse collections
 ```
 
 ### Phase 3: Playbook Development & Testing (Main Phase)
 
+#### EXAM REQUIRED: Use ansible-navigator
+
 ```bash
 # Syntax validation (ALWAYS do this first)
-ansible-playbook playbook.yml --syntax-check
-ansible-playbook playbook.yml --syntax-check -v
+ansible-navigator run playbook.yml --syntax-check
+ansible-navigator run playbook.yml --syntax-check --mode stdout
 
 # Dry run validation (ALWAYS do before executing)
-ansible-playbook playbook.yml --check
-ansible-playbook playbook.yml --check --diff
-ansible-playbook playbook.yml --check --diff -v
+ansible-navigator run playbook.yml --check
+ansible-navigator run playbook.yml --check --diff
+ansible-navigator run playbook.yml --check --diff --mode stdout
 
-# Playbook execution
-ansible-playbook playbook.yml                    # Standard execution
-ansible-playbook playbook.yml -v                 # With basic verbosity
-ansible-playbook playbook.yml -vv                # With more verbosity
+# Playbook execution (EXAM OBJECTIVE: "Run playbooks with Automation content navigator")
+ansible-navigator run playbook.yml                      # Interactive TUI mode
+ansible-navigator run playbook.yml --mode stdout        # Command-line output
+ansible-navigator run playbook.yml --mode stdout -v     # With verbosity
 
 # Target control
-ansible-playbook playbook.yml --limit webservers
-ansible-playbook playbook.yml --limit "web*"
-ansible-playbook playbook.yml --limit node1,node2
+ansible-navigator run playbook.yml --limit webservers
+ansible-navigator run playbook.yml --limit "web*"
+ansible-navigator run playbook.yml --limit node1,node2
 
 # Variable passing
-ansible-playbook playbook.yml -e "var=value"
-ansible-playbook playbook.yml -e "env=production debug=false"
-ansible-playbook playbook.yml -e "@vars.yml"
+ansible-navigator run playbook.yml -e "var=value"
+ansible-navigator run playbook.yml -e "env=production debug=false"
+ansible-navigator run playbook.yml -e "@vars.yml"
 
 # Tag control
-ansible-playbook playbook.yml --tags "web,db"
-ansible-playbook playbook.yml --skip-tags "debug"
-ansible-playbook playbook.yml --list-tags
+ansible-navigator run playbook.yml --tags "web,db"
+ansible-navigator run playbook.yml --skip-tags "debug"
+ansible-navigator run playbook.yml --list-tags
 
 # Task control
-ansible-playbook playbook.yml --start-at-task "Install packages"
-ansible-playbook playbook.yml --step
-ansible-playbook playbook.yml --list-tasks
+ansible-navigator run playbook.yml --start-at-task "Install packages"
+ansible-navigator run playbook.yml --step
+ansible-navigator run playbook.yml --list-tasks
 
 # Debugging levels
-ansible-playbook playbook.yml -v                 # Basic verbosity
-ansible-playbook playbook.yml -vv                # More details
-ansible-playbook playbook.yml -vvv               # Full debug output
-ansible-playbook playbook.yml -vvvv              # Connection debugging
+ansible-navigator run playbook.yml --mode stdout -v     # Basic
+ansible-navigator run playbook.yml --mode stdout -vv    # More info
+ansible-navigator run playbook.yml --mode stdout -vvv   # Full debug
 
-# Alternative: ansible-navigator (if available on RHCE exam)
-# ansible-navigator run playbook.yml --mode stdout
-# ansible-navigator run playbook.yml --check --diff
+# Alternative: ansible-playbook (general Ansible knowledge)
+# ansible-playbook playbook.yml --syntax-check
+# ansible-playbook playbook.yml --check --diff
 ```
 
 ### Phase 4: Ansible Vault Operations
@@ -124,9 +136,9 @@ echo 'secret_value' | ansible-vault encrypt_string --stdin-name 'var_name'
 # Change passwords
 ansible-vault rekey secrets.yml
 
-# Playbook integration
-ansible-playbook site.yml --ask-vault-pass
-ansible-playbook site.yml --vault-password-file .vault_pass
+# Playbook integration (EXAM REQUIRED: ansible-navigator)
+ansible-navigator run site.yml --ask-vault-pass
+ansible-navigator run site.yml --vault-password-file .vault_pass
 
 # Set up vault password file
 echo 'vault_password' > .vault_pass
@@ -193,8 +205,16 @@ ansible-config dump --only-changed
 
 ### Inventory Validation
 
+#### EXAM OBJECTIVE: Use Automation content navigator to create inventories and configure the Ansible environment
+
 ```bash
-# Inventory structure
+# Navigator inventory operations (EXAM REQUIRED)
+ansible-navigator inventory --list               # Interactive inventory view
+ansible-navigator inventory --list --mode stdout # Command-line inventory
+ansible-navigator inventory --graph              # Tree structure view
+ansible-navigator inventory --host hostname      # Single host details
+
+# Traditional inventory commands (also available)
 ansible-inventory --list
 ansible-inventory --list --yaml
 ansible-inventory --graph
@@ -213,10 +233,10 @@ ansible 'web*' --list-hosts
 ### Quick Validation Sequence
 
 ```bash
-# Use for every playbook (copy-paste ready)
-ansible-playbook site.yml --syntax-check && \
-ansible-playbook site.yml --check && \
-ansible-playbook site.yml
+# Use for every playbook (copy-paste ready) - EXAM REQUIRED
+ansible-navigator run site.yml --syntax-check && \
+ansible-navigator run site.yml --check && \
+ansible-navigator run site.yml --mode stdout
 ```
 
 ### Emergency Troubleshooting
@@ -247,9 +267,9 @@ adoc user | grep -A 10 EXAMPLES:  # Quick examples
 **Master these - you'll use them constantly:**
 
 1. **`ansible all -m ping`** - Always start here
-2. **`ansible-playbook playbook.yml --syntax-check`** - Before every execution  
-3. **`ansible-playbook playbook.yml --check --diff`** - Verify changes
-4. **`ansible-playbook playbook.yml -v`** - Execute with logging
+2. **`ansible-navigator run playbook.yml --syntax-check`** - Before every execution (EXAM REQUIRED)
+3. **`ansible-navigator run playbook.yml --check --diff`** - Verify changes (EXAM REQUIRED)
+4. **`ansible-navigator run playbook.yml --mode stdout -v`** - Execute with logging (EXAM REQUIRED)
 5. **`ansible-doc -s module_name`** - Quick syntax lookup
 
 ### Command Frequency During Exam

@@ -4,7 +4,7 @@
 
 *Concise reference for exam day - copy-paste ready syntax and parameters*
 
-⚠️ **IMPORTANT**: This focuses on PLAYBOOK syntax and essential commands you'll actually use on the exam. For detailed command-line operations, see `rhce_exam_commands.md`. The RHCE exam tests your ability to write PLAYBOOKS, not run ad-hoc commands.
+⚠️ **IMPORTANT**: This focuses on PLAYBOOK syntax and essential commands you'll actually use on the exam. **The RHCE exam specifically requires using ansible-navigator** - see official objectives. For detailed command-line operations, see `rhce_exam_commands.md`.
 
 ---
 
@@ -75,13 +75,13 @@ ansible-galaxy collection list           # Check available collections
 ### Playbook Execution Pattern
 
 ```bash
-# Standard validation sequence (copy-paste this)
-ansible-playbook playbook.yml --syntax-check && \
-ansible-playbook playbook.yml --check && \
-ansible-playbook playbook.yml
+# Standard validation sequence (copy-paste this) - EXAM REQUIRED
+ansible-navigator run playbook.yml --syntax-check && \
+ansible-navigator run playbook.yml --check && \
+ansible-navigator run playbook.yml --mode stdout
 
 # With variables and targeting
-ansible-playbook site.yml -e "env=prod" --limit webservers
+ansible-navigator run site.yml -e "env=prod" --limit webservers
 ```
 
 ### Documentation Commands (Your Lifeline)
@@ -471,30 +471,31 @@ vars:
 
 ## 🧭 Playbook Execution Commands
 
-### Primary Method: ansible-playbook
+### Primary Method: ansible-navigator (EXAM REQUIRED)
 
 ```bash
-# Standard execution pattern
-ansible-playbook site.yml --syntax-check    # Always check syntax first
-ansible-playbook site.yml --check --diff    # Dry run with changes
-ansible-playbook site.yml                   # Execute playbook
+# EXAM OBJECTIVES require ansible-navigator
+ansible-navigator run site.yml --syntax-check    # Always check syntax first
+ansible-navigator run site.yml --check --diff    # Dry run with changes
+ansible-navigator run site.yml --mode stdout     # Execute playbook
 
-# Common options
-ansible-playbook site.yml --limit webservers
-ansible-playbook site.yml -e "env=prod"
-ansible-playbook site.yml --ask-vault-pass
-ansible-playbook site.yml -v               # Verbosity levels: -v, -vv, -vvv
-```
-
-### Alternative: ansible-navigator (RHEL/AAP)
-
-```bash
-# Interactive TUI mode
+# Interactive TUI mode (also exam objective)
 ansible-navigator run site.yml
 
-# Command-line output (equivalent to ansible-playbook)
-ansible-navigator run site.yml --mode stdout
-ansible-navigator run site.yml --check --diff --mode stdout
+# Common options
+ansible-navigator run site.yml --limit webservers
+ansible-navigator run site.yml -e "env=prod"
+ansible-navigator run site.yml --ask-vault-pass
+ansible-navigator run site.yml --mode stdout -v  # Verbosity levels
+```
+
+### Alternative: ansible-playbook (General Knowledge)
+
+```bash
+# Traditional method (not exam-focused but good to know)
+ansible-playbook site.yml --syntax-check
+ansible-playbook site.yml --check --diff
+ansible-playbook site.yml -v
 ```
 
 ### TUI Navigation
@@ -529,21 +530,20 @@ ansible-doc -s module_name  # Synopsis only
     var: variable_name
     msg: "Value is {{ variable_name }}"
 
-# Verbosity levels
-ansible-playbook site.yml -v          # Basic
-ansible-playbook site.yml -vv         # More info
-ansible-playbook site.yml -vvv        # Connection debug
-ansible-playbook site.yml -vvvv       # Everything
+# Verbosity levels (EXAM REQUIRED: ansible-navigator)
+ansible-navigator run site.yml --mode stdout -v    # Basic
+ansible-navigator run site.yml --mode stdout -vv   # More info
+ansible-navigator run site.yml --mode stdout -vvv  # Connection debug
 ```
 
 ### Common Patterns
 
 ```bash
-# Check syntax
-ansible-playbook site.yml --syntax-check
+# Check syntax (EXAM REQUIRED)
+ansible-navigator run site.yml --syntax-check
 
-# Dry run with changes
-ansible-playbook site.yml --check --diff
+# Dry run with changes (EXAM REQUIRED)
+ansible-navigator run site.yml --check --diff
 
 # Test connectivity
 ansible all -m ping
@@ -562,11 +562,11 @@ ansible all -m systemd -a "name=httpd" --become
 ### Time-Saving Commands
 
 ```bash
-# Quick validation sequence
+# Quick validation sequence (EXAM REQUIRED)
 ansible all -m ping && \
-ansible-playbook site.yml --syntax-check && \
-ansible-playbook site.yml --check && \
-ansible-playbook site.yml
+ansible-navigator run site.yml --syntax-check && \
+ansible-navigator run site.yml --check && \
+ansible-navigator run site.yml --mode stdout
 
 # Fast documentation lookup
 ansible-doc -l | grep keyword
@@ -593,7 +593,7 @@ ansible all -m uri -a "url=http://{{ ansible_default_ipv4.address }}"
 
 - **Always use FQCN**: `ansible.builtin.dnf` not `dnf`
 - **Test first**: `--syntax-check`, `--check`, then execute
-- **Use ansible-playbook**: Standard tool, works everywhere
+- **Use ansible-navigator**: EXAM REQUIRED per official objectives
 - **Know ansible-doc**: Your main reference during exam
 - **Vault everything**: Encrypt all sensitive data
 - **Check connectivity**: `ansible all -m ping` at start
