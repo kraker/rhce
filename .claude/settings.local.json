@@ -19,7 +19,8 @@
       "WebFetch(domain:www.redhat.com)",
       "Bash(grep:*)",
       "Bash(git check-ignore:*)",
-      "Bash(ansible:*)"
+      "Bash(ansible:*)",
+      "Bash(vagrant status:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

@@ -5,6 +5,51 @@
   hosts: control
   become: true
   tasks:
+    # ansible-automation-platform (AAP) provides things like ansible-builder,
+    # ansible-navigator, etc.
+    # List Repo IDs:
+    #   subscription-manager repos --list | grep ansible-automation-platform
+    - name: Enable ansible-automation-platform repository
+      community.general.rhsm_repository:
+        name: ansible-automation-platform-2.5-for-rhel-9-x86_64-rpms
+
+    - name: Install Ansible packages
+      ansible.builtin.dnf:
+        name:
+          - ansible
+          - ansible-builder
+          - ansible-navigator
+        state: present
+
+    - name: Install common dependencies
+      ansible.builtin.dnf:
+        name:
+          - container-tools  # meta package that provides podman, skopeo, etc.
+        state: present
+
+    - name: Install Ansible inventory
+      ansible.builtin.copy:
+        content: |
+          # RHCE Lab Inventory
+
+          [control]
+          control1
+
+          [managed]
+          ansible1
+          ansible2
+          ansible3
+          ansible4
+
+          [all:vars]
+          ansible_user=ansible
+          ansible_ssh_common_args='-o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null'
+        dest: /etc/ansible/hosts
+        backup: true
+        owner: root
+        group: ansible
+        mode: "0664"
+
     - name: Create SSH key for ansible user
       ansible.builtin.user:
         name: ansible

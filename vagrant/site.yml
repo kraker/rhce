@@ -5,13 +5,20 @@
   hosts: all
   become: true
   tasks:
-    # Skip package updates to avoid EPEL conflicts in lab environment
-    # - name: Update packages (not latest to avoid EPEL issues)
-    #   ansible.builtin.dnf:
-    #     name: '*'
-    #     state: present
-    #     update_cache: true
+    # EPEL is not officially supported and therefore won't be on the exam.
+    - name: Uninstall EPEL
+      ansible.builtin.dnf:
+        name: epel-release
+        state: absent
 
+    - name: Update packages  # noqa package-latest
+      ansible.builtin.dnf:
+        name: '*'
+        state: latest
+        update_cache: true
+      notify: Reboot  # Reboot after system updates
+
+    # Consider removing?
     - name: Install essential packages
       ansible.builtin.dnf:
         name:
@@ -42,6 +49,8 @@
         validate: 'visudo -cf %s'
 
     # Is there a module for managing hosts file?
+    # Answer: There isn't, but there is win_hosts for managing the Windows hosts
+    # file...
     - name: Configure /etc/hosts for all lab VMs
       ansible.builtin.blockinfile:
         path: /etc/hosts
@@ -53,6 +62,10 @@
           192.168.4.203 ansible3.example.com ansible3
           192.168.4.204 ansible4.example.com ansible4
         marker: "# {mark} RHCE LAB HOSTS"
+
+  handlers:
+    - name: Reboot
+      ansible.builtin.reboot:
 
 - name: Control
   ansible.builtin.import_playbook: control.yml
