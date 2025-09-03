@@ -1,0 +1,97 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+# Practice Exam A Environment
+# Matches exact requirements for RHCE Practice Exam A
+# Minimal setup - exam candidates configure repositories manually
+Vagrant.configure("2") do |config|
+  # Skip Red Hat registration - exam candidates do this manually
+  if Vagrant.has_plugin?("vagrant-registration")
+    config.registration.skip = true
+  end
+
+  # VM configuration matching exam requirements
+  vms = {
+    "control" => {
+      "ip" => "192.168.56.10",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "control"
+    },
+    "ansible1" => {
+      "ip" => "192.168.56.11",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed",
+      "has_secondary_disk" => true
+    },
+    "ansible2" => {
+      "ip" => "192.168.56.12",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed",
+      "has_secondary_disk" => true
+    },
+    "ansible3" => {
+      "ip" => "192.168.56.13",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed"
+    },
+    "ansible4" => {
+      "ip" => "192.168.56.14",
+      "memory" => "1024",
+      "cpus" => "1",
+      "role" => "managed"
+    }
+  }
+
+  # Create VMs
+  vms.each do |name, vm_config|
+    config.vm.define name do |vm|
+      # Use RHEL 9 with Red Hat subscription
+      vm.vm.box = "generic/rhel9"
+      vm.vm.hostname = "#{name}.example.com"
+      vm.vm.network "private_network", ip: vm_config["ip"]
+
+      # Provider specific settings
+      vm.vm.provider "virtualbox" do |vb|
+        vb.name = "practice-exam-a-#{name}"
+        vb.memory = vm_config["memory"]
+        vb.cpus = vm_config["cpus"]
+        vb.customize ["modifyvm", :id, "--groups", "/Practice Exam A"]
+      end
+
+      # Configure additional disks using Vagrant disk feature
+      # Secondary disk only for ansible1 and ansible2 (5GB as required)
+      if vm_config["has_secondary_disk"]
+        vm.vm.disk :disk, name: "secondary", size: "5GB"
+      end
+
+      # Minimal provisioning - only set root password and configure /etc/hosts
+      vm.vm.provision "shell", inline: <<-SHELL
+        # Set root password to "password" as required by exam
+        echo 'root:password' | chpasswd
+
+        # Ensure SSH allows password authentication for root (exam requirement)
+        sed -i 's/#PermitRootLogin yes/PermitRootLogin yes/' /etc/ssh/sshd_config
+        sed -i 's/PasswordAuthentication no/PasswordAuthentication yes/' /etc/ssh/sshd_config
+        systemctl restart sshd
+
+        # Remove EPEL repository - not available on actual exam
+        dnf remove -y epel-release || true
+
+        # Configure /etc/hosts for hostname resolution (exam requirement)
+        cat >> /etc/hosts << 'EOF'
+
+# Practice Exam A Lab VMs
+192.168.56.10 control.example.com control
+192.168.56.11 ansible1.example.com ansible1
+192.168.56.12 ansible2.example.com ansible2
+192.168.56.13 ansible3.example.com ansible3
+192.168.56.14 ansible4.example.com ansible4
+EOF
+      SHELL
+    end
+  end
+end

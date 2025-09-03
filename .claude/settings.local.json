@@ -20,7 +20,11 @@
       "Bash(grep:*)",
       "Bash(git check-ignore:*)",
       "Bash(ansible:*)",
-      "Bash(vagrant status:*)"
+      "Bash(vagrant status:*)",
+      "Bash(vagrant destroy:*)",
+      "Bash(./exam-start.sh:*)",
+      "Bash(vagrant halt:*)",
+      "Bash(vagrant provision:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

@@ -1,0 +1,9 @@
+# Vagrant files
+.vagrant/
+*.vdi
+
+# Red Hat subscription credentials
+.rhel-credentials
+
+# Log files
+*.log
