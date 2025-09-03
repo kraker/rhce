@@ -24,7 +24,10 @@
       "Bash(vagrant destroy:*)",
       "Bash(./exam-start.sh:*)",
       "Bash(vagrant halt:*)",
-      "Bash(vagrant provision:*)"
+      "Bash(vagrant provision:*)",
+      "Bash(gh:*)",
+      "Bash(npx markdownlint:*)",
+      "Bash(export:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"
