@@ -47,21 +47,16 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install Ansible collections for linting
-        run: |
-          # Install collections needed for ansible-lint validation
-          ansible-galaxy collection install ansible.posix community.general community.crypto --collections-path ./ansible_collections
-
       - name: Cache pre-commit hooks
         uses: actions/cache@v4
         with:
           path: ~/.cache/pre-commit
           key: pre-commit-${{ hashFiles('.pre-commit-config.yaml') }}
 
-      - name: Set Ansible collections path for linting
+      - name: Install Ansible collections for linting
         run: |
-          # Make installed collections available to ansible-lint
-          echo "ANSIBLE_COLLECTIONS_PATH=./ansible_collections:/usr/share/ansible/collections" >> $GITHUB_ENV
+          # Install collections from requirements.yml globally so pre-commit can find them
+          ansible-galaxy collection install -r vagrant/requirements.yml
 
       - name: Run pre-commit hooks
         run: pre-commit run --all-files --show-diff-on-failure
