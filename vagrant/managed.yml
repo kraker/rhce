@@ -1,0 +1,22 @@
+---
+# Configure managed nodes and distribute SSH keys
+
+- name: Configure managed nodes
+  hosts: managed
+  gather_facts: false
+  become: true
+  tasks:
+    - name: Create .ssh directory for ansible user
+      ansible.builtin.file:
+        path: /home/ansible/.ssh
+        state: directory
+        owner: ansible
+        group: ansible
+        mode: '0700'
+
+    - name: Copy public key to managed nodes
+      when: hostvars['control1']['ansible_pubkey_content'] is defined
+      ansible.posix.authorized_key:
+        user: ansible
+        state: present
+        key: "{{ hostvars['control1']['ansible_pubkey_content'] }}"

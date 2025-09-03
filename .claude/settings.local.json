@@ -17,7 +17,17 @@
       "Bash(pre-commit:*)",
       "Bash(sudo dnf install:*)",
       "WebFetch(domain:www.redhat.com)",
-      "Bash(grep:*)"
+      "Bash(grep:*)",
+      "Bash(git check-ignore:*)",
+      "Bash(ansible:*)",
+      "Bash(vagrant status:*)",
+      "Bash(vagrant destroy:*)",
+      "Bash(./exam-start.sh:*)",
+      "Bash(vagrant halt:*)",
+      "Bash(vagrant provision:*)",
+      "Bash(gh:*)",
+      "Bash(npx markdownlint:*)",
+      "Bash(export:*)"
     ],
     "additionalDirectories": [
       "/home/stovepipe/repos/rhcsa/"

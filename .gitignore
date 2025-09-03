@@ -1,3 +1,5 @@
+# requirements.txt
+
 # External study materials and copyrighted content
 sources/
 
@@ -5,35 +7,13 @@ sources/
 site/
 
 # Python virtual environments and cache
-__pycache__/
-*.py[cod]
-.env
-.venv
-env/
 venv/
-ENV/
-*.egg-info/
-.installed.cfg
-
-# IDE and editor files
-.vscode/
-.idea/
-*.swp
-*.swo
-*~
-
-# OS generated files
-.DS_Store
-._*
-Thumbs.db
 
 # Ansible
-*.retry
-.vault_pass
 .ansible/
-# Project-local Ansible collections and roles (any location)
-**/collections/
-**/roles/
+vagrant/collections/
+vagrant/roles/
+vagrant/ansible-navigator.log
 
 # Vagrant and RHEL credentials
 vagrant/.rhel-credentials
@@ -41,13 +21,3 @@ vagrant/.rhel-credentials
 
 # Node.js dependencies and build artifacts
 node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Development and testing
-.pre-commit-cache/
-.tox/
-.coverage
-.pytest_cache/
-.cache/

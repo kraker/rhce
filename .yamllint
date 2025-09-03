@@ -1,7 +1,17 @@
+---
 # yamllint configuration for RHCE study repository
 # Balanced rules for Ansible playbooks and documentation
 
 extends: default
+
+ignore:
+  - env/
+  - site/
+  - sources/
+  - .cache/
+  - node_modules/
+  - vagrant/collections/
+  - vagrant/roles/
 
 rules:
   # Ansible playbooks often have long lines due to module parameters
@@ -21,7 +31,7 @@ rules:
 
   # Document start warnings (allow but don't require)
   document-start:
-    present: false
+    present: true
 
   # Allow empty lines at end of files
   empty-lines:
@@ -57,9 +67,3 @@ rules:
   octal-values:
     forbid-implicit-octal: true
     forbid-explicit-octal: true
-
-# Ignore certain directories and files
-ignore: |
-  site/
-  sources/
-  .cache/

@@ -1,14 +1,16 @@
-# Ansible-lint configuration for RHCE study repository
-# Tailored for educational playbooks and practice scenarios
+---
+# .ansible-lint
 
-# Directories and files to exclude from linting
+# Use vagrant directory as project root to find ansible.cfg
+project_dir: vagrant/
+
 exclude_paths:
-  - .cache/          # Implicit cache directory
-  - site/            # MkDocs build output
-  - sources/         # External copyrighted materials
-  - .github/         # GitHub workflows
-  - vagrant/collections/  # Project-local collections
-  - vagrant/roles/        # Project-local roles
+  - .cache/
+  - site/
+  - sources/
+  - .github/
+  - vagrant/collections/
+  - vagrant/roles/
 
 # Skip rules that may be too strict for educational content
 skip_list:

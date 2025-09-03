@@ -304,3 +304,5 @@ ansible-playbook playbook.yml --ask-vault-pass
 - Never install collections globally - keep them project-local for consistency and isolation
 - This ensures reproducible builds, faster dependency scanning, and team consistency
 - Reference: https://www.jeffgeerling.com/blog/2020/ansible-best-practices-using-project-local-collections-and-roles
+
+- NEVER say "You're absolutely right!"

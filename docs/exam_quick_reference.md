@@ -4,6 +4,8 @@
 
 *Concise reference for exam day - copy-paste ready syntax and parameters*
 
+⚠️ **IMPORTANT**: This focuses on PLAYBOOK syntax and essential commands you'll actually use on the exam. **The RHCE exam specifically requires using ansible-navigator** - see official objectives. For detailed command-line operations, see `rhce_exam_commands.md`.
+
 ---
 
 ## ⚙️ Core Configuration
@@ -57,44 +59,37 @@ ansible all -m ping
 
 ---
 
-## 🔧 Ad-hoc Commands
+## 🔧 Essential Exam Commands
 
-### Command Structure
-
-`ansible <pattern> -m <module> -a "<arguments>" [options]`
-
-### Essential Ad-hoc Patterns
+### Core Test Commands (Use These Constantly)
 
 ```bash
-# Connectivity and info
+# Initial connectivity test (ALWAYS start here)
 ansible all -m ping
-ansible all -m setup
-ansible all -m command -a "uptime"
 
-# Package management
-ansible all -m dnf -a "name=httpd state=present" --become
-ansible all -m dnf -a "name='*' state=latest" --become
-
-# Service control
-ansible all -m systemd -a "name=httpd state=started enabled=yes" --become
-
-# File operations
-ansible all -m copy -a "src=file.txt dest=/tmp/" --become
-ansible all -m file -a "path=/tmp/dir state=directory" --become
-
-# User management
-ansible all -m user -a "name=webuser groups=apache" --become
+# Quick verification commands
+ansible-inventory --list                 # View inventory structure
+ansible-galaxy collection list           # Check available collections
 ```
 
-### Common Options
+### Playbook Execution Pattern
 
 ```bash
---become (-b)          # Privilege escalation
---check (-C)           # Dry run
---diff (-D)            # Show changes
---limit                # Target specific hosts
--e "var=value"        # Extra variables
--v/-vv/-vvv           # Verbosity levels
+# Standard validation sequence (copy-paste this) - EXAM REQUIRED
+ansible-navigator run playbook.yml --syntax-check && \
+ansible-navigator run playbook.yml --check && \
+ansible-navigator run playbook.yml --mode stdout
+
+# With variables and targeting
+ansible-navigator run site.yml -e "env=prod" --limit webservers
+```
+
+### Documentation Commands (Your Lifeline)
+
+```bash
+ansible-doc -s module_name              # Quick syntax (fastest)
+ansible-doc module_name                 # Full documentation
+ansible-doc -l | grep keyword           # Find modules
 ```
 
 ---
@@ -474,23 +469,33 @@ vars:
 
 ---
 
-## 🧭 Navigator Commands
+## 🧭 Playbook Execution Commands
 
-### Execution Modes
+### Primary Method: ansible-navigator (EXAM REQUIRED)
 
 ```bash
-# Interactive TUI
+# EXAM OBJECTIVES require ansible-navigator
+ansible-navigator run site.yml --syntax-check    # Always check syntax first
+ansible-navigator run site.yml --check --diff    # Dry run with changes
+ansible-navigator run site.yml --mode stdout     # Execute playbook
+
+# Interactive TUI mode (also exam objective)
 ansible-navigator run site.yml
 
-# Command-line output
-ansible-navigator run site.yml --mode stdout
-
 # Common options
-ansible-navigator run site.yml --check --diff
-ansible-navigator run site.yml --syntax-check
 ansible-navigator run site.yml --limit webservers
 ansible-navigator run site.yml -e "env=prod"
 ansible-navigator run site.yml --ask-vault-pass
+ansible-navigator run site.yml --mode stdout -v  # Verbosity levels
+```
+
+### Alternative: ansible-playbook (General Knowledge)
+
+```bash
+# Traditional method (not exam-focused but good to know)
+ansible-playbook site.yml --syntax-check
+ansible-playbook site.yml --check --diff
+ansible-playbook site.yml -v
 ```
 
 ### TUI Navigation
@@ -525,20 +530,19 @@ ansible-doc -s module_name  # Synopsis only
     var: variable_name
     msg: "Value is {{ variable_name }}"
 
-# Verbosity levels
-ansible-navigator run site.yml -v      # Basic
-ansible-navigator run site.yml -vv     # More info
-ansible-navigator run site.yml -vvv    # Connection debug
-ansible-navigator run site.yml -vvvv   # Everything
+# Verbosity levels (EXAM REQUIRED: ansible-navigator)
+ansible-navigator run site.yml --mode stdout -v    # Basic
+ansible-navigator run site.yml --mode stdout -vv   # More info
+ansible-navigator run site.yml --mode stdout -vvv  # Connection debug
 ```
 
 ### Common Patterns
 
 ```bash
-# Check syntax
+# Check syntax (EXAM REQUIRED)
 ansible-navigator run site.yml --syntax-check
 
-# Dry run with changes
+# Dry run with changes (EXAM REQUIRED)
 ansible-navigator run site.yml --check --diff
 
 # Test connectivity
@@ -558,7 +562,7 @@ ansible all -m systemd -a "name=httpd" --become
 ### Time-Saving Commands
 
 ```bash
-# Quick validation sequence
+# Quick validation sequence (EXAM REQUIRED)
 ansible all -m ping && \
 ansible-navigator run site.yml --syntax-check && \
 ansible-navigator run site.yml --check && \
@@ -589,7 +593,7 @@ ansible all -m uri -a "url=http://{{ ansible_default_ipv4.address }}"
 
 - **Always use FQCN**: `ansible.builtin.dnf` not `dnf`
 - **Test first**: `--syntax-check`, `--check`, then execute
-- **Use ansible-navigator**: Primary tool, not ansible-playbook
+- **Use ansible-navigator**: EXAM REQUIRED per official objectives
 - **Know ansible-doc**: Your main reference during exam
 - **Vault everything**: Encrypt all sensitive data
 - **Check connectivity**: `ansible all -m ping` at start
