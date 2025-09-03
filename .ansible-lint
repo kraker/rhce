@@ -1,6 +1,9 @@
 ---
 # .ansible-lint
 
+# Use vagrant directory as project root to find ansible.cfg
+project_dir: vagrant/
+
 exclude_paths:
   - .cache/
   - site/
