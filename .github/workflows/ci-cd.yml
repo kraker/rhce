@@ -55,8 +55,11 @@ jobs:
 
       - name: Install Ansible collections for linting
         run: |
-          # Install collections from requirements.yml globally so pre-commit can find them
-          ansible-galaxy collection install -r vagrant/requirements.yml
+          # Install collections to project-local path as configured in vagrant/ansible.cfg
+          cd vagrant
+          ansible-galaxy collection install -r requirements.yml -p collections/
+          # Also make collections available globally for ansible-lint to find
+          ansible-galaxy collection install -r requirements.yml
 
       - name: Run pre-commit hooks
         run: pre-commit run --all-files --show-diff-on-failure
