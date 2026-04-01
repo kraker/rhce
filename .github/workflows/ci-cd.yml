@@ -20,7 +20,25 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+
+      - name: Install markdownlint-cli
+        run: npm install -g markdownlint-cli@0.45.0
+
+      - name: Lint markdown
+        run: markdownlint '**/*.md'
+
   build-and-deploy:
+    needs: lint
     runs-on: ubuntu-latest
     name: Build Documentation
     outputs:
@@ -29,27 +47,19 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.11'
+      - name: Setup uv
+        uses: astral-sh/setup-uv@v5
 
-      - name: Cache pip dependencies
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/pip
-          key: ${{ runner.os }}-pip-${{ hashFiles('requirements.txt') }}
-          restore-keys: |
-            ${{ runner.os }}-pip-
+      - name: Install dependencies
+        run: uv sync
 
-      - name: Install Python dependencies
-        run: |
-          pip install --upgrade pip
-          pip install -r requirements.txt
-
+      - name: Install WeasyPrint system dependencies
+        run: sudo apt-get update && sudo apt-get install -y libpango-1.0-0 libpangoft2-1.0-0 libharfbuzz-subset0
 
       - name: Build MkDocs documentation
-        run: mkdocs build --verbose --clean
+        env:
+          ENABLE_PDF_EXPORT: "1"
+        run: uv run mkdocs build --verbose --clean
 
       - name: Check if deployment needed
         id: check-deploy

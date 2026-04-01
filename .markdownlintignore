@@ -12,3 +12,9 @@ site/
 
 # External copyrighted materials
 sources/
+
+# Python virtual environment
+.venv/
+
+# Vendored Ansible collections (third-party code)
+vagrant/collections/

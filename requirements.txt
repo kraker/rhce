@@ -1,5 +1,6 @@
 # MkDocs and dependencies for RHCE documentation site
 mkdocs
+mkdocs-to-pdf
 
 # Ansible and automation tools for development and testing
 ansible
