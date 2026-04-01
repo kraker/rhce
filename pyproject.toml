@@ -1,0 +1,9 @@
+[project]
+name = "rhce-docs"
+version = "0.1.0"
+description = "RHCE certification study guide documentation"
+requires-python = ">=3.9"
+dependencies = [
+    "mkdocs",
+    "mkdocs-to-pdf",
+]

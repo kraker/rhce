@@ -2,6 +2,8 @@
 
 Welcome to the comprehensive Red Hat Certified Engineer (RHCE) certification study repository! This resource provides complete coverage of all RHCE exam objectives with practical automation focus for passing the EX294 exam.
 
+> **PDF Download**: [Download the complete study guide as PDF](pdf/rhce-study-guide.pdf)
+
 ## 🎯 About the RHCE Certification
 
 The Red Hat Certified Engineer (RHCE) certification demonstrates your ability to use Ansible for enterprise automation, configuration management, and orchestration. The EX294 exam focuses on:

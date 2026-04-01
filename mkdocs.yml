@@ -46,6 +46,19 @@ nav:
       - 'RHCE Acronyms & Glossary': rhce_acronyms_glossary.md
       - 'Knowledge Gaps Checklist': knowledge_gaps_checklist.md
 
+# Plugins
+plugins:
+  - search
+  - to-pdf:
+      cover: true
+      cover_title: "RHCE Certification Study Guide"
+      cover_subtitle: "Comprehensive Study Materials for Red Hat Certified Engineer Exam"
+      toc_title: "Table of Contents"
+      toc_level: 3
+      ordered_chapter_level: 2
+      output_path: pdf/rhce-study-guide.pdf
+      enabled_if_env: ENABLE_PDF_EXPORT
+
 # Markdown extensions
 markdown_extensions:
   - toc:

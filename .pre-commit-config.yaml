@@ -32,8 +32,8 @@ repos:
 
   # Markdown linting (for documentation quality)
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.44.0
+    rev: v0.45.0
     hooks:
       - id: markdownlint
-        args:
-          - --config=.mdl_config.yaml
+        args: ["--fix"]
+        files: \.md$
